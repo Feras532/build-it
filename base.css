@@ -1,0 +1,320 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+* {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+button {
+    transition: background-color 0.5s ease;
+}
+
+button:hover {
+    background-color: coral;
+}
+
+header {
+    width: 100%;
+    height: 68px;
+    text-align: center;
+    display: flex;
+    padding: 16px 80px;
+    background-color: #52616B;
+}
+
+
+
+.nav-container {
+    display: flex;
+    padding: 0px 20px;
+    justify-content: space-around;
+    align-items: center;
+    flex: 1 0 0;
+    height: 36px;
+    width: 100%;
+
+}
+
+.logo {
+    color: var(--gray-900, black);
+    text-align: center;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: bolder;
+    line-height: 36px;
+    /* 120% */
+    letter-spacing: -0.6px;
+}
+
+.navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-items {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    /*space between each a*/
+    list-style: none;
+
+}
+
+nav ul li a:hover {
+    color: coral;
+}
+
+.nav-items li:nth-last-of-type(1) {
+    margin: 0;
+}
+
+.nav-items a {
+    color: var(--gray-600, black);
+    /* Body2/Medium - All */
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    font-weight: bold;
+
+}
+
+.login {
+    display: flex;
+    padding: 6px 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    border-radius: 12px;
+    background: var(--gray-900, #313131);
+    color: var(--gray-50, #F9FAFB);
+
+    /* Body2/Medium - All */
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+    /* 150% */
+}
+
+/* Done with the naviagation editing... 👆🏻*/
+
+
+.Hero {
+    display: flex;
+    padding: 96px 80px;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-self: stretch;
+}
+
+.HeroContainer {
+    display: flex;
+    padding: 0px 32px;
+    align-items: flex-start;
+    gap: 48px;
+    flex: 1 0 0;
+    flex-wrap: wrap;
+}
+
+.main-content {
+    display: flex;
+    max-width: 768px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    /* gap: 4px; */
+    /* align-self: stretch; */
+    color: var(--gray-600, #4B5563);
+
+    /* Body2/Normal - All */
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    /* 150% */
+
+}
+
+
+
+.welcome {
+    color: var(--gray-900, #111827);
+
+    padding: 70px;
+    /* Heading/H1/Bold - Desktop */
+    font-family: Inter;
+    font-size: 60px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 72px;
+    /* 120% */
+    letter-spacing: -1.2px;
+
+}
+
+.intro {
+    color: var(--gray-600, #4B5563);
+
+    /* Body2/Normal - All */
+    padding: 20px;
+    font-family: "Inter";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    /* 150% */
+}
+
+.fancy-button {
+    height: 3rem;
+    width: 10rem;
+    text-transform: uppercase;
+    background-color: coral;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    color: rgb(0, 0, 0);
+    box-shadow: 0px 4px 14px 3px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.5s ease, box-shadow 0.5s ease;
+}
+
+.fancy-button:hover {
+    background-color: rgb(247, 166, 137);
+    box-shadow: 0px 4px 14px 3px rgba(222, 91, 43, 0.5);
+    /* box-shadow in coral color */
+}
+
+
+
+
+.Hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom, #b5b5b5, #ffffff, #F0F5F9);
+    /* gradient background */
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.main-content {
+    animation: fadeIn 2s ease-in-out 1;
+
+}
+
+.pcPic {
+    max-width: 40%;
+    height: auto;
+    margin: auto;
+
+}
+
+
+
+a {
+    color: coral;
+    text-decoration: none;
+    /*removed underlines of the navigations*/
+}
+
+
+
+
+
+
+/****************************/
+
+
+
+
+
+.hamburger {
+    /*not active for desktop version.*/
+    display: none;
+}
+
+/* Mobile ...*/
+@media screen and (max-width: 768px) {
+    header {
+        display: flex;
+        padding: 16px;
+        justify-content: space-between;
+        align-items: center;
+        align-self: stretch;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.00);
+        background: var(--gray-default, #FFF);
+
+    }
+
+    .hamburger {
+        display: block;
+        cursor: pointer;
+
+        padding: 6px;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+    .nav-items {
+        display: none;
+    }
+
+
+
+    .hamburger div {
+        width: 35px;
+        height: 5px;
+        background-color: #333;
+        margin: 6px 0;
+    }
+
+    .Hero {
+        display: flex;
+        padding: 64px 16px;
+        justify-content: space-between;
+        align-items: flex-start;
+        align-self: stretch;
+    }
+
+    .HeroContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 48px;
+        flex: 1 0 0;
+    }
+
+    .HeroContainer {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+
+
+
+}
