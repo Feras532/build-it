@@ -13,7 +13,7 @@ button {
 }
 
 button:hover {
-    background-color: coral;
+    cursor: pointer;
 }
 
 header {
@@ -23,6 +23,7 @@ header {
     display: flex;
     padding: 16px 80px;
     background-color: #52616B;
+    border-bottom: solid rgb(70, 255, 255); 
 }
 
 
@@ -49,6 +50,10 @@ header {
     letter-spacing: -0.6px;
 }
 
+span{
+    color:rgb(70, 255, 255);
+}
+
 .navigation {
     display: flex;
     justify-content: center;
@@ -66,7 +71,7 @@ header {
 }
 
 nav ul li a:hover {
-    color: coral;
+    color: rgb(70, 255, 255);
 }
 
 .nav-items li:nth-last-of-type(1) {
@@ -80,7 +85,7 @@ nav ul li a:hover {
     font-weight: 500;
     line-height: 24px;
     font-weight: bold;
-
+    transition: color 0.5s;
 }
 
 .login {
@@ -89,8 +94,8 @@ nav ul li a:hover {
     justify-content: center;
     align-items: center;
     gap: 8px;
-    border-radius: 12px;
-    background: var(--gray-900, #313131);
+    border: none;
+    background: var(--gray-900, #31313100);
     color: var(--gray-50, #F9FAFB);
 
     /* Body2/Medium - All */
@@ -101,6 +106,18 @@ nav ul li a:hover {
     line-height: 24px;
     /* 150% */
 }
+
+.login img {
+    width: 35px;
+    height: 35px;
+    background-color: #00000000;
+    transition: box-shadow 0.5s;
+}
+
+.login img:hover{
+    box-shadow: 0px 4px 14px 3px #000000;
+}
+
 
 /* Done with the naviagation editing... 👆🏻*/
 
@@ -147,7 +164,7 @@ nav ul li a:hover {
 .welcome {
     color: var(--gray-900, #111827);
 
-    padding: 70px;
+    padding: 70px 70px 35px 70px;
     /* Heading/H1/Bold - Desktop */
     font-family: Inter;
     font-size: 60px;
@@ -156,7 +173,7 @@ nav ul li a:hover {
     line-height: 72px;
     /* 120% */
     letter-spacing: -1.2px;
-
+    margin-bottom:px;
 }
 
 .intro {
@@ -176,18 +193,18 @@ nav ul li a:hover {
     height: 3rem;
     width: 10rem;
     text-transform: uppercase;
-    background-color: coral;
+    background-color: rgb(70, 255, 255);
     padding: 10px 20px;
     border: none;
     cursor: pointer;
     color: rgb(0, 0, 0);
-    box-shadow: 0px 4px 14px 3px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 4px 14px 3px rgba(0, 0, 0, 0.207);
     transition: background-color 0.5s ease, box-shadow 0.5s ease;
 }
 
 .fancy-button:hover {
-    background-color: rgb(247, 166, 137);
-    box-shadow: 0px 4px 14px 3px rgba(222, 91, 43, 0.5);
+    background-color: rgb(90, 249, 249);
+    box-shadow: 0px 4px 14px 3px rgba(139, 255, 255, 0.824);
     /* box-shadow in coral color */
 }
 
@@ -236,7 +253,7 @@ nav ul li a:hover {
 
 
 a {
-    color: coral;
+    color: rgb(5, 171, 171);
     text-decoration: none;
     /*removed underlines of the navigations*/
 }
