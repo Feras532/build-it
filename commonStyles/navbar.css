@@ -1,8 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Concert+One&display=swap');
+
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
 .navigation {
     flex-grow: 1;
 }
 
 .nav-items {
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -16,8 +23,8 @@ header {
     text-align: center;
     display: flex;
     padding: 16px 80px;
-    background-color: #52616B;
-    border-bottom: 4px solid #1E2022;
+    background-color: #708591;
+    /* border-bottom: 2px solid #1E2022; */
 
 }
 
@@ -32,39 +39,24 @@ header {
 
 }
 
-.logo {
-    color: var(--gray-900, black);
-    text-align: center;
-    font-size: 30px;
-    font-style: normal;
-    font-weight: bolder;
-    line-height: 36px;
-    /* 120% */
-    letter-spacing: -0.6px;
-}
-
-span {
-    color: rgb(70, 255, 255);
-}
-
 
 .nav-items {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 24px;
+    gap: 44px;
     /*space between each a*/
     list-style: none;
 
 }
 
 nav ul li a:hover {
-    color: rgb(70, 255, 255);
+    color: coral;
 }
 
 
 .nav-items a {
-    color: var(--gray-600, black);
+    color: var(--gray-600, rgb(0, 0, 0));
     /* Body2/Medium - All */
     font-size: 16px;
     font-weight: 500;
@@ -73,36 +65,7 @@ nav ul li a:hover {
     transition: color 0.5s;
 }
 
-.login {
-    display: flex;
-    padding: 6px 16px;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    border: none;
-    background: var(--gray-900, #31313100);
-    color: var(--gray-50, #F9FAFB);
 
-    /* Body2/Medium - All */
-    font-family: Inter;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 24px;
-    /* 150% */
-}
-
-.login img {
-    width: 35px;
-    height: 35px;
-    background-color: #00000000;
-    transition: box-shadow 0.5s;
-}
-
-/*Not good, fix it later. 🐔🐔*/
-.login img:hover {
-    box-shadow: 0px 4px 14px 3px #000000;
-}
 
 /* Mobile ...*/
 @media screen and (max-width: 720px) {
