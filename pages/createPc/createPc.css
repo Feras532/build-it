@@ -1,0 +1,12 @@
+* {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* starting with nav item it will show that it was clicked.*/
+.navItem-createPc {
+    text-decoration: underline;
+    border-radius: 20;
+}

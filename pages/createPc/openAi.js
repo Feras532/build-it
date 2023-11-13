@@ -1,4 +1,4 @@
-const API_KEY = "private-key"; // change it to the actual key.
+const API_KEY = "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"; // change it to the actual key.
 async function fetchData() {
   const response = await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
@@ -7,11 +7,14 @@ async function fetchData() {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      model: "gpt-4",
+      model: "gpt-4-1106-preview",
       messages: [
         {
+          role: "system",
+          content:
+            "your response should be in this format->  [[gpu: brand; modelName],[cpu: brand; modelName],[motherBoard: brand; modelName]..etc]",
           role: "user",
-          content: "What is 3060rtx?",
+          content: "give me a pc collection 1500$ i am a gamer",
         },
       ],
     }),

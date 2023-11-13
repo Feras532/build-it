@@ -87,7 +87,7 @@
     align-items: center;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(to bottom, #708591, #ffffff, #F0F5F9);
+    background: linear-gradient(to bottom, #a4bdcb, #ffffff, #F0F5F9);
     /* gradient background */
 }
 
@@ -119,15 +119,4 @@
     margin: auto;
     padding: 0 0 30px 0;
 
-}
-
-a {
-    color: coral;
-    text-decoration: none;
-    /*removed underlines of the navigations*/
-}
-
-.hamburger {
-    /*not active for desktop version.*/
-    display: none;
 }

@@ -17,13 +17,17 @@
     list-style: none;
 }
 
+.nav-items a.active {
+    color: coral;
+}
+
 header {
     width: 100%;
     height: 68px;
     text-align: center;
     display: flex;
     padding: 16px 80px;
-    background-color: #708591;
+    background-color: #a4bdcb;
     /* border-bottom: 2px solid #1E2022; */
 
 }
@@ -90,4 +94,15 @@ nav ul li a:hover {
         background-color: #333;
         margin: 6px 0;
     }
+}
+
+a {
+    color: coral;
+    text-decoration: none;
+    /*removed underlines of the navigations*/
+}
+
+.hamburger {
+    /*not active for desktop version.*/
+    display: none;
 }
