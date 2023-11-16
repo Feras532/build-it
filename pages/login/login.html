@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="../../commonStyles/navbar.css"> <!-- navbar styler only. -->
+</head>
+<body>
+    
+    <header>
+        <div class="nav-container">
+            <a href="../../index.html">
+                <img src="../../assets/logo.png" alt="Logo" height="40">
+            </a>
+            <nav class="navigation">
+                <div class="hamburger">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <ul class="nav-items">
+                    <li><a href="../../pages/createPc/createPc.html">Create pc</a></li>
+                    <li><a href="">Upgrade</a></li>
+                    <li><a href="">Community</a></li>
+                    <li><a href="">Something(TODO)...</a></li>
+                </ul>
+            </nav>
+            <a href = "login.html"><img src="../../assets/avatar.png" alt="login" height="40"></a>
+        </div>
+    </header>
+
+    <div class = "stage">
+        <div class = "leftSide"> <img class = "loginPagePic" src="../../assets/placeholder.png"> 
+        </div>
+        <div class = "rightSide">
+            <div class = "title">
+            <img class = "logo" src="../../assets/logoSeperated.png">
+            <h1> Login to Your Account </h1>
+            <p> The first step in getting the PC you deserve! </p>
+            </div>
+            <form>
+                <label for="username" id ="username">Username or Email:</label><br>
+                <input type="text" class="inputs" name="username" placeholder="Username/Email"><br>
+                <label for="password">Password:</label><br>
+                <input type="password" class="inputs" name="password"><br>
+                <div class = "signUpInfo"> </div>
+                <input type="submit" value="Login" class="subBut">
+            </form>
+            
+            <p class = "signUp"> <span>Not registered yet? </span><button onclick=signUp()> Create an account!</button></p>
+        </div>
+
+    </div>
+</body>
+</html>
+<script>
+    function signUp(){
+        let form = document.querySelector(".signUpInfo")
+
+        //Adding Confirm Password Field//
+        let pass2 = document.createElement("input")
+        let pass2Label = document.createElement("label")
+        pass2Label.for = "password2"
+        pass2Label.innerText = "Confirm Password: "
+        pass2.type = "password"
+        pass2.className = "inputs"
+        pass2.name = "password2"
+        form.append(pass2Label, document.createElement("br"), pass2)
+        
+        //Adding Email Field//
+        let email = document.createElement("input")
+        let emailLabel = document.createElement("label")
+        emailLabel.for = "email"
+        emailLabel.innerText = "Email Address: "
+        email.type = "email"
+        email.className = "inputs"
+        email.name = "email"
+        email.placeholder = "Ahmed13@gmail.com"
+        form.append(document.createElement("br"), emailLabel, document.createElement("br"), email)
+
+        //Tweaks
+        document.querySelector("#username").innerText = "Username"
+        document.querySelector(".inputs").placeholder = "Ahmed13"
+
+        //Changing text under login button
+        document.querySelector("span").innerText = "Already Registered? "
+        document.querySelector("button").remove()
+        let a = document.createElement("a")
+        a.href = "login.html"
+        a.innerText = "Login!"
+        document.querySelector(".signUp").appendChild(a)
+        
+        document.querySelector(".subBut").value = "Create Account"
+
+    }
+</script>   
