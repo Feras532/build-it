@@ -8,20 +8,20 @@
 .stage{
     display:flex;
     flex-direction: row;
+    justify-content: center;
     animation: fadeIn 2s ease-in-out 1;
     background: linear-gradient(to bottom, #a4bdcb, #ffffff, #F0F5F9);
+    height: 800px;
 }
 
-.leftSide{
-    width: 1109px;
-    height: 1080px;
-}
 
-.rightSide{
-    width: 811px;
-    height: 1080px;
+.middle{
+    width: 550px;
+    height: 400px;
     display:flex;
     flex-direction: column;
+    align-items: center;
+    background-color: white;
 }
 
 .loginPagePic{
@@ -66,6 +66,9 @@ height:30px;
 align-items: center;
 gap: 13px;
 margin-bottom:4px;
+border:none;
+border-bottom: solid 1px;
+background-color:   #f0f5f900;
 }
 
 input[type = "submit"]{
