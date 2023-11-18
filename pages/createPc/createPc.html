@@ -1,56 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create!</title>
-    <link rel="stylesheet" href="createPc.css">
-    <link rel="stylesheet" href="../../commonStyles/navbar.css"> <!-- navbar styler only. -->
-
+    <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
 
     <header>
-        <div class="nav-container">
-            <a href="../../index.html">
-                <img src="../../assets/logo.png" alt="Logo" height="40">
-            </a>
-            <nav class="navigation">
-                <div class="hamburger">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
-                <ul class="nav-items">
-                    <li><a href="createPc.html" class="navItem-createPc">Create pc</a></li>
-                    <li><a href="">Upgrade</a></li>
-                    <li><a href="">Community</a></li>
-                    <li><a href="">Something(TODO)...</a></li>
-                </ul>
-            </nav>
-            <a href="../login/login.html"><img src="../../assets/avatar.png" alt="" height="40"></a>
-
-        </div>
+        <a href="../../index.html">
+            <img src="../../assets/logo.png" alt="Logo" height="40">
+        </a>
     </header>
 
-    this is CREATE PC page!! <br>
-    this is CREATE PC page!! <br>
-    this is CREATE PC page!! <br>
-    this is CREATE PC page!! <br>
-    this is CREATE PC page!! <br>
-    this is CREATE PC page!! <br>
-    this is CREATE PC page!! <br>
-    this is CREATE PC page!! <br>
-    this is CREATE PC page!! <br>
-    this is CREATE PC page!! <br>
-    this is CREATE PC page!! <br>
-    this is CREATE PC page!! <br>
-    this is CREATE PC page!! <br>
-    this is CREATE PC page!! <br>
+    <div id="progress-bar"></div>
 
+    <div id="question1" class="question-container active">
+        <p>Question: Who is the GOAT?</p>
+        <input type="text" id="answer1">
+        <button onclick="nextQuestion()">Next</button>
+    </div>
+
+    <div id="question2" class="question-container">
+        <p>Question: Would you prefer to roar or meow?</p>
+        <input type="text" id="answer2">
+        <button onclick="nextQuestion()">Next</button>
+        <button class="back-button" onclick="previousQuestion()">Back</button>
+    </div>
+
+    <div id="question3" class="question-container">
+        <p>Question: Pineapple or eggplant?</p>
+        <input type="text" id="answer3">
+        <button onclick="nextQuestion()">Next</button>
+        <button class="back-button" onclick="previousQuestion()">Back</button>
+    </div>
+
+    <div id="question4" class="question-container">
+        <p>Question: Are you a slave?</p>
+        <input type="text" id="answer4">
+        <button onclick="nextQuestion()">Next</button>
+        <button class="back-button" onclick="previousQuestion()">Back</button>
+    </div>
+
+    <script src="main.js"></script>
 
 </body>
-
 </html>

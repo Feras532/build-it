@@ -1,4 +1,4 @@
-const API_KEY = "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"; // change it to the actual key.
+const API_KEY = "bobo"; // change it to the actual key.
 async function fetchData() {
   const response = await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
