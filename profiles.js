@@ -40,6 +40,10 @@ class GenericUser{
         // later implemented
         return
     }
+
+    toString(){
+        return this.username+  ' ' + this.password+  ' ' + this.email;
+    }
 }
 
 class EndUser extends GenericUser{
@@ -95,6 +99,5 @@ class Adviser extends GenericUser{
         // later implemented
         return
     }
-
 
 }

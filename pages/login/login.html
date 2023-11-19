@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>BuildIt Login!</title>
     <link rel="stylesheet" href="login.css">
     <link rel="stylesheet" href="../../commonStyles/navbar.css"> <!-- navbar styler only. -->
+    <script src = '../../profiles.js'> </script>
 </head>
 <body>
     
@@ -40,24 +41,25 @@
             <p> The first step in getting the PC you deserve! </p>
             </div>
             <form>
-                <label for="username" id ="username">Username or Email:</label><br>
-                <input type="text" class="inputs" name="username" placeholder="Username/Email"><br>
+                <label for="username" class ="username">Username or Email:</label><br>
+                <input type="text" class="inputs" name="username" id = 'username' placeholder="Username/Email"><br>
                 <label for="password">Password:</label><br>
-                <input type="password" class="inputs" name="password" placeholder="***********"><br>
+                <input type="password" class="inputs" id = 'password' name="password" placeholder="***********"><br>
                 <div class = "signUpInfo"> </div>
-                <input type="submit" value="Login" class="subBut">
+
             </form>
-            
-            <p class = "signUp"> <span>Not registered yet? </span><button onclick=signUp()> Create an account!</button></p>
+            <button class="subBut" onclick=login()> Login</button>
+            <p class = "signUp"> <span>Not registered yet? </span><button id = 'b2' onclick=extraFields()> Create an account!</button></p>
         </div>
 
     </div>
 </body>
 </html>
 <script>
-    function signUp(){
+    let newUser = false
+    function extraFields(){
         let form = document.querySelector(".signUpInfo")
-
+        newUser = true
         //Adding Confirm Password Field//
         let pass2 = document.createElement("input")
         let pass2Label = document.createElement("label")
@@ -65,6 +67,7 @@
         pass2Label.innerText = "Confirm Password: "
         pass2.type = "password"
         pass2.className = "inputs"
+        pass2.id = 'password2'
         pass2.name = "password2"
         form.append(pass2Label, document.createElement("br"), pass2)
         
@@ -76,6 +79,7 @@
         email.type = "email"
         email.className = "inputs"
         email.name = "email"
+        email.id = 'email'
         email.placeholder = "Ahmed13@gmail.com"
         form.append(document.createElement("br"), emailLabel, document.createElement("br"), email)
 
@@ -85,13 +89,32 @@
 
         //Changing text under login button
         document.querySelector("span").innerText = "Already Registered? "
-        document.querySelector("button").remove()
+        document.querySelector("#b2").remove()
         let a = document.createElement("a")
         a.href = "login.html"
         a.innerText = "Login!"
         document.querySelector(".signUp").appendChild(a)
         
-        document.querySelector(".subBut").value = "Create Account"
+        document.querySelector(".subBut").innerText = "Create Account"
 
     }
+    
+    function login(){
+    if (!newUser) {
+        //Logging an existing user (later implemented)
+        return
+    }
+    else {
+        //Creating a new User (More work needed but its reliant on the database)
+        let info = {
+                    name: document.querySelector("#username").value, 
+                    password: document.querySelector("#password").value, 
+                    email: document.querySelector("#email").value    
+                }
+        let user = new GenericUser(info.name, info.password, info.email, 0)
+    }
+
+    }
+    
+
 </script>   
