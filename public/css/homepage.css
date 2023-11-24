@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Concert+One&display=swap');
+
+* {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.Hero {
+    display: flex;
+    padding: 96px 80px;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-self: stretch;
+}
+
+.HeroContainer {
+    display: flex;
+    padding: 0px 0px 0px 150px;
+    align-items: flex-start;
+    gap: 4px;
+    flex: 1 0 0;
+    flex-wrap: wrap;
+}
+
+.main-content {
+    display: flex;
+    max-width: 768px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 0 0 0;
+    /* gap: 4px; */
+    /* align-self: stretch; */
+    color: var(--gray-600, #4B5563);
+
+}
+
+.welcome {
+    color: var(--gray-900, #111827);
+    padding: 70px 70px 35px 70px;
+    font-family: Inter;
+    font-size: 60px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 72px;
+    letter-spacing: -1.2px;
+    margin-bottom: px;
+}
+
+.intro {
+    color: var(--gray-600, #4B5563);
+    padding: 20px;
+    font-family: "Inter";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+.fancy-button {
+    font-size: 20px;
+    height: 3rem;
+    width: 10rem;
+    text-transform: uppercase;
+    background-color: coral;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    color: rgb(0, 0, 0);
+    box-shadow: 0px 4px 14px 3px rgba(0, 0, 0, 0.207);
+    transition: background-color 0.5s ease, box-shadow 0.5s ease;
+}
+
+.fancy-button:hover {
+    background-color: coral;
+    box-shadow: 0px 4px 14px 3px coral;
+}
+
+
+
+
+.Hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom, #a4bdcb, #ffffff, #F0F5F9);
+    /* gradient background */
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.main-content {
+    animation: fadeIn 2s ease-in-out 1;
+
+}
+
+.pcPic {
+    max-width: 70%;
+    height: auto;
+    margin: auto;
+    padding: 0 0 30px 0;
+
+}

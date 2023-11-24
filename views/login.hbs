@@ -1,18 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BuildIt Login!</title>
-    <link rel="stylesheet" href="login.css">
-    <link rel="stylesheet" href="../../commonStyles/navbar.css"> <!-- navbar styler only. -->
-    <script src = '../../profiles.js'> </script>
-</head>
+
 <body>
     
     <header>
         <div class="nav-container">
-            <a href="../../index.html">
+            <a href="/">
                 <img src="../../assets/logo.png" alt="Logo" height="40">
             </a>
             <nav class="navigation">
@@ -40,7 +33,7 @@
             <h1> Login to Your Account </h1>
             <p> The first step in getting the PC you deserve! </p>
             </div>
-            <form>
+            <form method="POST" action="/login">
                 <label for="username" class ="username">Username or Email:</label><br>
                 <input type="text" class="inputs" name="username" id = 'username' placeholder="Username/Email"><br>
                 <label for="password">Password:</label><br>
@@ -50,15 +43,24 @@
             </form>
             <button class="subBut" onclick=login()> Login</button>
             <p class = "signUp"> <span>Not registered yet? </span><button id = 'b2' onclick=extraFields()> Create an account!</button></p>
+            or
+            <div class="divider"></div>
+<div class="section">
+    <a href="/auth/google" class="btn red darken-1">
+        <i class="fab fa-google left"></i> Log In With Google
+    </a>
+</div>
         </div>
 
     </div>
+    
 </body>
-</html>
 <script>
     let newUser = false
     function extraFields(){
-        let form = document.querySelector(".signUpInfo")
+        let form = document.createElement('form');
+        form.method = 'POST';
+        form.action = '/register'; 
         newUser = true
         //Adding Confirm Password Field//
         let pass2 = document.createElement("input")
@@ -118,3 +120,4 @@
     
 
 </script>   
+</html>
