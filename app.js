@@ -53,12 +53,6 @@ app.use('/auth', require('./routes/auth'))
 app.engine('.hbs', exphbs.engine({defaultLayout: 'main',extname: '.hbs'}))
 app.set('view engine','.hbs')
 
-
-
-
-
-
-
 app.listen(
   PORT,
   console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`)

@@ -43,7 +43,6 @@
             </form>
             <button class="subBut" onclick=login()> Login</button>
             <p class = "signUp"> <span>Not registered yet? </span><button id = 'b2' onclick=extraFields()> Create an account!</button></p>
-            or
             <div class="divider"></div>
 <div class="section">
     <a href="/auth/google" class="btn red darken-1">
@@ -58,8 +57,7 @@
 <script>
     let newUser = false
     function extraFields(){
-        let form = document.createElement('form');
-        form.method = 'POST';
+        let form = document.querySelector('form');
         form.action = '/register'; 
         newUser = true
         //Adding Confirm Password Field//
@@ -93,7 +91,7 @@
         document.querySelector("span").innerText = "Already Registered? "
         document.querySelector("#b2").remove()
         let a = document.createElement("a")
-        a.href = "login.html"
+        a.href = ""
         a.innerText = "Login!"
         document.querySelector(".signUp").appendChild(a)
         
