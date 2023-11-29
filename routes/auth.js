@@ -1,28 +1,38 @@
-const express = require('express')
-const passport = require('passport')
-const router = express.Router()
+const express = require('express');
+const passport = require('passport');
+const router = express.Router();
 
-// @desc    Auth with Google
-// @route   GET /auth/google
-router.get('/google', passport.authenticate('google', { scope: ['profile'] }))
 
-// @desc    Google auth callback
-// @route   GET /auth/google/callback
-router.get(
-  '/google/callback',
-  passport.authenticate('google', { failureRedirect: '/' }),
-  (req, res) => {
-    res.redirect('/')
-  }
-)
+const authMiddleware = {
+  ensureAuth: function (req, res, next) {
+    res.locals.login = req.isAuthenticated();
+    if (req.isAuthenticated()) {
+      return next();
+    } else {
+      req.flash('errors', 'Login to access another page');
+      res.redirect('/');
+    }
+  },
+  ensureGuest: function (req, res, next) {
+    if (!req.isAuthenticated()) {
+      return next();
+    } else {
+      res.redirect('/dashboard');
+    }
+  },
+  isAuthed: function (req, res, next) {
+    res.locals.login = req.isAuthenticated();
+    next();
+  },
+  checkAuth: function (req, res, next) {
+    if (req.isAuthenticated()) {
+      // User is authenticated
+      return next();
+    } else {
+      // User is not authenticated
+      return res.status(401).json({ message: 'Unauthorized' });
+    }
+  },
+};
 
-// @desc    Logout user
-// @route   /auth/logout
-router.get('/logout', (req, res, next) => {
-  req.logout((error) => {
-      if (error) {return next(error)}
-      res.redirect('/')
-  })
-})
-
-module.exports = router
+module.exports = authMiddleware;

@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login and Signup</title>
 
+</head>
 <body>
-    
     <header>
         <div class="nav-container">
             <a href="/">
@@ -14,110 +17,77 @@
                     <div></div>
                     <div></div>
                 </div>
-                <ul class="nav-items">      
+                <ul class="nav-items">
                     <li><a href="../../pages/createPc/createPc.html">Create pc</a></li>
                     <li><a href="">Upgrade</a></li>
                     <li><a href="">Community</a></li>
                     <li><a href="">Something(TODO)...</a></li>
                 </ul>
             </nav>
-            <a href = "login.html"><img src="../../assets/avatar.png" alt="login" height="40"></a>
+            <a href="login.html"><img src="../../assets/avatar.png" alt="login" height="40"></a>
         </div>
     </header>
 
-    <div class = "stage">
-
-        <div class = "middle">
-            <div class = "title">
-            <img class = "logo" src="../../assets/logoSeperated.png">
-            <h1> Login to Your Account </h1>
-            <p> The first step in getting the PC you deserve! </p>
+    <div class="stage">
+        <div class="middle">
+            <div class="title">
+                <img class="logo" src="../../assets/logoSeperated.png">
+                <h1> Login to Your Account </h1>
+                <p> The first step in getting the PC you deserve! </p>
             </div>
-            <form method="POST" action="/login">
-                <label for="username" class ="username">Username or Email:</label><br>
-                <input type="text" class="inputs" name="username" id = 'username' placeholder="Username/Email"><br>
+
+            <!-- Login Form -->
+            <form method="POST" action="/login" id="authForm">
+                <div id="usernameField" style="display: none;">
+                    <label for="userName">Username:</label><br>
+                    <input type="text" id="userName" name="userName" placeholder="Username" class="inputs"><br>
+                </div>
+                <label for="email">Email:</label><br>
+                <input type="email" id="email" name="email" placeholder="Email" class="inputs" required><br>
                 <label for="password">Password:</label><br>
-                <input type="password" class="inputs" id = 'password' name="password" placeholder="***********"><br>
-                <div class = "signUpInfo"> </div>
-
+                <input type="password" id="password" name="password" placeholder="Password" class="inputs" required><br>
+                <div id="confirmPasswordField" style="display: none;">
+                    <label for="password2">Confirm Password:</label><br>
+                    <input type="password" id="password2" name="password2" placeholder="Confirm Password" class="inputs"><br>
+                </div>
+                <button class="subBut" type="submit" id="submitBtn">Login</button>
             </form>
-            <button class="subBut" onclick=login()> Login</button>
-            <p class = "signUp"> <span>Not registered yet? </span><button id = 'b2' onclick=extraFields()> Create an account!</button></p>
-            or
-            <div class="divider"></div>
-<div class="section">
-    <a href="/auth/google" class="btn red darken-1">
-        <i class="fab fa-google left"></i> Log In With Google
-    </a>
-</div>
+
+            <p class="signUp">
+                <span id="formToggleText">Not registered yet? </span>
+                <button id="formToggleButton" type="button">Create an account!</button>
+            </p>
         </div>
-
     </div>
-    
+
+ <script>
+        let newUser = false;
+
+        document.getElementById('formToggleButton').addEventListener('click', function() {
+            const usernameDiv = document.getElementById('usernameField');
+            const confirmPasswordDiv = document.getElementById('confirmPasswordField');
+            const form = document.getElementById('authForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const toggleText = document.getElementById('formToggleText');
+
+            if (!newUser) {
+                form.action = '/register';
+                usernameDiv.style.display = 'block';
+                confirmPasswordDiv.style.display = 'block';
+                submitBtn.textContent = 'Signup';
+                toggleText.textContent = 'Already registered? ';
+
+                newUser = true;
+            } else {
+                form.action = '/login';
+                usernameDiv.style.display = 'none';
+                confirmPasswordDiv.style.display = 'none';
+                submitBtn.textContent = 'Login';
+                toggleText.textContent = 'Not registered yet? ';
+
+                newUser = false;
+            }
+        });
+    </script>
 </body>
-<script>
-    let newUser = false
-    function extraFields(){
-        let form = document.createElement('form');
-        form.method = 'POST';
-        form.action = '/register'; 
-        newUser = true
-        //Adding Confirm Password Field//
-        let pass2 = document.createElement("input")
-        let pass2Label = document.createElement("label")
-        pass2Label.for = "password2"
-        pass2Label.innerText = "Confirm Password: "
-        pass2.type = "password"
-        pass2.className = "inputs"
-        pass2.id = 'password2'
-        pass2.name = "password2"
-        form.append(pass2Label, document.createElement("br"), pass2)
-        
-        //Adding Email Field//
-        let email = document.createElement("input")
-        let emailLabel = document.createElement("label")
-        emailLabel.for = "email"
-        emailLabel.innerText = "Email Address: "
-        email.type = "email"
-        email.className = "inputs"
-        email.name = "email"
-        email.id = 'email'
-        email.placeholder = "Ahmed13@gmail.com"
-        form.append(document.createElement("br"), emailLabel, document.createElement("br"), email)
-
-        //Tweaks
-        document.querySelector("#username").innerText = "Username"
-        document.querySelector(".inputs").placeholder = "Ahmed13"
-
-        //Changing text under login button
-        document.querySelector("span").innerText = "Already Registered? "
-        document.querySelector("#b2").remove()
-        let a = document.createElement("a")
-        a.href = "login.html"
-        a.innerText = "Login!"
-        document.querySelector(".signUp").appendChild(a)
-        
-        document.querySelector(".subBut").innerText = "Create Account"
-
-    }
-    
-    function login(){
-    if (!newUser) {
-        //Logging an existing user (later implemented)
-        return
-    }
-    else {
-        //Creating a new User (More work needed but its reliant on the database)
-        let info = {
-                    name: document.querySelector("#username").value, 
-                    password: document.querySelector("#password").value, 
-                    email: document.querySelector("#email").value    
-                }
-        let user = new GenericUser(info.name, info.password, info.email, 0)
-    }
-
-    }
-    
-
-</script>   
 </html>
