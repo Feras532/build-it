@@ -9,7 +9,10 @@ body {
     background-color: coral;
     transition: width 1s;
 }
+.questionsContainer{
+    /* background-colors: lightpink; */
 
+}
 .question-container {
     display: none;
     transition: opacity 1s;
@@ -54,17 +57,7 @@ input[type="text"] {
     box-sizing: border-box;
 }
 
-header {
-    width: 100%;
-    text-align: center;
-    padding: 20px 0;
-    background: #ffffff;
-    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
-}
 
-header img {
-    height: 60px;
-}
 
 .back-button {
     float: left;
@@ -74,4 +67,17 @@ header img {
     background-color: #ffffff;
     color: #333333;
     border: 1px solid #cccccc;
+}
+
+input[type="range"] {
+    width: 80%;
+    height: 15px;
+    margin: 10px 0;
+}
+
+#budgetDisplay {
+    font-size: 20px;
+    color: #333;
+    display: inline-block;
+    margin-left: 10px;
 }

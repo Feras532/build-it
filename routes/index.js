@@ -1,5 +1,5 @@
-const express = require('express')
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const passport = require('passport')
@@ -7,32 +7,25 @@ const authMiddleware = require('../routes/auth')
 
 
 
-router.get('/', (req,res) =>{
-    res.render('main',{
-layout: 'main'
-    })
-    
-})
+router.get("/", (req, res) => {
+  res.render("main", {
+    layout: "main",
+  });
+});
 
+router.get("/login", (req, res) => {
+  res.render("login", {
+    layout: "login",
+  });
+});
 
-router.get('/login', (req,res) =>{
-    res.render('login',{
-        layout: 'login'
-            })
-    
-})
+router.get("/dashboard", (req, res) => {
+  res.render("dashboard", { layout: "main" });
+});
 
-router.get('/dashboard', (req,res) =>{
-    res.render('dashboard',
-    {layout :'main'})
-    
-})
-
-router.get('/signup', (req,res) =>{
-    res.render('signup',
-    {layout :'main'})
-    
-})
+router.get("/signup", (req, res) => {
+  res.render("signup", { layout: "main" });
+});
 
 router.post('/register', async (req, res) => {
     const { userName, email, password, password2 } = req.body; // Include firstName and userName
@@ -113,4 +106,4 @@ router.get('/logout', (req, res, next) => {
     });
   });
 
-module.exports = router;
+module.exports = router;;

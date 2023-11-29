@@ -39,4 +39,11 @@ function previousQuestion() {
         let progress = ((currentQuestion - 1) / totalQuestions) * 100;
         document.getElementById('progress-bar').style.width = progress + '%';
     }
+
+    
+}
+
+
+function updateValue(val) {
+    document.getElementById('budgetDisplay').textContent = "$" + val;
 }

@@ -1,41 +1,44 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/createPC.css">
 </head>
+
 <body>
-
-
     <div id="progress-bar"></div>
 
-    <div id="question1" class="question-container active">
-        <p>Question: Who is the GOAT?</p>
-        <input type="text" id="answer1">
-        <button onclick="nextQuestion()">Next</button>
-    </div>
+    <div class="questionsContainer">
+        <div id="question1" class="question-container active">
+            <p>What is your budget?</p>
+            <input type="range" id="answer1" min="100" max="5000" value="0" oninput="updateValue(this.value)">
+            <span id="budgetDisplay">$0</span>
+            <button onclick="nextQuestion()">Next</button>
+        </div>
+        <div id="question2" class="question-container">
+            <p>What type of users are you? </p>
+            <input type="text" id="answer2">
+            <button onclick="nextQuestion()">Next</button>
+            <button class="back-button" onclick="previousQuestion()">Back</button>
+        </div>
 
-    <div id="question2" class="question-container">
-        <p>Question: Would you prefer to roar or meow?</p>
-        <input type="text" id="answer2">
-        <button onclick="nextQuestion()">Next</button>
-        <button class="back-button" onclick="previousQuestion()">Back</button>
-    </div>
+        <div id="question3" class="question-container">
+            <p>What is the storage capacity you need?</p>
+            <input type="text" id="answer3">
+            <button onclick="nextQuestion()">Next</button>
+            <button class="back-button" onclick="previousQuestion()">Back</button>
+        </div>
 
-    <div id="question3" class="question-container">
-        <p>Question: Pineapple or eggplant?</p>
-        <input type="text" id="answer3">
-        <button onclick="nextQuestion()">Next</button>
-        <button class="back-button" onclick="previousQuestion()">Back</button>
-    </div>
-
-    <div id="question4" class="question-container">
-        <p>Question: Are you a slave?</p>
-        <input type="text" id="answer4">
-        <button onclick="nextQuestion()">Next</button>
-        <button class="back-button" onclick="previousQuestion()">Back</button>
+        <div id="question4" class="question-container">
+            <p>Do you have parts that you want them to be used in the collection?</p>
+            <input type="text" id="answer4">
+            <button onclick="nextQuestion()">Next</button>
+            <button class="back-button" onclick="previousQuestion()">Back</button>
+        </div>
     </div>
 
     <script src="scripts/main.js"></script>
 
 </body>
+
 </html>
