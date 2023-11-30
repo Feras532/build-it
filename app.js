@@ -21,7 +21,7 @@ const flash = require("connect-flash");
 dotenv.config({ path: "config/config.env" });
 
 connectDB();
-connectDB({ serverSelectionTimeoutMS: 30000 }) // Increase timeout to 30 seconds
+connectDB({ serverSelectionTimeoutMS: 1000000 }) // Increase timeout to 30 seconds
 
 // Passport config
 require("./config/passport")(passport);

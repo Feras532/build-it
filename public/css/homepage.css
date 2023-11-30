@@ -7,35 +7,13 @@
     box-sizing: border-box;
 }
 
-.Hero {
-    display: flex;
-    padding: 96px 80px;
-    justify-content: space-between;
-    align-items: flex-start;
-    align-self: stretch;
+html, body{
+    height:100%;
+    width: 100%;
 }
 
-.HeroContainer {
-    display: flex;
-    padding: 0px 0px 0px 150px;
-    align-items: flex-start;
-    gap: 4px;
-    flex: 1 0 0;
-    flex-wrap: wrap;
-}
 
-.main-content {
-    display: flex;
-    max-width: 768px;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 60px 0 0 0;
-    /* gap: 4px; */
-    /* align-self: stretch; */
-    color: var(--gray-600, #4B5563);
 
-}
 
 .welcome {
     color: var(--gray-900, #111827);
@@ -46,7 +24,6 @@
     font-weight: 700;
     line-height: 72px;
     letter-spacing: -1.2px;
-    margin-bottom: px;
 }
 
 .intro {
@@ -79,23 +56,63 @@
 }
 
 
-
-
 .Hero {
     display: flex;
     justify-content: space-between;
     align-items: center;
     justify-content: center;
     align-items: center;
+    height: 100%;
+    padding-left: 60px;
     background: linear-gradient(to bottom, #a4bdcb, #ffffff, #F0F5F9);
     /* gradient background */
 }
 
+
 .main-content {
-    flex: 1;
     display: flex;
-    justify-content: space-around;
+    max-width: 768px;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
+    /* gap: 4px; */
+    /* align-self: stretch; */
+    color: var(--gray-600, #4B5563);
+    animation: fadeIn 2s ease-in-out 1;
+}
+
+.pcPic {
+    
+    align-self: center;
+    justify-self: center;
+    max-width: 768px;
+}
+
+
+/* Mobile View */
+@media screen and (max-width: 600px) {
+
+html, body{
+    width: 100%;
+    height: 100%;
+}
+
+.main-content{
+    flex-direction: column;
+    scale: 85%;
+    margin: 4px 40p;
+}
+
+.pcPic{
+    scale:50%
+}
+
+.Hero{
+    flex-direction: column;
+    height: fit-content;
+    width: 100%
+}
+
 }
 
 @keyframes fadeIn {
@@ -106,17 +123,4 @@
     100% {
         opacity: 1;
     }
-}
-
-.main-content {
-    animation: fadeIn 2s ease-in-out 1;
-
-}
-
-.pcPic {
-    max-width: 70%;
-    height: auto;
-    margin: auto;
-    padding: 0 0 30px 0;
-
 }

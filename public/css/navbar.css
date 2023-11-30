@@ -1,20 +1,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Concert+One&display=swap');
 
+:root {
+    --bar-width: 35px;
+    --bar-height: 6px;
+    --hamburger-gap: 4px;
+    --foreground: #000000;
+    --background: white;
+    --hamburger-margin: 12px;
+    --animation-timing: 500ms ease-in-out;
+    --hamburger-height: calc(var(--bar-height) * 3 + var(--hamburger-gap) * 2);
+  }
+
 * {
     font-family: 'Poppins', sans-serif;
 }
 
-.navigation {
+.navigation{
     flex-grow: 1;
+    list-style: none;
 }
 
 .nav-items {
-
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 24px;
-    list-style: none;
 }
 
 .nav-items a.active {
@@ -34,7 +44,6 @@ header {
 
 .nav-container {
     display: flex;
-    padding: 0px 20px;
     justify-content: space-around;
     align-items: center;
     flex: 1 0 0;
@@ -70,23 +79,141 @@ nav ul li a:hover {
 }
 
 
+a {
+    color: coral;
+    text-decoration: none;
+    /*removed underlines of the navigations*/
+}
 
+.mobile-nav{
+    display:none;
+}
 /* Mobile ...*/
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 600px) {
 
 
-    .hamburger {
-        display: block;
-        cursor: pointer;
-
-        padding: 6px;
-
-    }
+    .mobile-nav{
+        display: flex;
+        justify-content: right;
+      }
+    
+    .mobile-nav ul{
+        list-style: none;
+        color:#607254
+      }
+    
 
     .nav-items {
         display: none;
     }
 
+    .loginref, .loginref img{
+        display: none;
+    }
+    .hamburger {
+        --x-width: calc(var(--hamburger-height) * 1.41421356237);
+
+        display: flex;
+        flex-direction: column;
+        gap: var(--hamburger-gap);
+        width: max-content;
+        position: absolute;
+        top: var(--hamburger-margin);
+        right: var(--hamburger-margin);
+        z-index: 4;
+        cursor: pointer;
+
+
+    }
+
+
+    .hamburger:has(input:focus-visible)::before,
+    .hamburger:has(input:focus-visible)::after,
+    .hamburger input:focus-visible {
+    border: 1px solid var(--background);
+    box-shadow: 0 0 0 1px var(--foreground);
+    }
+
+    .hamburger::before,
+    .hamburger::after,
+    .hamburger input {
+      content: "";
+      width: var(--bar-width);
+      height: var(--bar-height);
+      background-color: var(--foreground);
+      border-radius: 9999px;
+      transform-origin: left center;
+      transition: opacity var(--animation-timing), width var(--animation-timing),
+        rotate var(--animation-timing), translate var(--animation-timing),
+        background-color var(--animation-timing);
+    }
+
+    .hamburger input {
+        appearance: none;
+        padding: 0;
+        margin: 0;
+        outline: none;
+        pointer-events: none;
+      }
+      
+      .hamburger:has(input:checked)::before {
+        rotate: 45deg;
+        width: var(--x-width);
+        translate: 0 calc(var(--bar-height) / -2);
+      }
+      
+      .hamburger:has(input:checked)::after {
+        rotate: -45deg;
+        width: var(--x-width);
+        translate: 0 calc(var(--bar-height) / 2);
+      }
+      
+      .hamburger input:checked {
+        opacity: 0;
+        width: 0;
+      }
+
+      .sidebar{
+        transition: translate var(--animation-timing);
+        translate: 100%;
+        position: absolute;
+        padding-top: calc(var(--hamburger-height) + var(--hamburger-margin));
+        background-color:white;
+        opacity: 0.8;
+        border: solid coral;
+        width: 30%;
+        min-height: 450px;
+        z-index: 3;
+        border-radius: 25px;
+        top:0;
+        justify-content: center;
+        align-items: center;
+      }
+
+    .sidebar nav {
+        margin-top: 10%;
+        text-align: center;
+    }
+
+    .sidebar nav img{
+        margin: 8px;
+    }
+      
+    .sidebar nav ul li{
+        font-weight: bold;
+        font-size: medium;
+        margin:10px 10px;
+        text-shadow: black;
+        text-transform: uppercase;
+        text-shadow: #000000;
+        width: 100%;
+    }
+
+      .hamburger:has(input:checked) + .sidebar{
+        translate: 0;
+      }
+      
+    
     .hamburger div {
         justify-content: right;
         width: 35px;
@@ -96,13 +223,6 @@ nav ul li a:hover {
     }
 }
 
-a {
-    color: coral;
-    text-decoration: none;
-    /*removed underlines of the navigations*/
-}
 
-.hamburger {
-    /*not active for desktop version.*/
-    display: none;
-}
+
+
