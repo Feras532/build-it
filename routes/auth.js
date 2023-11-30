@@ -1,7 +1,6 @@
-const express = require('express');
-const passport = require('passport');
+const express = require("express");
+const passport = require("passport");
 const router = express.Router();
-
 
 const authMiddleware = {
   ensureAuth: function (req, res, next) {
@@ -9,15 +8,15 @@ const authMiddleware = {
     if (req.isAuthenticated()) {
       return next();
     } else {
-      req.flash('errors', 'Login to access another page');
-      res.redirect('/');
+      req.flash("errors", "Login to access another page");
+      res.redirect("/");
     }
   },
   ensureGuest: function (req, res, next) {
     if (!req.isAuthenticated()) {
       return next();
     } else {
-      res.redirect('/dashboard');
+      res.redirect("/dashboard");
     }
   },
   isAuthed: function (req, res, next) {
@@ -30,7 +29,7 @@ const authMiddleware = {
       return next();
     } else {
       // User is not authenticated
-      return res.status(401).json({ message: 'Unauthorized' });
+      return res.status(401).json({ message: "Unauthorized" });
     }
   },
 };
