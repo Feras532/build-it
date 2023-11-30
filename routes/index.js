@@ -13,17 +13,25 @@ router.get("/", (req, res) => {
   });
 });
 
-router.get("/login", (req, res) => {
+
+router.get("/login",authMiddleware.ensureGuest, (req, res) => {
   res.render("login", {
     layout: "login",
   });
 });
 
-router.get("/dashboard", (req, res) => {
-  res.render("dashboard", { layout: "main" });
+router.get('/dashboard', authMiddleware.ensureAuth, function (req, res) {
+  const userName = req.user.userName;
+  const Email = req.user.email;
+  res.render('dashboard', {
+    layout: "main"
+    , userName: userName 
+    , Email: Email });
 });
 
-router.get("/signup", (req, res) => {
+
+
+router.get("/signup",authMiddleware.ensureGuest, (req, res) => {
   res.render("signup", { layout: "main" });
 });
 
