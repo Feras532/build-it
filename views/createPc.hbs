@@ -2,41 +2,156 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="css/createPC.css">
+    <link rel="stylesheet" href="css/createPC/createPC.css">
 </head>
 
 <body>
     <div id="progress-bar"></div>
 
-    <div class="questionsContainer">
-        <div id="question1" class="question-container active">
-            <p>What is your budget?</p>
-            <input type="range" id="answer1" min="100" max="5000" value="0" oninput="updateValue(this.value)">
-            <span id="budgetDisplay">$0</span>
-            <button onclick="nextQuestion()">Next</button>
+    <div id="question1" class="question-container active">
+        <div class="question">
+            <button class="back-button-fistOne" onclick="previousQuestion()">
+                < </button>
+                    What is your budget?
+                    <button onclick="nextQuestion()">Next</button>
         </div>
-        <div id="question2" class="question-container">
-            <p>What type of users are you? </p>
-            <input type="text" id="answer2">
-            <button onclick="nextQuestion()">Next</button>
-            <button class="back-button" onclick="previousQuestion()">Back</button>
+        <div class="bar">
+            <input type="range" id="answer1" min="0" max="50" value="0" oninput="updateValue(this.value)">
+            <span id="budgetDisplay">$0 </span>
         </div>
+        <div class="options-container">
+            <div class="option" onclick="selectOption('useMax')">
+                <p>Use maximum price</p>
+            </div>
 
-        <div id="question3" class="question-container">
-            <p>What is the storage capacity you need?</p>
-            <input type="text" id="answer3">
-            <button onclick="nextQuestion()">Next</button>
-            <button class="back-button" onclick="previousQuestion()">Back</button>
-        </div>
-
-        <div id="question4" class="question-container">
-            <p>Do you have parts that you want them to be used in the collection?</p>
-            <input type="text" id="answer4">
-            <button onclick="nextQuestion()">Next</button>
-            <button class="back-button" onclick="previousQuestion()">Back</button>
+            <div class="option" onclick="selectOption('saveMoney')">
+                <p>Try to save money</p>
+            </div>
         </div>
     </div>
 
+    <div id="question2" class="question-container">
+        <div class="question">
+            <button class="back-button" onclick="previousQuestion()">
+                < </button>
+                    What type of users are you?
+                    <button onclick="nextQuestion()">Next</button>
+        </div>
+        <div class="types-container">
+            <div class="type">
+                <img src="/assets/q2/gamer.png" alt="Gamer">
+                <p>Gamer</p>
+            </div>
+            <div class="type">
+                <img src="/assets/q2/developer.png" alt="Developer">
+                <p>Developer</p>
+            </div>
+            <div class="type">
+                <img src="/assets/q2/designer.png" alt="Designer">
+                <p>Designer</p>
+            </div>
+            <div class="type">
+                <img src="/assets/q2/student.png" alt="Student">
+                <p>Student</p>
+            </div>
+            <div class="type">
+                <img src="/assets/q2/business.png" alt="Business">
+                <p>Business</p>
+            </div>
+            <div class="type">
+                <img src="/assets/q2/casual.png" alt="Casual">
+                <p>Casual</p>
+            </div>
+        </div>
+
+        <div id="app-input-container" style="display: none;">
+            <label for="app-input">Please enter your favorite applications:</label>
+            <input id="app-input" type="text">
+        </div>
+    </div>
+
+    <div id="question3" class="question-container">
+        <div class="question">
+            <button class="back-button" onclick="previousQuestion()">
+                < </button>
+                    What size would you like to have?
+                    <button onclick="nextQuestion()">Next</button>
+        </div>
+        <div class="sizes-container">
+            <div class="size" onclick="selectSize('Mini Tower')">
+                <img class="mini-tower" src="/assets/q3/miniTower.png" alt="Mini Tower">
+                <p>Mini Tower</p>
+            </div>
+            <div class="size" onclick="selectSize('Mid Tower')">
+                <img class="mid-tower" src="/assets/q3/midTower.png" alt="Mid Tower">
+                <p>Mid Tower</p>
+            </div>
+            <div class="size" onclick="selectSize('Full Tower')">
+                <img class="full-tower" src="/assets/q3/fullTower.png" alt="Full Tower">
+                <p>Full Tower</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="question4" class="question-container">
+        <div class="question">
+            <button class="back-button" onclick="previousQuestion()">
+                < </button>
+                    What is the storage capacity you need?
+                    <button onclick="nextQuestion()">Next</button>
+        </div>
+
+        <div class="q4-options">
+            <div class="option" onclick="selectCapacity('256GB')">
+                <p>256GB</p>
+            </div>
+            <div class="option" onclick="selectCapacity('512GB')">
+                <p>512GB</p>
+            </div>
+            <div class="option" onclick="selectCapacity('1TB')">
+                <p>1TB</p>
+            </div>
+            <div class="option" onclick="selectCapacity('2TB')">
+                <p>2TB</p>
+            </div>
+            <div class="option" onclick="selectCapacity('4TB')">
+                <p>4TB</p>
+            </div>
+            <div class="option" onclick="selectCapacity('8TB')">
+                <p>8TB</p>
+            </div>
+            <div class="option" onclick="selectCapacity('16TB')">
+                <p>16TB</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="question5" class="question-container">
+        <div class="question">
+            <button class="back-button" onclick="previousQuestion()">
+                < </button>
+                    What is your monitor resolution?
+                    <button onclick="nextQuestion()" class="btn-submit">Submit</button>
+        </div>
+
+        <div class="q5-options">
+            <div class="option" onclick="selectResolution('720p')">
+                <p>720p <br>(HD)</p>
+            </div>
+            <div class="option" onclick="selectResolution('1080p')">
+                <p>1080p <br>(Full HD)</p>
+            </div>
+            <div class="option" onclick="selectResolution('1440p')">
+                <p>1440p <br>(Quad HD)</p>
+            </div>
+            <div class="option" onclick="selectResolution('2160p')">
+                <p>2160p <br>(4K Ultra HD)</p>
+            </div>
+            <div class="option" onclick="selectResolution('4320p')">
+                <p>4320p <br>(8K Ultra HD)</p>
+            </div>
+        </div>
+    </div>
     <script src="scripts/main.js"></script>
 
 </body>
