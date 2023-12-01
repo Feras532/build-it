@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Login and Signup</title>
 
 </head>
+
 <body>
 
     <div class="stage">
@@ -14,9 +16,7 @@
                 <h1> Login to Your Account </h1>
                 <p> The first step in getting the PC you deserve! </p>
             </div>
-
-            <!-- Login Form -->
-            <form method="POST" action="/login" id="authForm">
+            <form method="POST" action="/auth/login" id="authForm">
                 <div id="usernameField" style="display: none;">
                     <label for="userName">Username:</label><br>
                     <input type="text" id="userName" name="userName" placeholder="Username" class="inputs"><br>
@@ -27,8 +27,15 @@
                 <input type="password" id="password" name="password" placeholder="Password" class="inputs" required><br>
                 <div id="confirmPasswordField" style="display: none;">
                     <label for="password2">Confirm Password:</label><br>
-                    <input type="password" id="password2" name="password2" placeholder="Confirm Password" class="inputs"><br>
+                    <input type="password" id="password2" name="password2" placeholder="Confirm Password"
+                        class="inputs"><br>
                 </div>
+                {{#if errorMessage}}
+                <div class="error-message" id="errorMessage">
+                    <span class="error-symbol">&#9888;</span>
+                    {{errorMessage}}
+                </div>
+                {{/if}}
                 <button class="subBut" type="submit" id="submitBtn">Login</button>
             </form>
 
@@ -39,37 +46,45 @@
         </div>
     </div>
 
- <script>
+    <script>
         let newUser = false;
 
-        document.getElementById('formToggleButton').addEventListener('click', function() {
+        document.getElementById('formToggleButton').addEventListener('click', function () {
             const usernameDiv = document.getElementById('usernameField');
             const confirmPasswordDiv = document.getElementById('confirmPasswordField');
             const form = document.getElementById('authForm');
             const submitBtn = document.getElementById('submitBtn');
             const toggleText = document.getElementById('formToggleText');
-            
+            const errorMessageDiv = document.getElementById('errorMessage');
 
             if (!newUser) {
-                form.action = '/register';
+                form.action = '/auth/register';
                 usernameDiv.style.display = 'block';
                 confirmPasswordDiv.style.display = 'block';
                 submitBtn.textContent = 'Signup';
                 toggleText.textContent = 'Already registered? ';
-                formToggleButton.textContent = 'Login Instead'
+                formToggleButton.textContent = 'Login Instead';
+                        if (errorMessageDiv) {
+            errorMessageDiv.classList.add('hidden');
+                                            }
 
                 newUser = true;
             } else {
-                form.action = '/login';
+                form.action = '/auth/login';
                 usernameDiv.style.display = 'none';
                 confirmPasswordDiv.style.display = 'none';
                 submitBtn.textContent = 'Login';
                 toggleText.textContent = 'Not registered yet? ';
-                formToggleButton.textContent = 'Create an account!'
+                formToggleButton.textContent = 'Create an account!';
+                        if (errorMessageDiv) {
+                                        errorMessageDiv.classList.add('hidden');
+                                        }
 
                 newUser = false;
             }
         });
+
     </script>
 </body>
+
 </html>
