@@ -118,6 +118,23 @@ line-height: normal;
     font-weight: bold;
 }
 
+.error-message {
+    background-color: #ffede0;
+    padding: 7px;
+    color: #bc1515;
+    border-radius: 0.35rem;
+    border: 1px solid #ffb6a3; 
+    margin-bottom: 10px;
+    text-align: center;
+    display: block; 
+}
+.error-symbol {
+    font-weight: bold;
+    font-size: 24px; 
+    margin-right: 5px;
+}
+
+.hidden { display: none; }
 
 @keyframes fadeIn {
     0% {
