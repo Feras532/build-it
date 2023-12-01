@@ -322,3 +322,30 @@ input[type="text"] {
 .q5-options .option.active {
     border: 2px solid #333;
 }
+
+
+
+@media screen and (max-width:600px){
+    .question-container.active {
+        padding:60px 10px 0px 10px;
+        display: flex;
+        opacity: 1;
+        flex-direction: column;
+    }
+
+    .back-button-fistOne{
+        display:none;
+    }
+    .question{
+        scale:85%;
+        text-align: center;
+    }
+
+    .question button{
+        margin: 0px 15px;
+    }
+
+    .sizes-container{
+        flex-wrap: wrap;
+    }
+}
