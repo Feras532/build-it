@@ -34,5 +34,9 @@ router.get("/CreatePC", (req, res) => {
   res.render("createPc", { layout: "main" });
 });
 
+router.get("/community", (req, res) => {
+  res.render("community", { layout: "main" });
+});
+
 
 module.exports = router;
