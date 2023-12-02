@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        /* Table styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            margin-top: 10px;
+        }
+
+        th,
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4c4c4c;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+
+        #content-container {
+            margin-left: 10%;
+            margin-right: 10%;
+            background-color: rgb(255, 255, 255);
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        #total-price {
+            font-size: 20px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Animation for table rows */
+        @keyframes rowAnimation {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        table tbody tr {
+            opacity: 0;
+            /* Hidden by default */
+            animation: rowAnimation 0.5s forwards;
+            /* 0.5s animation to show the row */
+        }
+
+        /* Loading screen */
+        #loading-screen {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            display: none;
+            /* Hidden by default */
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.5);
+            /* Semi-transparent background */
+        }
+
+        /* Loading squares */
+        .loading-square {
+            width: 20px;
+            height: 20px;
+            margin: 3px;
+            border: 2px solid coral;
+            border-top-color: darkgrey;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+        }
+
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Animation for table rows */
+        @keyframes rowAnimation {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        table tbody tr {
+            opacity: 0;
+            /* Hidden by default */
+            animation: rowAnimation 0.5s forwards;
+            /* 0.5s animation to show the row */
+        }
+    </style>
+
+    <script type="module" src="scripts/openAi.js"></script>
+
+</head>
+
+<body>
+    <div id="loading-screen">
+        <div class="loading-square"></div>
+        <div class="loading-square"></div>
+        <div class="loading-square"></div>
+        <div class="loading-square"></div>
+    </div>
+
+
+    <div id="content-container">
+
+
+
+        <div id="results-container">
+            <div id="pc-components"></div>
+        </div>
+
+        <div class="performance-container">
+            performance
+            <br>
+            performance
+            <br> performance
+            <br> performance
+            <br> performance
+            <br> performance
+            <br> performance
+            <br> performance
+            <br>
+            performance
+            <br>
+            performance
+            <br> performance
+            <br> performance
+            <br> performance
+            <br> performance
+            <br> performance
+            <br> performance
+            <br> performance
+            <br>
+            performance
+            <br> performance
+            <br> performance
+            <br> performance
+            <br> performance
+            <br> performance
+            <br> performance
+            <br> performance
+            <br>
+            performance
+            <br> performance
+            <br> performance
+            <br> performance
+            <br> performance
+            <br> performance
+            <br> performance
+            <br>
+
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

@@ -5,23 +5,15 @@ const connectDB = require("./config/db");
 const morgan = require("morgan");
 const passport = require("passport");
 const session = require("express-session");
-const MongoStore = require("connect-mongo")
+const MongoStore = require("connect-mongo");
 const exphbs = require("express-handlebars");
 const flash = require("connect-flash");
-
-
-
-
-
-
-
-
 
 // Load config
 dotenv.config({ path: "config/config.env" });
 
 connectDB();
-connectDB({ serverSelectionTimeoutMS: 30000 }) // Increase timeout to 30 seconds
+connectDB({ serverSelectionTimeoutMS: 30000 }); // Increase timeout to 30 seconds
 
 // Passport config
 require("./config/passport")(passport);
@@ -43,18 +35,15 @@ if (process.env.NODE_ENV === "development") {
 // static folder
 app.use(express.static(path.join(__dirname, "public")));
 
-
-
-
-// Session 
+// Session
 app.use(
   session({
     secret: "keyboard cat",
     resave: false,
     saveUninitialized: false,
-    store: MongoStore.create({ 
-      mongoUrl: process.env.MONGO_URI // Use your MongoDB connection string here
-    })
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGO_URI, // Use your MongoDB connection string here
+    }),
   })
 );
 
@@ -66,10 +55,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Routes
-app.use("/",  require("./routes/index"));;
+app.use("/", require("./routes/index"));
 app.use("/auth", require("./controller/auth"));
-
-
 
 //handlebars
 app.engine(".hbs", exphbs.engine({ defaultLayout: "main", extname: ".hbs" }));

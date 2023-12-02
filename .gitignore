@@ -1,3 +1,5 @@
 node_modules
-.env.local
+config.env
+config
 
+config/config.env

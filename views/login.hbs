@@ -55,7 +55,6 @@
             const form = document.getElementById('authForm');
             const submitBtn = document.getElementById('submitBtn');
             const toggleText = document.getElementById('formToggleText');
-            const errorMessageDiv = document.getElementById('errorMessage');
 
             if (!newUser) {
                 form.action = '/auth/register';
@@ -64,9 +63,9 @@
                 submitBtn.textContent = 'Signup';
                 toggleText.textContent = 'Already registered? ';
                 formToggleButton.textContent = 'Login Instead';
-                        if (errorMessageDiv) {
-            errorMessageDiv.classList.add('hidden');
-                                            }
+                if (errorMessageDiv) {
+                    errorMessageDiv.classList.add('hidden');
+                }
 
                 newUser = true;
             } else {
@@ -76,9 +75,9 @@
                 submitBtn.textContent = 'Login';
                 toggleText.textContent = 'Not registered yet? ';
                 formToggleButton.textContent = 'Create an account!';
-                        if (errorMessageDiv) {
-                                        errorMessageDiv.classList.add('hidden');
-                                        }
+                if (errorMessageDiv) {
+                    errorMessageDiv.classList.add('hidden');
+                }
 
                 newUser = false;
             }

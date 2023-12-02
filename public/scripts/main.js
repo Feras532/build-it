@@ -33,6 +33,7 @@ function previousQuestion() {
     document.getElementById("progress-bar").style.width = progress + "%";
   }
 }
+window.previousQuestion = previousQuestion;
 
 function nextQuestion() {
   // Store answer before moving to the next question
@@ -59,13 +60,12 @@ function nextQuestion() {
         : "";
       break;
     case 5:
-      BASKET.resolution = selectedResolution;
       break;
     default:
       break;
   }
 
-  if (currentQuestion < totalQuestions) {
+  if (currentQuestion <= totalQuestions) {
     // Hide current question
     document
       .getElementById(`question${currentQuestion}`)
@@ -84,15 +84,14 @@ function nextQuestion() {
     let progress = ((currentQuestion - 1) / totalQuestions) * 100;
     document.getElementById("progress-bar").style.width = progress + "%";
   }
-
-  console.log(BASKET); // You can inspect the BASKET content in the console
 }
+window.nextQuestion = nextQuestion;
 
 function updateValue(value) {
   var scaledValue = value * 100;
   document.getElementById("budgetDisplay").textContent = "$" + scaledValue;
 }
-
+window.updateValue = updateValue;
 // ============================ Question 1========================
 
 let selectedOption = "useMax"; // Default value
@@ -111,7 +110,7 @@ function selectOption(option) {
   // Update selectedOption variable
   selectedOption = option;
 }
-
+window.selectOption = selectOption;
 // =============================Question 2=========================
 
 let types = document.querySelectorAll(".type");
@@ -132,17 +131,6 @@ types.forEach((type) => {
     }
   });
 });
-// Define the saveAppInput function
-function saveAppInput() {
-  let primaryApp = appInput.value;
-  console.log("Primary application: " + primaryApp);
-  // Do something with the primary application...
-
-  // Clear the input field and hide the input container
-  appInput.value = "";
-  appInputContainer.style.display = "none";
-}
-
 // ========================Question 3=====================
 function selectSize(towerSize) {
   // Remove 'selected' class from all options
@@ -159,7 +147,7 @@ function selectSize(towerSize) {
     selectedSize.classList.add("selected");
   }
 }
-
+window.selectSize = selectSize;
 // ================= Question 4 ============================
 
 function selectCapacity(capacity) {
@@ -177,8 +165,9 @@ function selectCapacity(capacity) {
     selectedOption.classList.add("selected");
   }
 }
+window.selectCapacity = selectCapacity;
 
-///   5
+///   ================= Question 5 ============================
 let selectedResolution = "";
 
 function selectResolution(resolution) {
@@ -194,4 +183,17 @@ function selectResolution(resolution) {
 
   // Update selectedResolution variable
   selectedResolution = resolution;
+  BASKET.resolution = selectedResolution;
+}
+window.selectResolution = selectResolution;
+
+function submitForm() {
+  // Save BASKET to localStorage
+  localStorage.setItem("basket", JSON.stringify(BASKET));
+  console.log("submitted.");
+}
+window.submitForm = submitForm;
+
+export function getBasket() {
+  return BASKET;
 }
