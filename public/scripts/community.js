@@ -96,7 +96,7 @@ const postsObj = [
         username:'TanKhalid',
         title:"Is document live editor the best method of communication?",
         cost:"None",
-        notes: "I don't know you very well sorry",
+        notes: "Ex-Professional minecraft UHC player",
         tag: "Question",
         date:"1 Dec",
         rating:4.1,
