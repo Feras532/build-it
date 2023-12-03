@@ -73,8 +73,8 @@ hr {
 
 /* Main  */
 main {
-    display: flex;
-    /* background: linear-gradient(to top, rgb(236, 169, 145) 1%, rgb(255, 255, 255) 40%); */
+    display:flex;
+    background: linear-gradient(to top, rgb(245, 219, 208) 1%, rgb(255, 255, 255) 40%);
 }
 
 main h1 {
@@ -141,7 +141,7 @@ main h1 {
 #midD {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width:100%;
     height: 100%;
     /* background-color: lightcoral; */
     /*Remove to identify sections*/
@@ -161,7 +161,7 @@ main h1 {
 
 #posts {
     padding: 5px;
-    width: 70%;
+    width: 100%;
     /* border:5px solid green; */
     border-radius: 20px;
     overflow: hidden;
@@ -171,12 +171,14 @@ main h1 {
 }
 
 /* Cards styling */
-.card {
-    width: 100%;
-    height: 12em;
-    display: flex;
+.card{
+    width: 100%; height:12em;
+    display:flex;
     overflow: hidden;
-    border-bottom: coral solid 2px;
+    /* border-bottom: coral solid 2px; */
+    border-radius: 20px;
+    background-color: white;
+    box-shadow: 4px 4px 4px rgb(126, 126, 126);
 
 }
 
@@ -201,6 +203,7 @@ main h1 {
     color: coral;
     font-weight: bolder;
     font-size: small;
+    align-items: center;
 }
 
 #userPost img {
@@ -254,13 +257,47 @@ main h1 {
     display: flex;
     gap: 3px;
 }
-
-.pTag {
+.pTag{
     padding: 2px;
     font-size: small;
     border: 1px solid black;
     border-radius: 15px;
 }
+#rightD{
+    width: 11%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+
+}
+#rightD button{
+    width: 6em;
+    height: 6em;
+    background-color: #f5793b;
+    border:0px;
+    border-radius: 30px;
+    box-shadow: 4px 4px 4px #CCCCCC;
+    position: fixed;
+    bottom:2em;
+}
+
+/* Form styling */
+#Setups{
+    background:rgb(83, 83, 177);
+    color:white;
+}
+
+#Questions{
+    background:rgb(160, 83, 177);
+    color:white;
+}
+
+#Products{
+    background:rgb(83, 177, 103);
+    color:white;
+}
+
+
 
 
 /* Mobile ...*/
@@ -318,5 +355,10 @@ main h1 {
         scale: 85%;
         flex-direction: column;
         gap: 8px;
+    }
+
+    #rightD button{
+        scale:75%;
+        bottom:1%;
     }
 }

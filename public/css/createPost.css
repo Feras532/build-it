@@ -1,0 +1,145 @@
+body{
+    background: rgb(255,127,80);
+    background: linear-gradient(to top, rgb(255, 255, 255) 0%, rgb(164, 189, 203) 90%);
+}
+#formBackgorund{
+    border:0px;
+    border-top:1px solid black;
+    display: flex;
+    justify-content: center;
+    
+}
+#form{
+    padding-top: 1.5em;
+    padding-bottom: 2em;
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    align-items: center;
+    justify-content: center;
+    border:1px solid black;
+    border-radius: 20px;
+    width: 80%;
+    gap: 2em;
+}
+h1{
+    color: #f5793b;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 2px rgb(116, 115, 115);
+}
+#form form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+}
+.formElement{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2em;
+    position: relative;
+
+}
+#formTag{
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#formTag article{
+    position: relative;
+    display:flex;
+    border: black solid 1px;
+    border-radius: 20px;
+    overflow: hidden;
+    text-align: center;
+    width: 120px;
+    font-size: x-large;
+}
+#formTag article div{
+    transition: .2s ease;
+    width: 100%;
+    height:100%;
+    border-radius: 20px;
+}
+#formTag input{
+    opacity: 0;
+    width: 100%;
+    height:100%;
+    cursor: pointer;
+    position: absolute;
+}
+
+#sTag:checked ~ div{
+    background:rgb(83, 83, 177);
+    color:white;
+}
+
+#qTag:checked ~ div{
+    background:rgb(160, 83, 177);
+    color:white;
+}
+
+
+#pTag:checked ~ div{
+    background:rgb(83, 177, 103);
+    color:white;
+}
+
+.inputT{
+    width:20em;
+    height: 1.5em;
+    font-size: x-large;
+    border: 0px;
+    border-radius: 15px;
+    box-shadow: 2px 2px 2px gray;
+    padding-left: 10px;
+}
+.inputT:focus{
+    outline: none;
+}
+#uploadButton{
+    width: 7em;
+    height: 2em;
+    border-radius:3em;
+    border:0px;
+    background-color: #f5793b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-size: larger;
+    color: white;
+    box-shadow: 2px 2px 2px gray;
+}
+#notes{
+    font-size: larger;
+    width:25em;
+    height:6em;
+    max-width:90%;
+    max-height: 7em;
+    min-height: 2em;
+    min-width: 50%;
+    border-radius: 20px;
+    border:0px;
+    box-shadow: 2px 2px 2px gray;
+    padding: 0.4em;
+}
+#notes:focus{
+    outline:none;
+}
+
+input[type=file]::-webkit-file-upload-button{
+    visibility: hidden;
+}
+input[type=file]{
+    display: none;
+    /* Not complete */
+}

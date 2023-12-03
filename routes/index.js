@@ -111,6 +111,10 @@ router.get("/upgrade", (req, res) => {
   res.render("upgrade", { layout: "main" });
 });
 
+router.get("/createPost", (req, res) => {
+  res.render("createPost", { layout: "main" });
+});
+
 router.post("/generated", (req, res) => {
   res.render("generated", { layout: "main" });
 });

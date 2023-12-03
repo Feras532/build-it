@@ -6,24 +6,6 @@ class Cardpost {
     }
 }
 
-let createCard = function(CardpostEntity){
-    let cardDiv = document.createElement("div");
-    cardDiv.className = "card"
-
-    let fig = document.createElement("figure");
-    let postIm = document.createElement("img").src = CardpostEntity.src;
-    fig.appendChild(postIm);
-
-    let figCap = document.createElement('figcaption');
-    let divUser = (document.createElement("div").className = 'userPost');
-    let userImg = (document.createElement('img').src = CardpostEntity.userImg);
-    let pUser = document.createElement('p').innerHTML(CardpostEntity.username);
-    divUser.appendChild(userImg); divUser.appendChild(pUser);
-    figCap.appendChild(divUser);
-
-    
-}
-
 let createCardString = function(CardpostEntity){
     let cardString = `
                     <figure>
@@ -38,10 +20,6 @@ let createCardString = function(CardpostEntity){
                         <h2>${CardpostEntity.cost}</h2>
                         <h3>${CardpostEntity.notes}</h3>
                         <div id="postTags">
-                            <div class="pTag">${CardpostEntity.tag}</div>
-                            <div class="pTag">${CardpostEntity.tag}</div>
-                            <div class="pTag">${CardpostEntity.tag}</div>
-                            <div class="pTag">${CardpostEntity.tag}</div>
                         </div>
                     </figcaption>
                     <div id="postStats">
@@ -66,6 +44,15 @@ let createCardString = function(CardpostEntity){
     let cardP = document.createElement('div');
     cardP.className = "card";
     cardP.innerHTML = cardString;
+    let cardTag = cardP.querySelector("#postTags");
+    
+    CardpostEntity.tags.forEach((tag) =>{
+        tagDiv = (document.createElement('div'));
+        tagDiv.className = "pTag";
+        tagDiv.id = tag;
+        tagDiv.innerHTML = tag;
+        cardTag.appendChild(tagDiv);
+    })
     return cardP;
 }
 
@@ -78,39 +65,39 @@ let postAdding = function(posts){
 
 const postsObj = [
     {
-        src:"assets/setUp.jpeg",
+        src:"assets/placeholder.png",
         userImg:"assets/loginIcon.png",
         username:'Feras532',
         title:"Please don't mess with the lengths of strings",
         cost:"3400 SAR",
         notes: "Hates the English Department",
-        tag: "Workaholic",
+        tags: ["Workaholic"],
         date:"1 Dec",
         rating:4.3,
         commentsCount:13,
         viewCount:490
     },
     {
-        src:"assets/setUp.jpeg",
+        src:"assets/placeholder.png",
         userImg:"assets/loginIcon.png",
         username:'TanKhalid',
         title:"Is document live editor the best method of communication?",
-        cost:"None",
+        cost:"",
         notes: "Ex-Professional minecraft UHC player",
-        tag: "Question",
+        tags: ["Questions"],
         date:"1 Dec",
         rating:4.1,
         commentsCount:400,
         viewCount:900
     },
     {
-        src:"assets/setUp.jpeg",
+        src:"assets/rtx.png",
         userImg:"assets/loginIcon.png",
         username:'afateel2',
         title:"nvidia geforce rtx 4090",
         cost:"8700 SAR",
         notes: "I am thinking of changing from 3060 to 4090",
-        tag: "Component",
+        tags: ["Products"],
         date:"1 Dec",
         rating:2.5,
         commentsCount:260,
@@ -122,8 +109,8 @@ const postsObj = [
         username:'matrouk',
         title:"Change my mind: The perfect setup!",
         cost:"10700 SAR",
-        notes: "Can you?",
-        tag: "Set up",
+        notes: "",
+        tags: ["Setups"],
         date:"1 Dec",
         rating:5.0,
         commentsCount:"10k",
@@ -131,4 +118,5 @@ const postsObj = [
     },
 ]
 postAdding(postsObj);
+
 

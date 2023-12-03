@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{!-- <title></title> --}}
+    {{!-- <link rel="stylesheet" href="css/createPost.css">  --}}
+    <link rel="stylesheet" href="css/createPost2.css">
+</head>
+
+<body>
+
+    <div id="formBackgorund">
+
+        <div id="form">
+
+
+            <h1>Create a post</h1>
+
+            <form action="">
+
+                <div class="formElement">
+
+                    <h2>Tags:</h2>
+
+                    <div class="interactables" id="formTag">
+
+                        <article>
+                            <input type="checkbox" name="tag" id="sTag">
+                            <div><span>Setups</span></div>
+                        </article>
+
+                        <article>
+                            <input type="checkbox" name="tag" id="qTag">
+                            <div><span>Question</span></div>
+                        </article>
+
+                        <article>
+                            <input type="checkbox" name="tag" id="pTag">
+                            <div><span>Products</span></div>
+                        </article>
+                    </div>
+
+
+                </div>
+
+                <div class="formElement" id="postTitle">
+                    <h2 style="display: flex;">Title: <p style="color:red;">*</p></h2>
+                    <input class="inputT interactables" type="text" name="pTitle" id="">
+                </div>
+
+                <div class="formElement" id="postCost">
+
+                    <h2 style="display: flex;">Cost: <p style="color:red;">*</p>
+                    </h2>
+                    <input class="inputT interactables" type="text" name="pCost" id="">
+                </div>
+
+                <div class="formElement" id="postCol">
+                    <h2>Select your collection:</h2>
+                    <select class="inputT interactables" name="collection" id="userCollection"></select>
+                </div>
+
+                <div class="formElement" id="picPropmt">
+
+                    <h2>post's cover picture:</h2>
+                    <input type="file">
+                    <div class="interactables" id="uploadButton"> Upload<img src="assets/upload.png" alt=""></div>
+                    
+                </div>
+
+                <div class="formElement">
+                    <h2>Add product:</h2>
+                    <input type="file">
+                    <div class="interactables" id="uploadButton"> Upload<img src="assets/upload.png" alt=""></div>
+                </div>
+
+                <div class="formElement">
+                    <h2>Notes:</h2>
+                    {{!-- <input placeholder="I dont know how to fix the gradient and text-alignment :cry:" class="interactables" type="text" name="formNote" id="notes"> --}}
+                    <textarea name="formNote" id="notes"  cols="30" rows="10"></textarea>
+                </div>
+
+            </form>
+        </div>
+
+
+    </div>
+</body>
+
+</html>
