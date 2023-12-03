@@ -107,6 +107,10 @@ router.get("/community", (req, res) => {
   res.render("community", { layout: "main" });
 });
 
+router.get("/upgrade", (req, res) => {
+  res.render("upgrade", { layout: "main" });
+});
+
 router.post("/generated", (req, res) => {
   res.render("generated", { layout: "main" });
 });

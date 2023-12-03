@@ -1,0 +1,6 @@
+#progress-bar {
+    width: 0%;
+    height: 5px;
+    background-color: coral;
+    transition: width 1s;
+}

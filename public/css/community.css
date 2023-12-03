@@ -234,3 +234,59 @@ margin-top:1em; margin-left: 10px;
     border: 1px solid black;
     border-radius: 15px;
 }
+
+
+/* Mobile ...*/
+@media screen and (max-width: 600px) {
+
+    #searchBar{
+        scale:85%;
+    }
+
+    h1{
+        scale:75%;
+    }
+
+    #leftD{
+        margin-right:12px;
+        display:none;
+    }
+
+    #midD{
+border-left:none;
+    }
+
+    #midD>h1{
+        margin-left:0px;
+        padding-left:0px;
+
+    }
+
+    .card{
+        height: fit-content;
+        width:100%;
+        margin: 10px 0px;
+    }
+
+    #posts{
+        width:100%;
+    }
+
+    figcaption{
+        scale:85%;
+        margin-left: 0px;
+        padding-left: 0px;
+    }
+    figcaption h1{
+        text-align: left;
+
+    }
+    #postData{
+        display:none;
+    }
+    #stats{
+        scale:85%;
+        flex-direction: column;
+        gap:8px;
+    }
+}

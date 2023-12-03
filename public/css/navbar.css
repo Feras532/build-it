@@ -13,6 +13,7 @@
 
 * {
     font-family: 'Poppins', sans-serif;
+
 }
 
 .navigation{
@@ -25,6 +26,7 @@
     justify-content: center;
     align-items: center;
     gap: 24px;
+
 }
 
 .nav-items a.active {
@@ -39,6 +41,7 @@ header {
     padding: 16px 80px;
     background-color: #a4bdcb;
     /* border-bottom: 2px solid #1E2022; */
+
 
 }
 
@@ -65,19 +68,22 @@ header {
 
 nav ul li a:hover {
     color: coral;
+    font-size: 28px;
+    background-color: #94b2c4;
+    border-radius: 50%;
+    padding:10px;
 }
 
 
 .nav-items a {
-    color: var(--gray-600, rgb(0, 0, 0));
+    color: coral;
     /* Body2/Medium - All */
-    font-size: 16px;
+    font-size: 24px;
     font-weight: 500;
     line-height: 24px;
     font-weight: bold;
-    transition: color 0.5s;
+    transition: color 0.5s, font-size 0.5s;
 }
-
 
 a {
     color: coral;
