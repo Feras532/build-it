@@ -4,6 +4,7 @@ const basket = storedBasket ? JSON.parse(storedBasket) : {};
 
 const responseFormat = {
   CPU: { brand: "AMD", model: "Ryzen 5 5600G", price: "119$" },
+  GPU: { brand: "Gigabyte", model: "1660gtx super", price: "XXX$" },
   MotherBoard: { brand: "Gigabyte", model: "B450M DS3H", price: "120$" },
   Case: { brand: "NZXT", model: "H510", price: "XXX$" },
   Rams: {
@@ -11,9 +12,9 @@ const responseFormat = {
     model: "Vengeance LPX 16GB (2x8GB) DDR4 3200",
     price: "XXX$",
   },
+  M2_SSD: { brand: "Samsung", model: "Samsung 990 PRO", price: "233$" },
   SSD: { brand: "Crucial", model: "P2 500GB NVMe SSD", price: "343$" },
   HDD: { brand: "Seagate", model: "Barracuda 2TB HDD", price: "223$" },
-  M2_SSD: { brand: "Samsung", model: "Samsung 990 PRO", price: "233$" },
   PSU: { brand: "EVGA", model: "600 BR 80+ Bronze", price: "231$" },
   totalPrice: "total$",
 };
@@ -22,6 +23,7 @@ const systemMessageContent = `
   if a part is not needed, then type none inside its component.
   and for the price try to give an estimated price from your last update.
   for the total price, just sum the price of each component and add it there (ACURATE summation).
+  for spending prefrences when its useMax, try to spend all money by providing the best products in the market(expensive). 
   answer style ONLY in this format: ${JSON.stringify(
     responseFormat
   )}. If you didn't follow my format, you will ruin my system.`;
