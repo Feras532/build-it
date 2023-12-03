@@ -7,8 +7,9 @@
     box-sizing: border-box;
 }
 
-html, body{
-    height:100%;
+html,
+body {
+    height: 100%;
     width: 100%;
 }
 
@@ -51,6 +52,7 @@ html, body{
 
 
 .Hero {
+    padding-bottom: 100px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -78,11 +80,12 @@ html, body{
 }
 
 .pcPic {
-    
+
     align-self: center;
     justify-self: center;
     max-width: 768px;
 }
+
 .slides {
     display: none;
     text-transform: capitalize;
@@ -90,26 +93,31 @@ html, body{
     font-weight: bold;
     text-align: center;
     font-size: large;
-    margin-bottom:20px;
+    margin-bottom: 20px;
     text-shadow: 2px 2px 2px #CCCCCC;
 }
 
 
 .slideshow-container {
-  max-width: 1000px;
-  position: relative;
-  margin: auto;
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
 }
 
 
 .fade {
-  animation-name: fade;
-  animation-duration: 2.5s;
+    animation-name: fade;
+    animation-duration: 2.5s;
 }
 
 @keyframes fade {
-  from {opacity: .4} 
-  to {opacity: 1}
+    from {
+        opacity: .4
+    }
+
+    to {
+        opacity: 1
+    }
 }
 
 
@@ -117,37 +125,38 @@ html, body{
 /* Mobile View */
 @media screen and (max-width: 600px) {
 
-html, body{
-    width: 100%;
-    height: 100%;
-}
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+    }
 
-.main-content{
-    flex-direction: column;
-    scale: 85%;
-    margin: 4px 40px;
-}
+    .main-content {
+        flex-direction: column;
+        scale: 85%;
+        margin: 4px 40px;
+    }
 
-.pcPic img{
+    .pcPic img {
 
-    scale:50%;
+        scale: 50%;
 
-}
+    }
 
-.Hero{
-    flex-direction: column;
-    height: fit-content;
-    width: 100%;
-    padding-right: 0px;
-    padding-left: 0px;
-}
+    .Hero {
+        flex-direction: column;
+        height: fit-content;
+        width: 100%;
+        padding-right: 0px;
+        padding-left: 0px;
+    }
 
-.welcome{
-    font-size: 42px;
-    width: 100%;
-    padding:0;
-    padding: 70px 0px;
-}
+    .welcome {
+        font-size: 42px;
+        width: 100%;
+        padding: 0;
+        padding: 70px 0px;
+    }
 }
 
 @keyframes fadeIn {

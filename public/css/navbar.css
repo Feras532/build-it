@@ -9,14 +9,14 @@
     --hamburger-margin: 12px;
     --animation-timing: 500ms ease-in-out;
     --hamburger-height: calc(var(--bar-height) * 3 + var(--hamburger-gap) * 2);
-  }
+}
 
 * {
     font-family: 'Poppins', sans-serif;
 
 }
 
-.navigation{
+.navigation {
     flex-grow: 1;
     list-style: none;
 }
@@ -71,14 +71,14 @@ nav ul li a:hover {
     font-size: 28px;
     background-color: #94b2c4;
     border-radius: 50%;
-    padding:10px;
+    padding: 10px;
 }
 
 
 .nav-items a {
-    color: coral;
+    color: rgb(0, 0, 0);
     /* Body2/Medium - All */
-    font-size: 24px;
+    font-size: 22px;
     font-weight: 500;
     line-height: 24px;
     font-weight: bold;
@@ -91,8 +91,8 @@ a {
     /*removed underlines of the navigations*/
 }
 
-.mobile-nav{
-    display:none;
+.mobile-nav {
+    display: none;
 }
 
 
@@ -100,24 +100,26 @@ a {
 @media screen and (max-width: 600px) {
 
 
-    .mobile-nav{
+    .mobile-nav {
         display: flex;
         justify-content: right;
-      }
-    
-    .mobile-nav ul{
+    }
+
+    .mobile-nav ul {
         list-style: none;
-        color:#607254
-      }
-    
+        color: #607254
+    }
+
 
     .nav-items {
         display: none;
     }
 
-    .loginref, .loginref img{
+    .loginref,
+    .loginref img {
         display: none;
     }
+
     .hamburger {
         --x-width: calc(var(--hamburger-height) * 1.41421356237);
 
@@ -138,22 +140,22 @@ a {
     .hamburger:has(input:focus-visible)::before,
     .hamburger:has(input:focus-visible)::after,
     .hamburger input:focus-visible {
-    border: 1px solid var(--background);
-    box-shadow: 0 0 0 1px var(--foreground);
+        border: 1px solid var(--background);
+        box-shadow: 0 0 0 1px var(--foreground);
     }
 
     .hamburger::before,
     .hamburger::after,
     .hamburger input {
-      content: "";
-      width: var(--bar-width);
-      height: var(--bar-height);
-      background-color: var(--foreground);
-      border-radius: 9999px;
-      transform-origin: left center;
-      transition: opacity var(--animation-timing), width var(--animation-timing),
-        rotate var(--animation-timing), translate var(--animation-timing),
-        background-color var(--animation-timing);
+        content: "";
+        width: var(--bar-width);
+        height: var(--bar-height);
+        background-color: var(--foreground);
+        border-radius: 9999px;
+        transform-origin: left center;
+        transition: opacity var(--animation-timing), width var(--animation-timing),
+            rotate var(--animation-timing), translate var(--animation-timing),
+            background-color var(--animation-timing);
     }
 
     .hamburger input {
@@ -162,26 +164,26 @@ a {
         margin: 0;
         outline: none;
         pointer-events: none;
-      }
-      
-      .hamburger:has(input:checked)::before {
+    }
+
+    .hamburger:has(input:checked)::before {
         rotate: 45deg;
         width: var(--x-width);
         translate: 0 calc(var(--bar-height) / -2);
-      }
-      
-      .hamburger:has(input:checked)::after {
+    }
+
+    .hamburger:has(input:checked)::after {
         rotate: -45deg;
         width: var(--x-width);
         translate: 0 calc(var(--bar-height) / 2);
-      }
-      
-      .hamburger input:checked {
+    }
+
+    .hamburger input:checked {
         opacity: 0;
         width: 0;
-      }
+    }
 
-      .sidebar{
+    .sidebar {
         transition: translate var(--animation-timing), visibility var(--animation-timing);
         translate: 100%;
         position: absolute;
@@ -194,35 +196,35 @@ a {
         z-index: 3;
         border-bottom-left-radius: 25px;
         border-bottom-right-radius: 25px;
-        top:0;
+        top: 0;
         justify-content: center;
         align-items: center;
         visibility: hidden;
         padding-bottom: 50px;
-      }
+    }
 
-      .hamburger:has(input:checked) + .sidebar{
+    .hamburger:has(input:checked)+.sidebar {
         translate: 0;
         visibility: visible;
-      }
+    }
 
     .sidebar nav {
         margin-top: 10%;
         text-align: center;
     }
 
-    .sidebar nav img{
+    .sidebar nav img {
         margin: 8px;
     }
-      
-    .sidebar nav ul li{
-        padding:10px;
+
+    .sidebar nav ul li {
+        padding: 10px;
         margin: 0px;
-        border-top:solid coral 1px;
-        border-bottom:solid coral 1px;
+        border-top: solid coral 1px;
+        border-bottom: solid coral 1px;
     }
 
-    .sidebar nav ul li a{
+    .sidebar nav ul li a {
         color: coral;
         padding: 5px;
         font-weight: bolder;
@@ -230,6 +232,7 @@ a {
         text-shadow: black;
         text-transform: uppercase;
     }
+
     .hamburger div {
         justify-content: right;
         width: 35px;
@@ -238,7 +241,3 @@ a {
         margin: 6px 0;
     }
 }
-
-
-
-

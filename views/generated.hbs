@@ -112,9 +112,59 @@
             animation: rowAnimation 0.5s forwards;
             /* 0.5s animation to show the row */
         }
+
+
+        .performance-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+            margin-top: 20px;
+        }
+
+        .performance-card {
+
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            padding: 16px;
+            text-align: center;
+            background-color: white;
+            margin: 10px;
+            display: inline-block;
+        }
+
+        .fixed-size-card {
+            width: 250px;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .performance-card h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .performance-card p {
+            font-size: 16px;
+        }
+
+        .gauge-chart {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .performance-card progress {
+            flex: 1;
+            width: 100%;
+            align-self: center;
+            /* center the progress bar horizontally */
+        }
     </style>
 
     <script type="module" src="scripts/openAi.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 </head>
 
@@ -136,45 +186,6 @@
         </div>
 
         <div class="performance-container">
-            performance
-            <br>
-            performance
-            <br> performance
-            <br> performance
-            <br> performance
-            <br> performance
-            <br> performance
-            <br> performance
-            <br>
-            performance
-            <br>
-            performance
-            <br> performance
-            <br> performance
-            <br> performance
-            <br> performance
-            <br> performance
-            <br> performance
-            <br> performance
-            <br>
-            performance
-            <br> performance
-            <br> performance
-            <br> performance
-            <br> performance
-            <br> performance
-            <br> performance
-            <br> performance
-            <br>
-            performance
-            <br> performance
-            <br> performance
-            <br> performance
-            <br> performance
-            <br> performance
-            <br> performance
-            <br>
-
 
         </div>
 

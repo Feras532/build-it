@@ -7,3 +7,6 @@ const PC = JSON.parse(generatedMessage);
 console.log(PC.totalPrice); // Output: 2000$
 console.log(PC.CPU.model); // Output: Core i7-12700K
 console.log(PC);
+// bottleneck
+// fps for the given games.
+// time to boot the system in seconds
