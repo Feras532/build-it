@@ -143,8 +143,49 @@ justify-content: center;
 display:flex;
 flex-direction: row;
 flex-wrap: wrap;
+padding-bottom: 20px;;
+margin-bottom:20px;
+border-bottom:dotted coral 2px;
+justify-content: center;
 }
 
 .extra{
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding-bottom: 20px;;
+    margin-bottom:20px;
+    justify-content: center;
+}
 
+.card{
+    display:flex;
+    flex-direction:column;
+    text-align: center;
+    justify-content: center;
+    gap:4px;
+    color:coral;
+    font-weight: bold;
+    margin:12px;
+    border:solid black 1px;
+    box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 15%;
+    padding:20px;
+    transition:scale 0.5s;
+}
+
+.card:hover{
+    scale:110%;
+}
+
+.card img {
+    scale:80%;
+    max-height: 138px;
+    max-width: 138px;
+}
+
+form h1 {
+    color:coral;
+    text-align: center;
+    text-shadow: 0px 1px 1px black;
 }

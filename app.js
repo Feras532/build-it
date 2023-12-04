@@ -1,7 +1,7 @@
 const path = require("path");
 const express = require("express");
 const dotenv = require("dotenv");
-const connectDB = require("./config/db");
+//const connectDB = require("./config/db");
 const morgan = require("morgan");
 const passport = require("passport");
 const session = require("express-session");
@@ -12,8 +12,8 @@ const flash = require("connect-flash");
 // Load config
 dotenv.config({ path: "config/config.env" });
 
-connectDB();
-connectDB({ serverSelectionTimeoutMS: 30000 }); // Increase timeout to 30 seconds
+//connectDB();
+//connectDB({ serverSelectionTimeoutMS: 30000 }); // Increase timeout to 30 seconds
 
 // Passport config
 require("./config/passport")(passport);
@@ -36,7 +36,7 @@ if (process.env.NODE_ENV === "development") {
 app.use(express.static(path.join(__dirname, "public")));
 
 // Session
-app.use(
+/*app.use(
   session({
     secret: "keyboard cat",
     resave: false,
@@ -45,14 +45,14 @@ app.use(
       mongoUrl: process.env.MONGO_URI, // Use your MongoDB connection string here
     }),
   })
-);
+);*/
 
 // Initialize connect-flash
 app.use(flash());
 
 //passport middleware
-app.use(passport.initialize());
-app.use(passport.session());
+//app.use(passport.initialize());
+//app.use(passport.session());
 
 // Routes
 app.use("/", require("./routes/index"));
