@@ -10,6 +10,7 @@
 
 }
 
+
 hr {
     border: 1px solid black
 }
@@ -279,6 +280,12 @@ main h1 {
     box-shadow: 4px 4px 4px #CCCCCC;
     position: fixed;
     bottom:2em;
+    cursor: pointer;
+    transition: scale 0.5s;
+}
+
+#rightD button:hover{
+    scale:110%;
 }
 
 /* Form styling */
@@ -360,5 +367,18 @@ main h1 {
     #rightD button{
         scale:75%;
         bottom:1%;
+        right:2%;  
+        position: absolute;
+        transition: scale 0.5s;
     }
+
+    #rightD button:hover{
+        scale:85%;
+
+    }
+    
+    #posts, body, html
+    {
+    overflow-y: scroll ;
+}
 }
