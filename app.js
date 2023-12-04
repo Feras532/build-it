@@ -62,6 +62,12 @@ app.use("/auth", require("./controller/auth"));
 app.engine(".hbs", exphbs.engine({ defaultLayout: "main", extname: ".hbs" }));
 app.set("view engine", ".hbs");
 
+app.get('/public/assets/part_dataset/:part', (req, res) =>{
+  const { part } = req.params;
+  let jsonpath = `public/assets/part_dataset/${part}`
+  res.sendFile(path.join(__dirname, jsonpath))
+})
+
 app.listen(
   PORT,
   console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`)
