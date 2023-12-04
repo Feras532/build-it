@@ -7,7 +7,83 @@
     <link rel="stylesheet" href="css/upgrade.css">
 </head>
 <body>
-        <div id="progress-bar"></div>
+    <div id="progress-bar"></div>
 
+
+    <div id="question1" class="question-container active">
+        <div class="question">
+            <button class="back-button-fistOne" onclick="previousQuestion()"> </button>
+            What is Your Budget?
+            <button onclick="nextQuestion()">Next</button>
+        </div>
+
+        <div class="bar">
+            <input type="range" id="answer1" min="0" max="50" value="0" oninput="updateValue(this.value)">
+            <span id="budgetDisplay">$0 </span>
+        </div>
+    </div>
+
+    <div id="question2" class="question-container">
+        <div class="question">
+            <button class="back-button" onclick="previousQuestion()">
+                < </button>
+                        Current PC Specifications
+                    <button onclick="nextQuestion()">Next</button>
+        </div>
+
+        <div class = "form-container">
+            <form>
+                <div class = "core">
+
+                    <label for="motherboard"> Motherboard </label><br>
+                    <input list="mblist" id="input" name="motherboard" placeholder="Select Motherboard"> 
+                    <datalist id = "mblist"> </datalist>
+
+                    <label for="cpu"> CPU </label><br>
+                    <input list="cpu" id="input" name="cpu" placeholder="Select CPU"> 
+                    <datalist id = "cpu"> </datalist>
+
+                    <label for="gpu"> Graphics Card </label><br>
+                    <input list="gpu" id="input" name="gpu" placeholder="Select GPU"> 
+                    <datalist id = "gpu"> </datalist>
+
+                    <label for="hdd"> External Hard Drive (HDD) </label><br>
+                    <input list="hdd" id="input" name="hdd" placeholder="Select HDD"> 
+                    <datalist id = "hdd"> </datalist>
+
+                    <label for="power"> Power Supply </label><br>
+                    <input list="power" id="input" name="power" placeholder="Select Power Supply"> 
+                    <datalist id = "power"> </datalist>
+
+                    <label for="casefan"> Case Fan </label><br>
+                    <input list="casefan" id="input" name="casefan" placeholder="Select Case Fan"> 
+                    <datalist id = "casefan"> </datalist>
+
+                   <label for="ram"> RAM (Memory) </label><br>
+                    <input list="ram" id="input" name="ram" placeholder="Select RAM"> 
+                    <datalist id = "ram"> </datalist>
+                </div>
+
+                <hr>
+                <div class = "extra">
+                   <label for="ssd"> Internal Hard Drive (SSD) </label><br>
+                    <input list="ssd" id="input" name="ssd" placeholder="Select SSD"> 
+                    <datalist id = "ssd"> </datalist>
+
+                   <label for="monitor"> Monitor </label><br>
+                    <input list="monitor" id="input" name="monitor" placeholder="Select Monitor"> 
+                    <datalist id = "monitor"> </datalist>
+
+                   <label for="sound"> Sound Card </label><br>
+                    <input list="sound" id="input" name="sound" placeholder="Select Sound Card"> 
+                    <datalist id = "sound"> </datalist>
+                </div>
+            </form>
+        </div>
+
+
+    </div>
+    
 </body>
+<script type="module" src="scripts/upgrade.js"></script>
 </html>
