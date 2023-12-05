@@ -2,14 +2,18 @@
 let totalQuestions = 2;
 let currentQuestion = 1;
 
-let BASKET = {
-  spendingPreference: "useMax", // Default value
-  applications: "not specified",
-  capacity: "not specified",
-  resolution: "not specified",
-  spendingPreference: "useMax",
-  tower: "Mid Tower",
-  userTypes: "",
+let userInput = {
+  budget: "0",
+  motherboard: "not specified",
+  CPU: "not specified",
+  GPU: "not specified",
+  HDD: "not specified",
+  powerSupply: "not specified",
+  caseFan: "not specified",
+  RAM: "not specified",
+  SSD: "not specofied",
+  monitor: "not specofied",
+  soundCard: "not specofied"
 };
 function previousQuestion() {
   if (currentQuestion > 1) {
@@ -40,15 +44,11 @@ function nextQuestion() {
   // Store answer before moving to the next question
   switch (currentQuestion) {
     case 1:
-      BASKET.budget = document.getElementById("budgetDisplay").textContent;
-      BASKET.spendingPreference = selectedOption; // Include selectedOption in BASKET
+      userInput.budget = document.getElementById("budgetDisplay").textContent;
       break;
     case 2:
-      const selectedTypes = Array.from(
-        document.querySelectorAll(".type.selected")
-      ).map((typeElement) => typeElement.textContent.trim());
-      BASKET.userTypes = selectedTypes.join(", ");
-      BASKET.applications = document.getElementById("app-input").value;
+      //Getting core components (Cant be empty)
+      userInput.motherboard = document.getElementById("motherboard").textContent;
       break;
     case 3:
       const selectedSize = document.querySelector(".size.selected");
