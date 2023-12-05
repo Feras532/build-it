@@ -22,7 +22,7 @@ h1{
     text-transform: uppercase;
     text-shadow: 2px 2px 2px rgb(116, 115, 115);
 }
-#form form{
+#outerFrame{
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -109,21 +109,6 @@ h1{
 .inputT:focus{
     outline: none;
 }
-#uploadButton{
-    width: 15.4em;
-    height: 2em;
-    border-radius:0.4em;
-    border:0px;
-    background-color: #f5793b;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    font-size: larger;
-    color: white;
-    box-shadow: 2px 2px 2px gray;
-
-}
 #notes{
     
     font-size: x-large;
@@ -137,22 +122,120 @@ h1{
     min-width: 50%;
     min-height: 2em;
     padding: 0.1em;
-
+    
+    
 }
 #notes:focus{
     outline:none;
-
-}
-input[type=file]::-webkit-file-upload-button{
-    visibility: hidden;
-}
-input[type=file]{
-    top: 49.2%;
-    height: 3.1em;
-    width: 22.2em;
-    position: absolute;
-    cursor: pointer;
-    background-color: black;
-    opacity: 0;
     
+}
+input[type="file"]{
+    display: none;
+}
+
+.uploadButton{
+    background-color: #f5793b;
+    width: 19em;
+    height: 2.7em;
+    display: flex;
+    border: 0px;
+    border-radius: 0.2em;
+    align-items: center;
+    justify-content: center;
+    box-shadow:  2px 2px 2px gray;
+    cursor: pointer;
+}
+.uploadButton img{
+    width: 1.6em;
+    height: 1.6em;
+}
+.upload{
+    display: flex;
+    color: white;
+    font-size: large;
+    gap: 0.8em;
+    align-items: center;
+}
+.uploaded{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 10px;
+    border: .12em solid #7a878e;
+    overflow:hidden ;
+    transition: scale  0.3s;
+}
+.uploaded:hover{
+    scale: 100.5%;
+}
+.UpPic{
+    width: 8em;
+    height: 7em;
+}
+#UpPicName{
+    font-size: larger;
+}
+.prodCost{
+    display: flex;
+    /* justify-content: center; */
+    gap: 0.2em;
+    align-items: center;
+}
+.prodCost input[type='number']{
+    font-size: large;
+    width: 6em;
+    padding: 5px;
+    border: 1px solid #7a878e;
+   
+}
+.prodName{
+    font-size: larger;
+    width: 12em;
+    padding:5px;
+    border: 1px solid #7a878e;
+    
+}
+.prodName:focus{
+    outline:none;
+}
+.prodCost span{
+    /* $ */
+}
+.prodCost input:focus{
+    outline: none;
+    
+}
+.prodCost img{
+    width:2em;
+    cursor:pointer;
+}
+.remImage{
+    width: 3em;
+    padding-right: 0.4em;
+    cursor:pointer;
+}
+.remImage:hover{
+    
+}
+#postCost{
+    display: none;
+}
+#pCost::-webkit-inner-spin-button{
+    display: none;
+}
+#postCol{
+    display:none;
+}
+
+#createPost{
+    background-color: #f5793b;
+    color:white;
+    font-size: xx-large;
+    padding: 0.1em;
+    border: 0px;
+    border-radius: 0.2em;
+    box-shadow:  2px 2px 2px gray;
+    cursor: pointer;
+
 }

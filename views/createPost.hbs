@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {{!-- <title></title> --}}
-    {{!-- <link rel="stylesheet" href="css/createPost.css">  --}}
+    {{!--
+    <link rel="stylesheet" href="css/createPost.css"> --}}
     <link rel="stylesheet" href="css/createPost2.css">
 </head>
 
@@ -18,7 +19,7 @@
 
             <h1>Create a post</h1>
 
-            <form action="">
+            <div id="outerFrame">
 
                 <div class="formElement">
 
@@ -33,7 +34,7 @@
 
                         <article>
                             <input type="checkbox" name="tag" id="qTag">
-                            <div><span>Question</span></div>
+                            <div><span>Questions</span></div>
                         </article>
 
                         <article>
@@ -46,47 +47,72 @@
                 </div>
 
                 <div class="formElement" id="postTitle">
-                    <h2 style="display: flex;">Title: <p style="color:red;">*</p></h2>
-                    <input class="inputT interactables" type="text" name="pTitle" id="">
+                    <h2 style="display: flex;">Title: <p style="color:red;">*</p>
+                    </h2>
+                    <input class="inputT interactables" type="text" name="" id="pTitle">
                 </div>
 
                 <div class="formElement" id="postCost">
 
-                    <h2 style="display: flex;">Cost: <p style="color:red;">*</p>
+                    <h2 style="display: flex;">Cost ($): <p style="color:red;">*</p>
                     </h2>
-                    <input class="inputT interactables" type="text" name="pCost" id="">
+                    <input class="inputT interactables" type="number" name="" min="0" id="pCost">
                 </div>
 
                 <div class="formElement" id="postCol">
                     <h2>Select your collection:</h2>
-                    <select class="inputT interactables" name="collection" id="userCollection"></select>
+                    <select class="inputT interactables" name="collection" id="userCollection" value="None">
+                        <option value="None">None</option>
+                    </select>
                 </div>
 
-                <div class="formElement" id="picPropmt">
+
+                <div class="formElement" id="picPrompt">
 
                     <h2>post's cover picture:</h2>
-                    <input type="file">
-                    <div class="interactables" id="uploadButton"> Upload<img src="assets/upload.png" alt=""></div>
-                    
+                    <label for="uploadFile" class="uploadButton">
+                        <input type="file" onchange="showImage(this)" accept="image/*" multiple="false" id="uploadFile">
+                        <div class="upload" id="Pprompt">
+                            <p>Upload</p>
+                            <img src="assets/upload.png" alt="">
+                        </div>
+                    </label>
+                   <div id="picView">
+                        {{!-- Image Selected --}}
+                   </div>
+
                 </div>
 
-                <div class="formElement">
+
+                <div class="formElement" id="prodPrompt">
                     <h2>Add product:</h2>
-                    <input type="file">
-                    <div class="interactables" id="uploadButton"> Upload<img src="assets/upload.png" alt=""></div>
+                    <label for="uploadProd" class="uploadButton">
+                        <input type="file" onchange="showProd(this)" accept="image/*" multiple="true" id="uploadProd">
+                        <div class="upload" id="Pprompt">
+                            <p>Upload</p>
+                            <img src="assets/upload.png" alt="">
+                        </div>
+                    </label>
+                    <div id="prodDiv">
+                        {{!-- Products --}}
+                    </div>
                 </div>
 
                 <div class="formElement">
                     <h2>Notes:</h2>
-                    {{!-- <input placeholder="I dont know how to fix the gradient and text-alignment :cry:" class="interactables" type="text" name="formNote" id="notes"> --}}
-                    <textarea name="formNote" id="notes"  cols="30" rows="10"></textarea>
+                    <textarea name="formNote" id="notes" cols="30" rows="10"></textarea>
                 </div>
 
-            </form>
+                <button onclick="createPost" id="createPost">
+                    Create Post
+                </button>
+
+            </div>
         </div>
 
 
     </div>
+    <script src="scripts/createPost.js"></script>
 </body>
 
 </html>

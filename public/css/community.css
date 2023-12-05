@@ -271,7 +271,10 @@ main h1 {
     position: relative;
 
 }
-#rightD button{
+#rightD a{
+    display:flex;
+    justify-content: center;
+    align-items: center;
     width: 6em;
     height: 6em;
     background-color: #f5793b;
@@ -284,7 +287,7 @@ main h1 {
     transition: scale 0.5s;
 }
 
-#rightD button:hover{
+#rightD a:hover{
     scale:110%;
 }
 
@@ -364,15 +367,15 @@ main h1 {
         gap: 8px;
     }
 
-    #rightD button{
+    #rightD a{
         scale:75%;
         bottom:1%;
-        right:2%;  
+        /* right:2%;   */
         position: absolute;
         transition: scale 0.5s;
     }
 
-    #rightD button:hover{
+    #rightD a:hover{
         scale:85%;
 
     }
