@@ -1,5 +1,5 @@
 
-let totalQuestions = 2;
+let totalQuestions = 3;
 let currentQuestion = 1;
 
 let userInput = {
@@ -11,9 +11,9 @@ let userInput = {
   powerSupply: "not specified",
   caseFan: "not specified",
   RAM: "not specified",
-  SSD: "not specofied",
+  SSD: "not specified",
   monitor: "not specofied",
-  soundCard: "not specofied"
+  soundCard: "not specified"
 };
 function previousQuestion() {
   if (currentQuestion > 1) {
@@ -38,6 +38,7 @@ function previousQuestion() {
     document.getElementById("progress-bar").style.width = progress + "%";
   }
 }
+
 window.previousQuestion = previousQuestion;
 
 function nextQuestion() {
@@ -47,12 +48,29 @@ function nextQuestion() {
       userInput.budget = document.getElementById("budgetDisplay").textContent;
       break;
     case 2:
-      //Getting core components (Cant be empty)
-      userInput.motherboard = document.getElementById("motherboard").textContent;
+      //Getting core components
+      userInput.motherboard = document.getElementById("motherboard").value;
+      userInput.CPU = document.getElementById("cpu").value;
+      userInput.GPU = document.getElementById("gpu").value;
+      userInput.HDD = document.getElementById("hdd").value;
+      userInput.powerSupply = document.getElementById("power").value;
+      userInput.caseFan = document.getElementById("casefan").value;
+      userInput.RAM = document.getElementById("ram").value;
+    
+      //Addition Components
+      if(document.getElementById("ssd").value.length !== 0){
+        userInput.SSD = document.getElementById("ssd").value;
+      }
+      if(document.getElementById("monitor").value.length !== 0){
+        userInput.monitor = document.getElementById("monitor").value
+      }
+      if(document.getElementById("sound").value.length !== 0){
+        userInput.soundCard = document.getElementById("sound").value
+      }
+
       break;
     case 3:
-      const selectedSize = document.querySelector(".size.selected");
-      BASKET.tower = selectedSize ? selectedSize.textContent.trim() : "";
+      
       break;
     case 4:
       const selectedOption4 = document.querySelector(".option.selected");
@@ -116,61 +134,32 @@ function selectOption(option) {
   selectedOption = option;
 }
 window.selectOption = selectOption;
-// =============================Question 2=========================
 
-let types = document.querySelectorAll(".type");
-let appInputContainer = document.getElementById("app-input-container");
-let appInput = document.getElementById("app-input");
 
-types.forEach((type) => {
-  type.addEventListener("click", function () {
-    // Toggle 'selected' class for the clicked type
-    this.classList.toggle("selected");
-
-    // Show the app input field if at least one type is selected
-    if (document.querySelector(".selected")) {
-      appInputContainer.style.display = "block";
-    } else {
-      appInputContainer.style.display = "none";
-      appInput.value = ""; // reset the input field if no types are selected
-    }
-  });
-});
 // ========================Question 3=====================
-function selectSize(towerSize) {
-  // Remove 'selected' class from all options
-  document
-    .querySelectorAll(".size")
-    .forEach((s) => s.classList.remove("selected"));
+  let leftPart = document.querySelector('.left')
+  let rightPart = document.querySelector('.right')
+  let prompt = document.querySelector('.firstprompt')
+  let choices = document.querySelector('.choices-container')
+  let nextBttn = document.querySelector('.left button')
+  leftPart.addEventListener('click', (event) => {
+    leftPart.className = 'left selected'
+    rightPart.className = 'right'
+    prompt.className = 'firstprompt leftselected'
+    choices.style.display = 'flex'
+    nextBttn.style.display= 'block'
+  })
 
-  // Add 'selected' class to the clicked option
-  let sizeElems = Array.from(document.querySelectorAll(".size"));
-  let selectedSize = sizeElems.find(
-    (elem) => elem.textContent.trim() === towerSize
-  );
-  if (selectedSize) {
-    selectedSize.classList.add("selected");
-  }
-}
-window.selectSize = selectSize;
+  rightPart.addEventListener('click', (event) => {
+    rightPart.className = 'right selected'
+    leftPart.className = 'left'
+    prompt.className = 'firstprompt'
+    choices.style.display = 'none'
+    nextBttn.style.display= 'none'
+  })
+
 // ================= Question 4 ============================
 
-function selectCapacity(capacity) {
-  // Remove 'selected' class from all options
-  document
-    .querySelectorAll(".option")
-    .forEach((o) => o.classList.remove("selected"));
-
-  // Add 'selected' class to the clicked option
-  let optionElems = Array.from(document.querySelectorAll(".option"));
-  let selectedOption = optionElems.find(
-    (elem) => elem.textContent.trim() === capacity
-  );
-  if (selectedOption) {
-    selectedOption.classList.add("selected");
-  }
-}
-window.selectCapacity = selectCapacity;
 
 ///   ================= Question 5 ============================
 let selectedResolution = "";
@@ -204,7 +193,7 @@ window.submitForm = submitForm;
     //Motherboard list
     let data = await fetchJson('public/assets/part_dataset/motherboard.json')
       let motherboards = data.map((o) => o.name)
-      let list = document.getElementById('mblist')
+      let list = document.getElementById('mbdata')
       for(let i = 0; i<motherboards.length; i++){
         let option = document.createElement("option")
         option.value = motherboards[i]
@@ -214,7 +203,7 @@ window.submitForm = submitForm;
     //CPU list
     data = await fetchJson('public/assets/part_dataset/cpu.json')
     motherboards = data.map((o) => o.name)
-    list = document.getElementById('cpu')
+    list = document.getElementById('cpudata')
     for(let i = 0; i<motherboards.length; i++){
       let option = document.createElement("option")
       option.value = motherboards[i]
@@ -224,7 +213,7 @@ window.submitForm = submitForm;
     //GPU list
     data = await fetchJson('public/assets/part_dataset/video-card.json')
     motherboards = data.map((o) => o.name)
-    list = document.getElementById('gpu')
+    list = document.getElementById('gpudata')
     for(let i = 0; i<motherboards.length; i++){
       let option = document.createElement("option")
       option.value = motherboards[i]
@@ -234,7 +223,7 @@ window.submitForm = submitForm;
     //PowerSupply list
     data = await fetchJson('public/assets/part_dataset/power-supply.json')
     motherboards = data.map((o) => o.name)
-    list = document.getElementById('power')
+    list = document.getElementById('powerdata')
     for(let i = 0; i<motherboards.length; i++){
       let option = document.createElement("option")
       option.value = motherboards[i]
@@ -244,7 +233,7 @@ window.submitForm = submitForm;
     //Case Fan list
     data = await fetchJson('public/assets/part_dataset/case-fan.json')
     motherboards = data.map((o) => o.name)
-    list = document.getElementById('casefan')
+    list = document.getElementById('casefandata')
     for(let i = 0; i<motherboards.length; i++){
       let option = document.createElement("option")
       option.value = motherboards[i]
@@ -254,7 +243,7 @@ window.submitForm = submitForm;
     //HDD list
     data = await fetchJson('public/assets/part_dataset/external-hard-drive.json')
     motherboards = data.map((o) => o.name)
-    list = document.getElementById('hdd')
+    list = document.getElementById('hdddata')
     for(let i = 0; i<motherboards.length; i++){
       let option = document.createElement("option")
       option.value = motherboards[i]
@@ -264,7 +253,7 @@ window.submitForm = submitForm;
     //SSD list
     data = await fetchJson('public/assets/part_dataset/internal-hard-drive.json')
     motherboards = data.map((o) => o.name)
-    list = document.getElementById('ssd')
+    list = document.getElementById('ssddata')
     for(let i = 0; i<motherboards.length; i++){
       let option = document.createElement("option")
       option.value = motherboards[i]
@@ -274,7 +263,7 @@ window.submitForm = submitForm;
     //RAM list
     data = await fetchJson('public/assets/part_dataset/memory.json')
     motherboards = data.map((o) => o.name)
-    list = document.getElementById('ram')
+    list = document.getElementById('ramdata')
     for(let i = 0; i<motherboards.length; i++){
       let option = document.createElement("option")
       option.value = motherboards[i]
@@ -284,7 +273,7 @@ window.submitForm = submitForm;
     //Monitor list
     data = await fetchJson('public/assets/part_dataset/monitor.json')
     motherboards = data.map((o) => o.name)
-    list = document.getElementById('monitor')
+    list = document.getElementById('monitordata')
     for(let i = 0; i<motherboards.length; i++){
       let option = document.createElement("option")
       option.value = motherboards[i]
@@ -294,7 +283,7 @@ window.submitForm = submitForm;
     //Sound Card
     data = await fetchJson('public/assets/part_dataset/sound-card.json')
     motherboards = data.map((o) => o.name)
-    list = document.getElementById('sound')
+    list = document.getElementById('sounddata')
     for(let i = 0; i<motherboards.length; i++){
       let option = document.createElement("option")
       option.value = motherboards[i]

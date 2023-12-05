@@ -38,50 +38,50 @@
                     <div class ="card">
                         <img src="assets/upgradeIcons/motherboard.png">
                         <label for="motherboard"> Motherboard </label><br>
-                        <input list="mblist" id="motherboard" name="motherboard" placeholder="Select Motherboard"> 
-                        <datalist id = "mblist"> </datalist>
+                        <input list="mbdata" id="motherboard" name="motherboard" placeholder="Select Motherboard"> 
+                        <datalist id = "mbdata"> </datalist>
                     </div>
 
                     <div class ="card">
                         <img src="/assets/upgradeIcons/cpu.png">
                         <label for="cpu"> CPU </label><br>
-                        <input list="cpu" id="cpu" name="cpu" placeholder="Select CPU"> 
-                        <datalist id = "cpu"> </datalist>
+                        <input list="cpudata" id="cpu" name="cpu" placeholder="Select CPU"> 
+                        <datalist id = "cpudata"> </datalist>
                     </div>
 
                     <div class ="card">
                         <img src="/assets/upgradeIcons/videocard.png">
                         <label for="gpu"> Graphics Card </label><br>
-                        <input list="gpu" id="gpu" name="gpu" placeholder="Select GPU"> 
-                        <datalist id = "gpu"> </datalist>
+                        <input list="gpudata" id="gpu" name="gpu" placeholder="Select GPU"> 
+                        <datalist id = "gpudata"> </datalist>
                     </div>
 
                     <div class ="card">
                         <img src="/assets/upgradeIcons/hdd.png">
                         <label for="hdd"> External Hard Drive (HDD) </label><br>
-                        <input list="hdd" id="hdd" name="hdd" placeholder="Select HDD"> 
-                        <datalist id = "hdd"> </datalist>
+                        <input list="hdddata" id="hdd" name="hdd" placeholder="Select HDD"> 
+                        <datalist id = "hdddata"> </datalist>
                     </div>
 
                     <div class ="card">
                         <img src="/assets/upgradeIcons/powersupply.png">
                         <label for="power"> Power Supply </label><br>
-                        <input list="power" id="power" name="power" placeholder="Select Power Supply"> 
-                        <datalist id = "power"> </datalist>
+                        <input list="powerdata" id="power" name="power" placeholder="Select Power Supply"> 
+                        <datalist id = "powerdata"> </datalist>
                     </div>
 
                     <div class ="card">
                         <img src="/assets/upgradeIcons/fan.png">
                         <label for="casefan"> Case Fan </label><br>
-                        <input list="casefan" id="casefan" name="casefan" placeholder="Select Case Fan"> 
-                        <datalist id = "casefan"> </datalist>
+                        <input list="casefandata" id="casefan" name="casefan" placeholder="Select Case Fan"> 
+                        <datalist id = "casefandata"> </datalist>
                     </div>
 
                     <div class ="card">
                         <img src="/assets/upgradeIcons/ram.png">
                         <label for="ram"> RAM (Memory) </label><br>
-                        <input list="ram" id="ram" name="ram" placeholder="Select RAM"> 
-                        <datalist id = "ram"> </datalist>
+                        <input list="ramdata" id="ram" name="ram" placeholder="Select RAM"> 
+                        <datalist id = "ramdata"> </datalist>
                     </div>
 
                 </div>
@@ -92,22 +92,22 @@
                     <div class ="card">
                         <img src="/assets/upgradeIcons/ssd.png">
                         <label for="ssd"> Internal Hard Drive (SSD) </label><br>
-                        <input list="ssd" id="ssd" name="ssd" placeholder="Select SSD"> 
-                        <datalist id = "ssd"> </datalist>
+                        <input list="ssddata" id="ssd" name="ssd" placeholder="Select SSD"> 
+                        <datalist id = "ssddata"> </datalist>
                     </div>
 
                     <div class ="card">
                         <img src="/assets/upgradeIcons/monitor.png">
                         <label for="monitor"> Monitor </label><br>
-                        <input list="monitor" id="monitor" name="monitor" placeholder="Select Monitor"> 
-                        <datalist id = "monitor"> </datalist>
+                        <input list="monitordata" id="monitor" name="monitor" placeholder="Select Monitor"> 
+                        <datalist id = "monitordata"> </datalist>
                     </div>
 
                     <div class ="card">
                         <img src="/assets/upgradeIcons/audio.png">
                         <label for="sound"> Sound Card </label><br>
-                        <input list="sound" id="sound" name="sound" placeholder="Select Sound Card"> 
-                        <datalist id = "sound"> </datalist>
+                        <input list="sounddata" id="sound" name="sound" placeholder="Select Sound Card"> 
+                        <datalist id = "sounddata"> </datalist>
                     </div>
 
                 </div>
@@ -117,6 +117,115 @@
 
     </div>
     
+    <div id="question3" class="question-container">
+        <div class="question">
+            <button class="back-button" onclick="previousQuestion()">
+                < </button>
+                        Select Option:
+                    <button onclick="nextQuestion()">Next</button>
+        </div>
+
+        <div class ="firstprompt">
+
+            <div class = "left">
+                <h1> Upgrade Specific Parts </h1>
+                <div class = "choices-container">
+                        <div class ="cardq3">
+                            <img src="assets/upgradeIcons/motherboard.png">
+                            <label class="container">Motherboard
+                            <input type="checkbox" checked="checked">
+                            <span class="checkmark"></span>
+                            </label>    
+                        </div>
+
+                        <div class ="cardq3">
+                            <img src="/assets/upgradeIcons/cpu.png">
+                            <label class="container">CPU
+                            <input type="checkbox" checked="checked">
+                            <span class="checkmark"></span>
+                            </label>
+                        </div>
+
+                        <div class ="cardq3">
+                            <img src="/assets/upgradeIcons/videocard.png">
+                            <label class="container">GPU
+                            <input type="checkbox" checked="checked">
+                            <span class="checkmark"></span>
+                            </label>
+                        </div>
+
+                        <div class ="cardq3">
+                            <img src="/assets/upgradeIcons/hdd.png">
+                            <label class="container">HDD
+                            <input type="checkbox" checked="checked">
+                            <span class="checkmark"></span>
+                            </label>
+                        </div>
+
+                        <div class ="cardq3">
+                            <img src="/assets/upgradeIcons/powersupply.png">
+                            <label class="container">Power Supply
+                            <input type="checkbox" checked="checked">
+                            <span class="checkmark"></span>
+                            </label>
+                        </div>
+
+                        <div class ="cardq3">
+                            <img src="/assets/upgradeIcons/fan.png">
+                            <label class="container">Case Fan
+                            <input type="checkbox" checked="checked">
+                            <span class="checkmark"></span>
+                            </label>
+                        </div>
+
+                        <div class ="cardq3">
+                            <img src="/assets/upgradeIcons/ram.png">
+                            <label class="container">RAM
+                            <input type="checkbox" checked="checked">
+                            <span class="checkmark"></span>
+                            </label>
+                        </div>
+                                     
+                        <div class ="cardq3">
+                            <img src="/assets/upgradeIcons/ssd.png">
+                            <label class="container">SSD
+                            <input type="checkbox" checked="checked">
+                            <span class="checkmark"></span>
+                            </label>
+                        </div>
+
+                        <div class ="cardq3">
+                            <img src="/assets/upgradeIcons/monitor.png">
+                            <label class="container">Monitor
+                            <input type="checkbox" checked="checked">
+                            <span class="checkmark"></span>
+                            </label>
+                        </div>
+
+                        <div class ="cardq3">
+                            <img src="/assets/upgradeIcons/audio.png">
+                            <label class="container">Sound Card
+                            <input type="checkbox" checked="checked">
+                            <span class="checkmark"></span>
+                            </label>
+                        </div>
+                </div>
+                <button onclick="nextQuestion()">Next</button>
+            </div> 
+
+            <div class = "right">
+                <h1> Upgrade Entire PC </h1>
+            </div>
+
+        </div>
+
+
+      
+
+
+    </div>
+
+
 </body>
 <script type="module" src="scripts/upgrade.js"></script>
 </html>

@@ -139,6 +139,7 @@ flex-direction: column;
 justify-content: center;
 
 }
+
 .core{
 display:flex;
 flex-direction: row;
@@ -172,6 +173,7 @@ justify-content: center;
     border-radius: 15%;
     padding:20px;
     transition:scale 0.5s;
+    max-width: 215px;
 }
 
 .card:hover{
@@ -182,6 +184,7 @@ justify-content: center;
     scale:80%;
     max-height: 138px;
     max-width: 138px;
+    padding-left: 27px;
 }
 
 form h1 {
@@ -189,3 +192,125 @@ form h1 {
     text-align: center;
     text-shadow: 0px 1px 1px black;
 }
+
+/* =======================  Question 3 ================================ */
+
+.choices-container{
+    display:none;
+    }
+
+.firstprompt{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height:100px;
+    transition: height 1.5s;
+}
+
+.right, .left{
+    margin:0px 10px;
+    width: 50%;
+    height: 100px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.right:hover, .left:hover{
+    scale:105%;
+    transition:scale 0.5s;
+    border:solid 1px #333;
+    border-radius: 15%;
+
+
+}
+
+.right.selected{
+    border: 2px solid #333333;
+    border-radius:15%;
+    height:100px;
+}
+
+.left.selected{
+    border: 2px solid #333333;
+    border-radius:15%;
+    height:800px;
+    transition: height 2s, width 2s;
+    width: 50%;
+    flex-wrap: wrap;
+    flex-direction: column;
+    
+}
+
+.firstprompt.leftselected{
+    height:800px;
+}
+
+.left button{
+    display:none;
+}
+
+.left.selected button{
+    margin-right: 37%;
+    margin-top:10px;
+    width: 101px;
+}
+
+#question3 h1{
+    text-align: center;
+    color:coral;
+    cursor: pointer;
+    padding-top:10px;
+}
+.cardq3{
+    display:flex;
+    flex-direction:column;
+    text-align: center;
+    justify-content: center;
+    color:coral;
+    font-weight: bold;
+    margin:12px;
+    border:solid black 1px;
+    box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 25%;
+    transition:scale 0.5s;
+    width: 25%;
+    height: 25%;
+    max-width: 101px;
+    max-height: 140px;
+ 
+}
+
+.cardq3 img{
+    scale:50%;
+}
+
+.choices-container{
+    max-width: 100%;
+    display: none;
+    flex-wrap: wrap;
+    justify-content:center ;
+}
+
+/* Customize the label (the container) */
+.container {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: small;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+  }
+  
+  .container:hover input {
+    background-color: #ccc;
+  }
+  
+  .container input:checked {
+    background-color: #2196F3;
+  }
+  
+  
