@@ -1,5 +1,5 @@
 
-let totalQuestions = 3;
+let totalQuestions = 4;
 let currentQuestion = 1;
 
 let userInput = {
@@ -13,8 +13,12 @@ let userInput = {
   RAM: "not specified",
   SSD: "not specified",
   monitor: "not specofied",
-  soundCard: "not specified"
+  soundCard: "not specified",
+  upgradeAll: true,
+  upgradeSpecific: [],
+  issues: ''
 };
+
 function previousQuestion() {
   if (currentQuestion > 1) {
     // Hide current question
@@ -70,18 +74,23 @@ function nextQuestion() {
 
       break;
     case 3:
-      
+      if(!userInput.upgradeAll){
+        let labels = document.querySelectorAll('.container')
+        let checkboxes = document.querySelectorAll('.container input')
+        for(let i = 0; i<checkboxes.length; i++){
+          if(checkboxes[i].checked){
+            userInput.upgradeSpecific.push(labels[i].innerText)
+          }
+        }
+      }
       break;
     case 4:
-      const selectedOption4 = document.querySelector(".option.selected");
-      BASKET.capacity = selectedOption4
-        ? selectedOption4.textContent.trim()
-        : "";
-      break;
-    case 5:
+      let issues = document.querySelector('.answer-container input')
+      userInput.issues = issues.value;
+      console.log(userInput)
       break;
     default:
-      break;
+      break;  
   }
 
 
@@ -115,26 +124,6 @@ function updateValue(value) {
   document.getElementById("budgetDisplay").textContent = "$" + scaledValue;
 }
 window.updateValue = updateValue;
-// ============================ Question 1========================
-
-let selectedOption = "useMax"; // Default value
-
-function selectOption(option) {
-  // Remove 'selected' class from all options
-  const options = document.querySelectorAll(".options-container .option");
-  options.forEach((o) => o.classList.remove("selected"));
-
-  // Add 'selected' class to the clicked option
-  const clickedOption = document.querySelector(
-    `.options-container .option[onclick="selectOption('${option}')"]`
-  );
-  clickedOption.classList.add("selected");
-
-  // Update selectedOption variable
-  selectedOption = option;
-}
-window.selectOption = selectOption;
-
 
 // ========================Question 3=====================
   let leftPart = document.querySelector('.left')
@@ -142,12 +131,14 @@ window.selectOption = selectOption;
   let prompt = document.querySelector('.firstprompt')
   let choices = document.querySelector('.choices-container')
   let nextBttn = document.querySelector('.left button')
+
   leftPart.addEventListener('click', (event) => {
     leftPart.className = 'left selected'
     rightPart.className = 'right'
     prompt.className = 'firstprompt leftselected'
     choices.style.display = 'flex'
     nextBttn.style.display= 'block'
+    userInput.upgradeAll = false
   })
 
   rightPart.addEventListener('click', (event) => {
@@ -156,37 +147,9 @@ window.selectOption = selectOption;
     prompt.className = 'firstprompt'
     choices.style.display = 'none'
     nextBttn.style.display= 'none'
+    userInput.upgradeAll = true
   })
-
-// ================= Question 4 ============================
-
-
-///   ================= Question 5 ============================
-let selectedResolution = "";
-
-function selectResolution(resolution) {
-  // Remove active class from all options
-  const options = document.querySelectorAll(".q5-options .option");
-  options.forEach((option) => option.classList.remove("active"));
-
-  // Add active class to selected option
-  const selectedOption = document.querySelector(
-    `.q5-options .option[onclick="selectResolution('${resolution}')"]`
-  );
-  selectedOption.classList.add("active");
-
-  // Update selectedResolution variable
-  selectedResolution = resolution;
-  BASKET.resolution = selectedResolution;
-}
-window.selectResolution = selectResolution;
-
-function submitForm() {
-  // Save BASKET to localStoragepublic/scripts/upgrade.js
-  localStorage.setItem("basket", JSON.stringify(BASKET));
-  console.log("submitted.");
-}
-window.submitForm = submitForm;
+// ========================================================
 
  async function populateDatalists(){
     
@@ -298,8 +261,8 @@ const fetchJson = async url => {
     return response.json()
 }
 
-export function getBasket() {
-  return BASKET;
+export function getInput() {
+  return userInput;
 }
 
 

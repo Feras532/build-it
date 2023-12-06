@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+''<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -133,7 +133,7 @@
                         <div class ="cardq3">
                             <img src="assets/upgradeIcons/motherboard.png">
                             <label class="container">Motherboard
-                            <input type="checkbox" checked="checked">
+                            <input type="checkbox" name="motherboard">
                             <span class="checkmark"></span>
                             </label>    
                         </div>
@@ -141,7 +141,7 @@
                         <div class ="cardq3">
                             <img src="/assets/upgradeIcons/cpu.png">
                             <label class="container">CPU
-                            <input type="checkbox" checked="checked">
+                            <input type="checkbox" name="cpu">
                             <span class="checkmark"></span>
                             </label>
                         </div>
@@ -149,7 +149,7 @@
                         <div class ="cardq3">
                             <img src="/assets/upgradeIcons/videocard.png">
                             <label class="container">GPU
-                            <input type="checkbox" checked="checked">
+                            <input type="checkbox" >
                             <span class="checkmark"></span>
                             </label>
                         </div>
@@ -157,7 +157,7 @@
                         <div class ="cardq3">
                             <img src="/assets/upgradeIcons/hdd.png">
                             <label class="container">HDD
-                            <input type="checkbox" checked="checked">
+                            <input type="checkbox" >
                             <span class="checkmark"></span>
                             </label>
                         </div>
@@ -165,7 +165,7 @@
                         <div class ="cardq3">
                             <img src="/assets/upgradeIcons/powersupply.png">
                             <label class="container">Power Supply
-                            <input type="checkbox" checked="checked">
+                            <input type="checkbox" >
                             <span class="checkmark"></span>
                             </label>
                         </div>
@@ -173,7 +173,7 @@
                         <div class ="cardq3">
                             <img src="/assets/upgradeIcons/fan.png">
                             <label class="container">Case Fan
-                            <input type="checkbox" checked="checked">
+                            <input type="checkbox" >
                             <span class="checkmark"></span>
                             </label>
                         </div>
@@ -181,7 +181,7 @@
                         <div class ="cardq3">
                             <img src="/assets/upgradeIcons/ram.png">
                             <label class="container">RAM
-                            <input type="checkbox" checked="checked">
+                            <input type="checkbox" >
                             <span class="checkmark"></span>
                             </label>
                         </div>
@@ -189,7 +189,7 @@
                         <div class ="cardq3">
                             <img src="/assets/upgradeIcons/ssd.png">
                             <label class="container">SSD
-                            <input type="checkbox" checked="checked">
+                            <input type="checkbox" >
                             <span class="checkmark"></span>
                             </label>
                         </div>
@@ -197,7 +197,7 @@
                         <div class ="cardq3">
                             <img src="/assets/upgradeIcons/monitor.png">
                             <label class="container">Monitor
-                            <input type="checkbox" checked="checked">
+                            <input type="checkbox" >
                             <span class="checkmark"></span>
                             </label>
                         </div>
@@ -205,7 +205,7 @@
                         <div class ="cardq3">
                             <img src="/assets/upgradeIcons/audio.png">
                             <label class="container">Sound Card
-                            <input type="checkbox" checked="checked">
+                            <input type="checkbox" >
                             <span class="checkmark"></span>
                             </label>
                         </div>
@@ -219,13 +219,24 @@
 
         </div>
 
+    </div>
 
-      
+    <div id="question4" class="question-container">
+        <div class="question">
+            <button class="back-button" onclick="previousQuestion()">
+                < </button>
+                        Specific Issues:
+                    <button onclick="nextQuestion()">Next</button>
+        </div>
+
+        <p> *Leave empty if there are no specific issues</p>
+        <div class = "answer-container">
+            <input type="text">
+        </div>
 
 
     </div>
 
-
 </body>
 <script type="module" src="scripts/upgrade.js"></script>
-</html>
+</html>''

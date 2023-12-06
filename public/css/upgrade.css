@@ -314,3 +314,48 @@ form h1 {
   }
   
   
+
+
+/* =======================  Question 4 ================================ */
+
+#question4 p{
+    font-size: small;
+    font-weight: lighter;
+    color:grey;
+    padding-bottom:2px;
+    margin-bottom:2px;
+}
+.answer-container input{
+  padding: 0 10px;
+  text-align: left;
+  transition-property: box-shadow, background;
+  transition-duration: 150ms;
+  transition-timing-function: ease-in-out;
+  background-color: #FFFFFF;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #DAE3F3;
+  border-radius: 0px;
+  color: #272C34;
+  width: 100%;
+  cursor: text;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0px;
+  font-weight: 400;
+  font-style: normal;
+  height: 80px;
+}
+
+.answer-container input:hover{
+      box-shadow: 0px 2px 4px rgb(39 44 52 / 12%);
+      
+  }
+
+.answer-container input:focus{
+      transition-property: border-color, box-shadow, background;
+      border-color: #39414D;
+      border-width: 1px;
+      outline: 0px;
+      box-shadow: 0 0 0 2px coral;
+  }
