@@ -27,6 +27,7 @@ body {
     letter-spacing: -1.2px;
     text-align: center;
     text-shadow: 2px 2px 2px #CCCCCC;
+    text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
 }
 
 .fancy-button {
