@@ -122,86 +122,42 @@
 
 
 
-    <script>
-        // This is where the PC data would come from in a real application
+<script>
+    const pcs = {{{ json pcs }}};
 
-        let PC1 = {
-            totalPrice: "1000$",
-            CPU: { brand: "AMD", model: "Ryzen 5 5600G", price: "XXX$" },
-            GPU: { brand: "Geforce", model: "1660gtx super", price: "XXX$" },
-            MotherBoard: { brand: "Gigabyte", model: "B450M DS3H", price: "XXX$" },
-            Case: { brand: "NZXT", model: "H510", price: "XXX$" },
-            Rams: {
-                brand: "Corsair",
-                model: "Vengeance LPX 16GB (2x8GB) DDR4 3200",
-                price: "XXX$",
-            },
-            SSD: { brand: "Crucial", model: "P2 500GB NVMe SSD", price: "XXX$" },
-            HDD: { brand: "Seagate", model: "Barracuda 2TB HDD", price: "XXX$" },
-            M2: { brand: "none", model: "none", price: "none" },
-            PSU: { brand: "EVGA", model: "600 BR 80+ Bronze", price: "XXX$" },
-        }
+    const container = document.getElementById('pcs-container');
 
-        let PC2 = {
-            totalPrice: "3002$",
-            CPU: { brand: "AMD", model: "Ryzen 5 5600G", price: "XXX$" },
-            GPU: { brand: "Geforce", model: "1660gtx super", price: "XXX$" },
-            MotherBoard: { brand: "Gigabyte", model: "B450M DS3H", price: "XXX$" },
-            Case: { brand: "NZXT", model: "H510", price: "XXX$" },
-            Rams: {
-                brand: "Corsair",
-                model: "Vengeance LPX 16GB (2x8GB) DDR4 3200",
-                price: "XXX$",
-            },
-            SSD: { brand: "Crucial", model: "P2 500GB NVMe SSD", price: "XXX$" },
-            HDD: { brand: "Seagate", model: "Barracuda 2TB HDD", price: "XXX$" },
-            M2: { brand: "none", model: "none", price: "none" },
-            PSU: { brand: "EVGA", model: "600 BR 80+ Bronze", price: "XXX$" },
+    pcs.forEach((pc, index) => {
+        const pcDiv = document.createElement('div');
+        pcDiv.classList.add('pc-row');
 
-        }
-        const pcs = [PC1, PC2];
+        const button = document.createElement('button');
+        button.textContent = 'Expand ↓';
+        button.onclick = () => {
+            const detailsDiv = pcDiv.querySelector('.pc-details');
+            detailsDiv.style.display = detailsDiv.style.display === 'none' ? 'block' : 'none';
+        };
+        pcDiv.appendChild(button);
 
-        // Get the container to add PCs to
-        const container = document.getElementById('pcs-container');
+        pcDiv.appendChild(document.createTextNode(` PC ${index + 1}: ${pc.totalPrice}`));
 
-        pcs.forEach((pc, index) => {
-            // Create a new div for this PC
-            const pcDiv = document.createElement('div');
-            pcDiv.classList.add('pc-row');
+        const detailsDiv = document.createElement('div');
+        detailsDiv.classList.add('pc-details');
+        detailsDiv.style.display = 'none';
 
-            // Add a button to show/hide details
-            const button = document.createElement('button');
-            button.textContent = 'Expand ↓';
-            button.onclick = () => {
-                const detailsDiv = pcDiv.querySelector('.pc-details');
-                detailsDiv.style.display = detailsDiv.style.display === 'none' ? 'block' : 'none';
-            };
-            pcDiv.appendChild(button);
-
-            // Add the total price
-            pcDiv.appendChild(document.createTextNode(` PC ${index + 1}: ${pc.totalPrice}`));
-
-            // Add a div for the details
-            const detailsDiv = document.createElement('div');
-            detailsDiv.classList.add('pc-details');
-            detailsDiv.style.display = 'none'; // initially hidden
-
-            // Add each part to the details
-            Object.keys(pc).forEach((part) => {
-                if (part !== 'totalPrice' && part !== 'performance') {
-                    const partDiv = document.createElement('div');
-                    partDiv.textContent = `${part}: ${pc[part].brand} ${pc[part].model}`;
-                    detailsDiv.appendChild(partDiv);
-                }
-            });
-
-            // Add the details div to the PC div
-            pcDiv.appendChild(detailsDiv);
-
-            // Add the PC div to the container
-            container.appendChild(pcDiv);
+        Object.keys(pc).forEach((part) => {
+            if (part !== 'totalPrice' && pc[part] && typeof pc[part] === 'object') {
+                const partInfo = pc[part];
+                const partDiv = document.createElement('div');
+                partDiv.textContent = `${part}: ${partInfo.brand} ${partInfo.model}, Price: ${partInfo.price}`;
+                detailsDiv.appendChild(partDiv);
+            }
         });
-    </script>
+
+        pcDiv.appendChild(detailsDiv);
+        container.appendChild(pcDiv);
+    });
+</script>
 
     </div>
 

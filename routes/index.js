@@ -18,11 +18,11 @@ router.get("/login", authMiddleware.ensureGuest, (req, res) => {
 
 router.get("/dashboard", authMiddleware.ensureAuth, function (req, res) {
   const userName = req.user.userName;
-  const Email = req.user.email;
+  const pcConfigs = req.user.pcConfig;
   res.render("dashboard", {
     layout: "main",
     userName: userName,
-    Email: Email,
+    pcs: pcConfigs,
   });
 });
 

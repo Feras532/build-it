@@ -8,7 +8,7 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const exphbs = require("express-handlebars");
 const flash = require("connect-flash");
-
+const User = require("./models/User")
 // Load config
 dotenv.config({ path: "config/config.env" });
 
@@ -58,8 +58,20 @@ app.use(passport.session());
 app.use("/", require("./routes/index"));
 app.use("/auth", require("./controller/auth"));
 
+// Creating a Handlebars instance with the json helper
+const hbs = exphbs.create({
+  defaultLayout: "main",
+  extname: ".hbs",
+  helpers: {
+      json: function (context) {
+          return JSON.stringify(context);
+      }
+  }
+});
+
 //handlebars
 app.engine(".hbs", exphbs.engine({ defaultLayout: "main", extname: ".hbs" }));
+app.engine(".hbs", hbs.engine);
 app.set("view engine", ".hbs");
 
 app.get('/public/assets/part_dataset/:part', (req, res) =>{
@@ -67,6 +79,26 @@ app.get('/public/assets/part_dataset/:part', (req, res) =>{
   let jsonpath = `public/assets/part_dataset/${part}`
   res.sendFile(path.join(__dirname, jsonpath))
 })
+
+// addPCConfigurationToUser('656720910d50adaea327fd11',PC2)
+
+// // Function to add PC configuration to a user's profile
+// async function addPCConfigurationToUser(userId, pcConfig) {
+//   try {
+//       const user = await User.findById(userId);
+//       if (user) {
+//           user.pcConfig.push(pcConfig);
+//           await user.save();
+//           console.log('PC configuration added successfully.');
+//       } else {
+//           console.log('User not found.');
+//       }
+//   } catch (error) {
+//       console.error('Error adding PC configuration:', error);
+//   }
+// }
+
+// module.exports = User;
 
 app.listen(
   PORT,
