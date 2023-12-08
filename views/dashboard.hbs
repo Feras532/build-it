@@ -123,7 +123,7 @@
 
 
 <script>
-    const pcs = {{{ json pcs }}};
+        const pcs = {{{ json pcs }}};
 
     const container = document.getElementById('pcs-container');
 
@@ -135,7 +135,9 @@
         button.textContent = 'Expand ↓';
         button.onclick = () => {
             const detailsDiv = pcDiv.querySelector('.pc-details');
-            detailsDiv.style.display = detailsDiv.style.display === 'none' ? 'block' : 'none';
+            const isHidden = detailsDiv.style.display === 'none';
+            detailsDiv.style.display = isHidden ? 'block' : 'none';
+            button.textContent = isHidden ? 'Collapse ↑' : 'Expand ↓'; // Toggle text
         };
         pcDiv.appendChild(button);
 
