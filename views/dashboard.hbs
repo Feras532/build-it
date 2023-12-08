@@ -1,10 +1,211 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+    <title>{{ userName }}'s Profile</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        .profile-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-container h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .profile-container p {
+            text-align: center;
+            color: #666;
+        }
+
+        .logout-button {
+            display: block;
+            width: 100px;
+            height: 30px;
+            margin: 20px auto;
+            background-color: #f44336;
+            color: #fff;
+            text-align: center;
+            line-height: 30px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .pc-row {
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+        }
+
+        .pc-row button {
+            margin-right: 10px;
+        }
+
+        .pc-details {
+            display: none;
+            /* initially hidden */
+            margin: 10px 0;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+
+        .pc-details div {
+            margin-bottom: 10px;
+        }
+
+        .pc-row button {
+            background-color: #787878;
+            /* Green */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 12px;
+            transition: background-color 0.3s ease;
+        }
+
+        .logout-button:hover {
+            background-color: #d32f2f;
+        }
+
+        .pc-row button:hover {
+            background-color: #b6b6b6;
+        }
+
+        /* Improve the appearance of the PC details */
+        .pc-details {
+            background-color: #ffffff;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 10px;
+        }
+
+        /* Style the text for each part */
+        .pc-details div {
+            background: #f7f7f7;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </head>
+
 <body>
-<p>Welcome, {{userName}}!</p>
-{{Email}}
-<a href="/auth/logout">Logout</a>
+    <div class="profile-container">
+        <h1>Welcome, {{ userName }}!</h1>
+        <p>{{ Email }}</p>
+        <a href="/auth/logout" class="logout-button">Logout</a>
+
+        <h2>Your PCs</h2>
+
+        <!-- Placeholder for PCs -->
+        <div id="pcs-container"></div>
+    </div>
+
+
+
+    <script>
+        // This is where the PC data would come from in a real application
+
+        let PC1 = {
+            totalPrice: "1000$",
+            CPU: { brand: "AMD", model: "Ryzen 5 5600G", price: "XXX$" },
+            GPU: { brand: "Geforce", model: "1660gtx super", price: "XXX$" },
+            MotherBoard: { brand: "Gigabyte", model: "B450M DS3H", price: "XXX$" },
+            Case: { brand: "NZXT", model: "H510", price: "XXX$" },
+            Rams: {
+                brand: "Corsair",
+                model: "Vengeance LPX 16GB (2x8GB) DDR4 3200",
+                price: "XXX$",
+            },
+            SSD: { brand: "Crucial", model: "P2 500GB NVMe SSD", price: "XXX$" },
+            HDD: { brand: "Seagate", model: "Barracuda 2TB HDD", price: "XXX$" },
+            M2: { brand: "none", model: "none", price: "none" },
+            PSU: { brand: "EVGA", model: "600 BR 80+ Bronze", price: "XXX$" },
+        }
+
+        let PC2 = {
+            totalPrice: "3002$",
+            CPU: { brand: "AMD", model: "Ryzen 5 5600G", price: "XXX$" },
+            GPU: { brand: "Geforce", model: "1660gtx super", price: "XXX$" },
+            MotherBoard: { brand: "Gigabyte", model: "B450M DS3H", price: "XXX$" },
+            Case: { brand: "NZXT", model: "H510", price: "XXX$" },
+            Rams: {
+                brand: "Corsair",
+                model: "Vengeance LPX 16GB (2x8GB) DDR4 3200",
+                price: "XXX$",
+            },
+            SSD: { brand: "Crucial", model: "P2 500GB NVMe SSD", price: "XXX$" },
+            HDD: { brand: "Seagate", model: "Barracuda 2TB HDD", price: "XXX$" },
+            M2: { brand: "none", model: "none", price: "none" },
+            PSU: { brand: "EVGA", model: "600 BR 80+ Bronze", price: "XXX$" },
+
+        }
+        const pcs = [PC1, PC2];
+
+        // Get the container to add PCs to
+        const container = document.getElementById('pcs-container');
+
+        pcs.forEach((pc, index) => {
+            // Create a new div for this PC
+            const pcDiv = document.createElement('div');
+            pcDiv.classList.add('pc-row');
+
+            // Add a button to show/hide details
+            const button = document.createElement('button');
+            button.textContent = 'Expand ↓';
+            button.onclick = () => {
+                const detailsDiv = pcDiv.querySelector('.pc-details');
+                detailsDiv.style.display = detailsDiv.style.display === 'none' ? 'block' : 'none';
+            };
+            pcDiv.appendChild(button);
+
+            // Add the total price
+            pcDiv.appendChild(document.createTextNode(` PC ${index + 1}: ${pc.totalPrice}`));
+
+            // Add a div for the details
+            const detailsDiv = document.createElement('div');
+            detailsDiv.classList.add('pc-details');
+            detailsDiv.style.display = 'none'; // initially hidden
+
+            // Add each part to the details
+            Object.keys(pc).forEach((part) => {
+                if (part !== 'totalPrice' && part !== 'performance') {
+                    const partDiv = document.createElement('div');
+                    partDiv.textContent = `${part}: ${pc[part].brand} ${pc[part].model}`;
+                    detailsDiv.appendChild(partDiv);
+                }
+            });
+
+            // Add the details div to the PC div
+            pcDiv.appendChild(detailsDiv);
+
+            // Add the PC div to the container
+            container.appendChild(pcDiv);
+        });
+    </script>
+
+    </div>
+
+
 </body>
+
 </html>
