@@ -1,12 +1,15 @@
-let costDiv = document.querySelector("#postCost");
-let setupInput = document.querySelector('#sTag');
-let prodInput = document.querySelector('#pTag');
-let questInput = document.querySelector("#qTag");
-let collSelect = document.querySelector('#postCol');
+const Post = require("../models/Post");
+
+const costDiv = document.querySelector("#postCost");
+const setupInput = document.querySelector('#sTag');
+const prodInput = document.querySelector('#pTag');
+const questInput = document.querySelector("#qTag");
+const collSelect = document.querySelector('#postCol');
 var tags = [];
 setupInput.addEventListener('change',() => {
     if(setupInput.checked || prodInput.checked){
         costDiv.style.display = 'flex';
+
     }
     else{
         costDiv.style.display = 'none';
@@ -25,6 +28,10 @@ setupInput.addEventListener('change',() => {
         tags = tags.filter(function(string) {
             return string !== "Setups"});
     }
+    costDiv.querySelector('.error').value = '';
+    costDiv.querySelector('input').classList.remove('CorrInput');
+    costDiv.querySelector('input').classList.remove('WrongInput');
+
 });
 prodInput.addEventListener('change',() => {
     if(setupInput.checked || prodInput.checked){
@@ -41,6 +48,9 @@ prodInput.addEventListener('change',() => {
         tags = tags.filter(function(string) {
             return string !== "Products"});
     }
+    costDiv.querySelector('.error').value = '';
+    costDiv.querySelector('input').classList.remove('CorrInput');
+    costDiv.querySelector('input').classList.remove('WrongInput');
 });
 questInput.addEventListener("change", () =>{
     if(setupInput.checked || questInput.checked){
@@ -57,14 +67,57 @@ questInput.addEventListener("change", () =>{
             return string !== "Questions"});
     }
 });
+//Prevent Form Default action
+const form = document.querySelector('form');
+form.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    check_AND_create();
+})
+//Moving from field to field
+const titleInput = document.querySelector('#pTitle');
+const noteInput = document.querySelector('#pNote');
+const costInput = document.querySelector('#pCost');
+const collectInput = document.querySelector('select');
+const bodyInput = document.querySelector('textarea');
+const postPicUpload = document.querySelector('#uploadFile');
 
-//Tags ^
-//Image V
+
+titleInput.addEventListener('keydown',(e)=>{
+    if(e.key === 13 || e.key === 'Enter'){
+        noteInput.focus();
+    }
+})
+noteInput.addEventListener('keydown',(e)=>{
+    if(e.key === 13 || e.key === 'Enter'){
+        
+        if(tags.indexOf("Setups")!==-1 || tags.indexOf("Products")!==-1){
+            costInput.focus();
+        }
+        else if(tags.indexOf("Questions")!=-1){
+            collectInput.focus();
+        }
+        else{
+            bodyInput.focus();
+        }
+    }
+})
+costInput.addEventListener('keydown', (e)=>{
+    if(e.key === 13 | e.key === 'Enter'){
+        if(tags.indexOf("Setups")!==-1 || tags.indexOf("Questions")!=-1){
+            collectInput.focus();
+        }
+    }
+} )
+bodyInput.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter' | e.key === 13){
+        checkInputs();
+    }
+})
+
+//
 let img = "";
-
 function showImage(e){
     
-    const postPicUpload = document.querySelector('#uploadFile');
     const postPicDiv = document.querySelector("#picView");
     while(postPicDiv.firstChild){
         postPicDiv.removeChild(postPicDiv.firstChild);
@@ -123,15 +176,24 @@ function showProd(e){
                 let prodImg = document.createElement('img');
                 prodImg.className = "UpPic";
                 prodImg.src = e.target.result;
+                img = e.target.result; //img for submitting;
                 container.appendChild(prodImg);
-                
+
+                let nameDiv = document.createElement('div');
+                nameDiv.style.display ='flex';
+                nameDiv.style.flexDirection='column';
                 let prodName = document.createElement('input');
                 prodName.type = 'text';
                 prodName.className = "prodName";
                 prodName.placeholder = 'Product Name';
-                container.appendChild(prodName);
+                nameDiv.appendChild(prodName);
+                //errorDiv
+                let errorDiv = document.createElement('div');
+                errorDiv.className = 'errorMes';
+                nameDiv.appendChild(errorDiv);
+                container.appendChild(nameDiv);
                 
-                
+                //add errorMes for cost also 
                 let costCont = document.createElement('div');
                 costCont.className = 'prodCost';
                 let addRemImg = document.createElement('img');
@@ -139,11 +201,17 @@ function showProd(e){
                 let span = document.createElement('span');
                 span.innerHTML = "$";
                 span.style.display = "none";
+                let costDiv = document.createElement('div');
+                costDiv.style.display ='flex';
+                costDiv.style.flexDirection='column';
                 let costInput = document.createElement('input');
                 costInput.type = "number";
                 costInput.step = '10';
                 costInput.placeholder = 'Cost';
                 costInput.style.display = "none";
+                costDiv.appendChild(costInput);
+                costDiv.appendChild(errorDiv);
+                
                 
                 addRemImg.addEventListener('click', ()=>{
                     if((span.style.display === "none")){
@@ -160,7 +228,7 @@ function showProd(e){
                 })
                 costCont.appendChild(addRemImg);
                 costCont.appendChild(span);
-                costCont.appendChild(costInput);
+                costCont.appendChild(costdiv);
                 container.appendChild(costCont);
                 
                 
@@ -178,68 +246,190 @@ function showProd(e){
     }
 }
 
-class Product{
-    constructor(name,src, cost){
-        this.name = name;
-        this.src = src;
-        this.cost = cost;
-    }
+
+// class Product{
+//     constructor(name,src, cost){
+//         this.name = name;
+//         this.src = src;
+//         this.cost = cost;
+//     }
+// }
+
+const showError = (element, message) =>{
+    const parentInput = element.parentElement;
+    const errorDiv = parentInput.querySelector('.errorMes');
+
+    errorDiv.innerHTML = message;
+    element.classList.add('WrongInput');
+    element.classList.remove('CorrInput');
+}
+
+const showSuccess = (element) => {
+    const parentInput = element.parentElement;
+    const errorDiv = parentInput.querySelector('.errorMes');
+
+    errorDiv.innerHTML = "";
+    element.classList.add('CorrInput');
+    element.classList.remove('WrongInput');
 }
 
 
-const createProduct = (div)=>{
-    var name = '';
-    var src = '';
-    var cost = '';
-    
-    imgP = div.querySelector('.UpPic')
-    nameP = div.querySelector('.prodName');
-    costP = div.querySelector('.prodCost').querySelector('input');
-    // return new Product();
 
-} 
-function createPost(){
-    let Errors = [];
-    const titleInput = document.querySelector('#pTitle');
-    var title = title.value;
-    if(title){
-
+const createProduct = (div)=>{    
+    imgP = div.querySelector('.UpPic').value;
+    nameP = div.querySelector('.prodName').value.trim();
+    costP = div.querySelector('.prodCost').querySelector('input').value.trim();
+    return  {
+        name:nameP,
+        src:imgP,
+        cost:costP
     }
-    /*check of title:
+} 
+
+function check_AND_create(){
+    var SuccessFlag = true;
+    //Tags (If Required)
+    const tagDiv = document.querySelector('#formTag');
+    if(tags.length === 0){
+        SuccessFlag = false;
+        showError(tagDiv,'Please choose at least on tag!');
+    }
+    else{
+        showSuccess(tagDiv);
+    }
+
+    //Title (Required)
+    var title = titleInput.value.trim();
+    /*check if title:
     NOT EMPTY
-    NO SPACES
-    UNIQUE TO USER'S POST
+    UNIQUE TO USER'S POSTS
     */
-    const costInput = document.querySelector('#pCost');
+   titleFlag = true
+   if(title === ''){
+       showError(titleInput, "This field is required!");
+       SuccessFlag = false;
+       titleFlag = false;
+    }
+    if(titleFlag){
+
+        // let userId = "something";
+        // let repeatedTitle = Post.findOne({Title:title, userID: userId})
+        // .then((post) => {
+        //     if(post){
+        //         showError(titleInput,"You already used this title for another post, use a new one");
+        //         SuccessFlag = false;
+        //     }})
+        // .catch((err)=>{console.log(err);})
+    }
+    if(!titleFlag){
+        showSuccess(titleInput);
+    }
+
+    //Note (Optional)
+    var note = noteInput.value.trim();
+
+    //Cost (Depends on Tags)
     /*check if the cost:
-    NOT EMPTY IF TAG == SETUPS, PRODUCTS WILL HAVE THEIR OWN COST
+    NOT EMPTY IF TAG == SETUPS or TAG == PRODUCTS, 
+    Should Tag(PRODUCTS) have It's own cost? (like in the product adding section [make it required if tag == product])
     */
-    const collInput = document.querySelector('#userCollection');
-    //THIS IS GOING TO BE COMPLICATED
+    if(tags.indexOf("Setups")!=-1 | tags.indexOf('Products')!=-1){
+        var cost = costInput.value.trim();
+        if(cost.length === ""){
+            showError(costInput, "This field is require!");
+            SuccessFlag = false;
+        }
+        else if(cost.length>10){
+            showError(costInput, "Be realistic");
+            SuccessFlag = false;
 
-    //img already declared;
+        }
+        // else if(scientific notation){
+        //     showError(Input,"We like the precision, but please be normal"); //Change this later
+        //     return false;
+        // }
+        else{
+            showSucces(costInput);
+        } 
+    }
+    
+    //Collection (Optional)
+    var selectedCollection = collectInput.value;
 
 
+    //Image (Optional)
+    if(img === ''){
+        img = 'assets/default.png'; //will database default handle this?
+    }
+    
+
+
+    //Products (Optional) unless we change it to depend on Tag(Products)
     var products = [];
     prodDivs = productsDiv.querySelectorAll('.uploaded');
+    //check products names;
     if(prodDivs){
-        //check for product names (filled)
+        prodDivs.forEach((pDiv) => {
+            var pFlag = true;
+            const prodNameInput = pDiv.querySelector('.prodName');
+            const prodCostInput = pDiv.querySelector('.prodCost');
+            const pName = prodNameInput.value.trim();
+            const pCost = prodCostInput.value.trim();
+            if(pName === ''){
+                showError(prodNameInput,"Kindly provide the name of the product");
+                SuccessFlag = false;
+                pFlag = false;
+            }
+            else{
+                showSuccess(prodNameInput);
+            }
+            if(pCost){
+                if(pCost.length>8){
+                    showError(prodCostInput,"Be realistic"); //Change this later
+                    pFlag = false;
+                    SuccessFlag = false;
+                }
+                // else if(pCost in scienific notation){
+                //     showError(prodCostInput,"Okay Einstein"); //Change this later
+                //     pFlag = false;
+                //     SuccessFlag
+                // }
+                else{
+                    showSuccess(prodCostInput);
+                }
+            }
+            if(pFlag){
+                products.push(createProduct(pDiv));
+            }
+        });
     }
-    productsDiv.forEach((pDiv) => {
-        products.push(createProduct(pDiv));
-    });
 
+    //Body (Optional) IDK about this one honestly
+    var bodyContent = bodyInput.value.trim();
 
-}
-const checkText = function(string){
-    //Empty
-    if(string.length === 0){
-        return false;
+    //Final creating post,also IDK to have it here or at Index.js 
+    if(SuccessFlag){
+        //find a way to get the userID or username (since its unique)
+
+        // const formData = {
+        //     userID: userId,
+        //     Tags:tags,
+        //     Title: title,
+        //     Note: note,
+        //     Cost: cost,
+        //     Collection: selectedCollection,
+        //     Image:img,
+        //     Products:products,
+        //     Body:bodyContent
+        // }
+        // const post = new Post(formData);
+        // fetch('/community', { //until I figure out how to make post view
+        //     method: 'POST',
+        //     body: post
+        //   })
+        //   .catch(error => {
+        //     console.log(error)
+        //   });
     }
-    //Spaces
-    else if(string.trim ===string.replace(/[^ ]/g, '')){
-        return false;
-    }
-    //Good To Go
-    else{return true;}
+
 }
