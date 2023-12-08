@@ -227,7 +227,20 @@ input[type="file"]{
 #postCol{
     display:none;
 }
-
+.errorMes{
+    text-transform: lowercase;
+    color:red;
+    font-size: medium;
+}
+.errorMes::first-letter{
+    text-transform: capitalize;
+}
+.CorrInput{
+    border-color: green;
+}
+.WrongInput{
+    border-color: red;
+}
 #createPost{
     background-color: #f5793b;
     color:white;

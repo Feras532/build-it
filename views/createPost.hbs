@@ -14,7 +14,7 @@
 
     <div id="formBackgorund">
 
-        <div id="form">
+        <form id="form" action="/community/:id" method="POST">
 
 
             <h1>Create a post</h1>
@@ -25,7 +25,7 @@
 
                     <h2>Tags:</h2>
 
-                    <div class="interactables" id="formTag">
+                    <div class="" id="formTag">
 
                         <article>
                             <input type="checkbox" name="tag" id="sTag">
@@ -42,36 +42,44 @@
                             <div><span>Products</span></div>
                         </article>
                     </div>
+                    <div class="errorMes"></div>
+
 
 
                 </div>
 
                 <div class="formElement" id="postTitle">
-                    <h2 style="display: flex;">Title: <p style="color:red;">*</p>
-                    </h2>
-                    <input class="inputT interactables" type="text" name="" id="pTitle">
+                    <h2>Title:</h2>
+                    <input class="inputT" type="text" name="Title" id="pTitle">
+                    <div class="errorMes"></div>
+                </div>
+
+                <div class="formElement" id="postNote">
+                    <h2>Note:</h2>
+                    <input class="inputT" type="text" name="Note" id="pNote">
+                    {{!-- <div class="errorMes"></div> --}}
                 </div>
 
                 <div class="formElement" id="postCost">
-
-                    <h2 style="display: flex;">Cost ($): <p style="color:red;">*</p>
-                    </h2>
-                    <input class="inputT interactables" type="number" name="" min="0" id="pCost">
+                    <h2 style="display: flex;">Cost ($):</h2>
+                    <input class="inputT " type="number" name="Cost" min="0" id="pCost">
+                    <div class="errorMes"></div>
                 </div>
 
                 <div class="formElement" id="postCol">
                     <h2>Select your collection:</h2>
-                    <select class="inputT interactables" name="collection" id="userCollection" value="None">
+                    <select class="inputT " name="Collection" id="userCollection" value="None">
                         <option value="None">None</option>
+                        <option value="DD">HOW</option>
                     </select>
                 </div>
 
 
                 <div class="formElement" id="picPrompt">
 
-                    <h2>post's cover picture:</h2>
+                    <h2>Post's cover picture:</h2>
                     <label for="uploadFile" class="uploadButton">
-                        <input type="file" onchange="showImage(this)" accept="image/*" multiple="false" id="uploadFile">
+                        <input type="file" onchange="showImage(this)" name="Image" accept="image/*" multiple="false" id="uploadFile">
                         <div class="upload" id="Pprompt">
                             <p>Upload</p>
                             <img src="assets/upload.png" alt="">
@@ -87,7 +95,7 @@
                 <div class="formElement" id="prodPrompt">
                     <h2>Add product:</h2>
                     <label for="uploadProd" class="uploadButton">
-                        <input type="file" onchange="showProd(this)" accept="image/*" multiple="true" id="uploadProd">
+                        <input type="file" onchange="showProd(this)" name="Products" accept="image/*" multiple="true" id="uploadProd">
                         <div class="upload" id="Pprompt">
                             <p>Upload</p>
                             <img src="assets/upload.png" alt="">
@@ -99,8 +107,8 @@
                 </div>
 
                 <div class="formElement">
-                    <h2>Notes:</h2>
-                    <textarea name="formNote" id="notes" cols="30" rows="10"></textarea>
+                    <h2>Body:</h2>
+                    <textarea name="Body" id="notes" cols="30" rows="10"></textarea>
                 </div>
 
                 <button onclick="createPost" id="createPost">
@@ -108,7 +116,7 @@
                 </button>
 
             </div>
-        </div>
+        </form>
 
 
     </div>
