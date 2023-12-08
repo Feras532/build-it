@@ -36,31 +36,24 @@ const systemMessageContent = `
   )}. If you didn't follow my format, you will ruin my system.`;
 let PC = {};
 async function fetchData() {
-  const response = await fetch("https://api.openai.com/v1/chat/completions", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${API_KEY}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      model: "gpt-4-1106-preview",
-      messages: [
-        {
-          role: "system",
-          content: systemMessageContent,
-        },
-        {
-          role: "user",
-          content: basketString,
-        },
-      ],
-    }),
-  });
-  const data = await response.json();
-  console.log("request created.");
-  // Parse the API response into a JSON object
-  PC = JSON.parse(data.choices[0].message.content);
-  console.log(PC);
+  try {
+    const response = await fetch("/auth/fetchData", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        basket: basket,
+        systemMessageContent: systemMessageContent,
+      }),
+    });
+    const data = await response.json();
+    console.log("request created.");
+    PC = JSON.parse(data.choices[0].message.content);
+    console.log("PC:", PC);
+  } catch (error) {
+    console.error('Error in fetchData:', error);
+  }
 }
 
 window.onload = async function () {

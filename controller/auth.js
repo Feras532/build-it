@@ -86,4 +86,35 @@ router.get("/logout", (req, res, next) => {
   });
 });
 
+router.post('/fetchData', async (req, res) => {
+  try {
+      const basketString = JSON.stringify(req.body.basket);
+      const response = await fetch("https://api.openai.com/v1/chat/completions", {
+          method: "POST",
+          headers: {
+              Authorization: `Bearer ${process.env.OPENAI_KEY}`,
+              "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+              model: "gpt-4-1106-preview",
+              messages: [
+                  {
+                      role: "system",
+                      content: req.body.systemMessageContent,
+                  },
+                  {
+                      role: "user",
+                      content: basketString,
+                  },
+              ],
+          }),
+      });
+      const data = await response.json();
+      res.json(data);
+  } catch (error) {
+      console.error('Error fetching data:', error);
+      res.status(500).send('Error fetching data');
+  }
+});
+
 module.exports = router;
