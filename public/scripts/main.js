@@ -5,7 +5,7 @@ let BASKET = {
   spendingPreference: "useMax", // Default value
   applications: "not specified",
   capacity: "not specified",
-  resolution: "not specified",
+  resolution: "1080p",
   spendingPreference: "useMax",
   tower: "Mid Tower",
   userTypes: "",
@@ -39,15 +39,29 @@ function nextQuestion() {
   // Store answer before moving to the next question
   switch (currentQuestion) {
     case 1:
-      BASKET.budget = document.getElementById("budgetDisplay").textContent;
-      BASKET.spendingPreference = selectedOption; // Include selectedOption in BASKET
+      if (
+        document.getElementById("budgetDisplay").textContent.match(/\d+/) > 200
+      ) {
+        BASKET.budget = document.getElementById("budgetDisplay").textContent;
+        BASKET.spendingPreference = selectedOption; // Include selectedOption in BASKET
+      } else {
+        alert("Your budget is too low");
+        console.log(document.getElementById("budgetDisplay").textContent);
+        return;
+      }
       break;
     case 2:
       const selectedTypes = Array.from(
         document.querySelectorAll(".type.selected")
       ).map((typeElement) => typeElement.textContent.trim());
-      BASKET.userTypes = selectedTypes.join(", ");
-      BASKET.applications = document.getElementById("app-input").value;
+      if (selectedTypes.length !== 0) {
+        // if selected.
+        BASKET.userTypes = selectedTypes.join(", ");
+        BASKET.applications = document.getElementById("app-input").value;
+      } else {
+        alert("Please select your type.");
+        return;
+      }
       break;
     case 3:
       const selectedSize = document.querySelector(".size.selected");
@@ -197,7 +211,3 @@ window.submitForm = submitForm;
 export function getBasket() {
   return BASKET;
 }
-
-
-
-

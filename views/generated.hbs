@@ -67,15 +67,37 @@
 
         /* Loading screen */
         #loading-screen {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            display: none;
-            /* Hidden by default */
-            justify-content: center;
-            align-items: center;
             background: rgba(0, 0, 0, 0.5);
             /* Semi-transparent background */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* White container with fixed size */
+        .loading-container {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            width: 300px;
+            /* Fixed width */
+            height: 200px;
+            /* Fixed height */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Loading squares row */
+        .loaders {
+            display: flex;
+            /* Align squares in a row */
         }
 
         /* Loading squares */
@@ -94,6 +116,21 @@
                 transform: rotate(360deg);
             }
         }
+
+        /* Loading text with fade effect */
+        .loading-text {
+            margin-top: 20px;
+            color: black;
+            opacity: 0;
+            /* Start with text invisible */
+            transition: opacity 1s ease-in-out;
+            /* Smooth transition for the opacity */
+        }
+
+        .text-visible {
+            opacity: 1;
+        }
+
 
         /* Animation for table rows */
         @keyframes rowAnimation {
@@ -161,6 +198,19 @@
             align-self: center;
             /* center the progress bar horizontally */
         }
+
+        .btn-save {
+            display: block;
+            width: 100px;
+            height: 30px;
+            margin: 20px auto;
+            background-color: #f44336;
+            color: #fff;
+            text-align: center;
+            line-height: 30px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
     </style>
 
     <script type="module" src="scripts/openAi.js"></script>
@@ -170,12 +220,36 @@
 
 <body>
     <div id="loading-screen">
-        <div class="loading-square"></div>
-        <div class="loading-square"></div>
-        <div class="loading-square"></div>
-        <div class="loading-square"></div>
+        <div class="loading-container">
+            <div class="loaders">
+                <div class="loading-square"></div>
+                <div class="loading-square"></div>
+                <div class="loading-square"></div>
+                <div class="loading-square"></div>
+            </div>
+            <div class="loading-text">Finding best parts...</div>
+        </div>
     </div>
+    <script>
+        const texts = ["Finding best parts...", "Checking compatibility...", "Calculating performance...", "Testing quality...", "One moment", "Almost there..."];
+        const loadingText = document.querySelector('.loading-text');
+        let textIndex = 0;
 
+        function changeText() {
+            // Fade out the text
+            loadingText.classList.remove('text-visible');
+
+            // After a short delay to allow the fade out, change the text and fade it back in
+            setTimeout(() => {
+                loadingText.textContent = texts[textIndex++ % texts.length];
+                loadingText.classList.add('text-visible');
+            }, 1000); // This should match the duration of the CSS transition
+        }
+
+        changeText();
+
+        setInterval(changeText, 4000); 
+    </script>
 
     <div id="content-container">
 
@@ -183,7 +257,10 @@
 
         <div id="results-container">
             <div id="pc-components"></div>
+
+            <button class="btn-save" onclick="savePC()">SAVE</button>
         </div>
+
 
         <div class="performance-container">
 

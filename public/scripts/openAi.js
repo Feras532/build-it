@@ -52,7 +52,7 @@ async function fetchData() {
     PC = JSON.parse(data.choices[0].message.content);
     console.log("PC:", PC);
   } catch (error) {
-    console.error('Error in fetchData:', error);
+    console.error("Error in fetchData:", error);
   }
 }
 
@@ -236,3 +236,10 @@ function animateProgressBar(progressBar, finalValue, duration, textNode) {
 
   requestAnimationFrame(animationFrame);
 }
+
+function savePC() {
+  //TODO backend.
+  //user.collection.add(PC)
+  console.log("saved.");
+}
+window.savePC = savePC; //gloabal :)
