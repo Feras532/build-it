@@ -3,3 +3,4 @@ config.env
 config
 
 config/config.env
+*.env

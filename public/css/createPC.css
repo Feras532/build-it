@@ -321,6 +321,7 @@ input[type="text"] {
 
 .q5-options .option.active {
     border: 2px solid #333;
+    background-color: #ffffff;
 }
 
 
