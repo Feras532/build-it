@@ -9,7 +9,7 @@ const authMiddleware = {
       return next();
     } else {
       req.flash("errors", "Login to access another page");
-      res.redirect("/");
+      res.redirect("/login");
     }
   },
   ensureGuest: function (req, res, next) {

@@ -237,9 +237,25 @@ function animateProgressBar(progressBar, finalValue, duration, textNode) {
   requestAnimationFrame(animationFrame);
 }
 
-function savePC() {
-  //TODO backend.
-  //user.collection.add(PC)
-  console.log("saved.");
+async function savePC() {
+  try {
+      const response = await fetch('/auth/savePC', { // Endpoint should match the server route
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(PC), // Send the PC object as a JSON string
+      });
+      const result = await response.json();
+      if (result.success) {
+          console.log('PC configuration saved successfully.');
+      } else {
+          console.error('Failed to save PC configuration:', result.message);
+      }
+  } catch (error) {
+      console.error('Error in savePC:', error);
+  }
 }
-window.savePC = savePC; //gloabal :)
+
+// Expose savePC to be callable from your HTML
+window.savePC = savePC;
