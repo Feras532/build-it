@@ -14,7 +14,7 @@
 
     <div id="formBackgorund">
 
-        <form id="form" action="/community/:id" method="POST">
+        <form id="form">
 
 
             <h1>Create a post</h1>
@@ -44,8 +44,6 @@
                     </div>
                     <div class="errorMes"></div>
 
-
-
                 </div>
 
                 <div class="formElement" id="postTitle">
@@ -57,7 +55,6 @@
                 <div class="formElement" id="postNote">
                     <h2>Note:</h2>
                     <input class="inputT" type="text" name="Note" id="pNote">
-                    {{!-- <div class="errorMes"></div> --}}
                 </div>
 
                 <div class="formElement" id="postCost">
@@ -70,7 +67,7 @@
                     <h2>Select your collection:</h2>
                     <select class="inputT " name="Collection" id="userCollection" value="None">
                         <option value="None">None</option>
-                        <option value="DD">HOW</option>
+                        {{!-- User's Collections --}}
                     </select>
                 </div>
 
@@ -111,12 +108,12 @@
                     <textarea name="Body" id="notes" cols="30" rows="10"></textarea>
                 </div>
 
-                <button onclick="createPost" id="createPost">
+                <button onclick="check_AND_create" id="createPost">
                     Create Post
                 </button>
 
             </div>
-        </form>
+        </form>{{!previously form}}
 
 
     </div>

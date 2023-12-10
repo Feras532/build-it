@@ -117,6 +117,6 @@ const postsObj = [
         viewCount:"56k"
     },
 ]
-postAdding(postsObj);
+// postAdding(postsObj);
 
 

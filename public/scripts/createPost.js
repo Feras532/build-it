@@ -1,10 +1,11 @@
-const Post = require("../models/Post");
-
 const costDiv = document.querySelector("#postCost");
 const setupInput = document.querySelector('#sTag');
 const prodInput = document.querySelector('#pTag');
 const questInput = document.querySelector("#qTag");
 const collSelect = document.querySelector('#postCol');
+
+// const Post = require("../models/Post"); //Ask matrouk
+
 var tags = [];
 setupInput.addEventListener('change',() => {
     if(setupInput.checked || prodInput.checked){
@@ -274,7 +275,7 @@ const showSuccess = (element) => {
 }
 
 
-
+const username = "Me";
 const createProduct = (div)=>{    
     imgP = div.querySelector('.UpPic').value;
     nameP = div.querySelector('.prodName').value.trim();
@@ -312,14 +313,15 @@ function check_AND_create(){
     }
     if(titleFlag){
 
-        // let userId = "something";
-        // let repeatedTitle = Post.findOne({Title:title, userID: userId})
+        
+        // Post.findOne({Title:title, userID: userId})
         // .then((post) => {
         //     if(post){
         //         showError(titleInput,"You already used this title for another post, use a new one");
         //         SuccessFlag = false;
+        //         titleFlag= false;
         //     }})
-        // .catch((err)=>{console.log(err);})
+        // .catch((err)=>{console.log(err);});
     }
     if(!titleFlag){
         showSuccess(titleInput);
@@ -411,25 +413,24 @@ function check_AND_create(){
     if(SuccessFlag){
         //find a way to get the userID or username (since its unique)
 
-        // const formData = {
-        //     userID: userId,
-        //     Tags:tags,
-        //     Title: title,
-        //     Note: note,
-        //     Cost: cost,
-        //     Collection: selectedCollection,
-        //     Image:img,
-        //     Products:products,
-        //     Body:bodyContent
-        // }
-        // const post = new Post(formData);
-        // fetch('/community', { //until I figure out how to make post view
-        //     method: 'POST',
-        //     body: post
-        //   })
-        //   .catch(error => {
-        //     console.log(error)
-        //   });
+        const formData = {
+            userName: userId,
+            Tags:tags,
+            Title: title,
+            Note: note,
+            Cost: cost,
+            Collection: selectedCollection,
+            Image:img,
+            Products:products,
+            Body:bodyContent
+        }
+        fetch('/createPost', { //until I figure out how to make post view
+            method: 'POST',
+            body: formData,
+          })
+          .catch(error => {
+            console.log(error)
+          });
     }
 
 }
