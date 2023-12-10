@@ -140,9 +140,10 @@ pcs.forEach((pc, index) => {
 
     // Delete button
     const deleteButton = document.createElement('button');
-    deleteButton.innerHTML = '<i class="fas fa-trash"></i>'; // Make sure the class is 'fas fa-trash'
+    deleteButton.innerHTML = '<i class="fas fa-trash"></i>'; 
     deleteButton.classList.add('delete-button');
-    deleteButton.style.marginRight = '10px'; // Add some margin to separate from the details button
+    deleteButton.style.marginRight = '10px'; 
+deleteButton.style.backgroundColor = 'red'; 
     deleteButton.onclick = () => deletePC(userName, pc._id.toString());
     buttonContainer.appendChild(deleteButton);
 
