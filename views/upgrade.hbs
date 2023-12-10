@@ -226,7 +226,9 @@
             <button class="back-button" onclick="previousQuestion()">
                 < </button>
                         Specific Issues:
-                    <button onclick="nextQuestion()">Next</button>
+                    <form method="POST" action="/generated/upgrade" id="submitSpecs">
+                        <button onclick="submitForm()" class="btn-submit">Submit</button>
+                    </form>
         </div>
 
         <p> *Leave empty if there are no specific issues</p>

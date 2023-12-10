@@ -119,4 +119,7 @@ router.post("/generated", (req, res) => {
   res.render("generated", { layout: "main" });
 });
 
+router.post("/generated/upgrade", (req, res) => {
+  res.render("generatedUpgrade", { layout: "main" });
+});
 module.exports = router;

@@ -12,9 +12,9 @@ let userInput = {
   caseFan: "not specified",
   RAM: "not specified",
   SSD: "not specified",
-  monitor: "not specofied",
+  monitor: "not specified",
   soundCard: "not specified",
-  upgradeAll: true,
+  upgradeAll: true, //Default option is to upgrade all parts
   upgradeSpecific: [],
   issues: ''
 };
@@ -74,6 +74,7 @@ function nextQuestion() {
 
       break;
     case 3:
+      //Getting checked boxes of specific upgrades.
       if(!userInput.upgradeAll){
         let labels = document.querySelectorAll('.container')
         let checkboxes = document.querySelectorAll('.container input')
@@ -83,11 +84,11 @@ function nextQuestion() {
           }
         }
       }
+
       break;
     case 4:
       let issues = document.querySelector('.answer-container input')
       userInput.issues = issues.value;
-      console.log(userInput)
       break;
     default:
       break;  
@@ -254,7 +255,11 @@ window.updateValue = updateValue;
     }
 }
 
-
+function submitForm() {
+  // Save userInput to localStorage
+  localStorage.setItem("userInput", JSON.stringify(userInput));
+  console.log("submitted.");
+}
 
 const fetchJson = async url => {
     const response = await fetch(url)
