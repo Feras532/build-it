@@ -117,4 +117,44 @@ router.post("/fetchData", async (req, res) => {
   }
 });
 
+router.delete('/deletePC/:userName/:pcId', async (req, res) => {
+  try {
+    const { userName, pcId } = req.params;
+    // Find the user by username
+    const user = await User.findOne({ userName: userName });
+
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+
+    // Logic to delete the PC configuration from the user's pcConfig array
+    await User.updateOne(
+      { _id: user._id },
+      { $pull: { pcConfig: { _id: pcId } } } // Ensure pcId is cast to the correct type if necessary
+    );
+
+    res.json({ success: true });
+  } catch (error) {
+    console.error('Error deleting PC:', error);
+    res.status(500).json({ success: false });
+  }
+});
+
+router.post('/savePC', async (req, res) => {
+  const userId = req.user.id;
+  const pcConfig = req.body; // The PC configuration object sent from the client
+
+  try {
+      const user = await User.findById(userId); // Find the user in the database
+      if (!user) {
+          return res.status(404).json({ success: false, message: "User not found" });
+      }
+      user.pcConfig.push(pcConfig); // Add the PC configuration to the user's document
+      await user.save(); // Save the updated user document
+      res.json({ success: true });
+  } catch (error) {
+      console.error('Error in /savePC:', error);
+      res.status(500).json({ success: false, message: "Internal Server Error" });
+  }
+});
 module.exports = router;
