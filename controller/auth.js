@@ -117,4 +117,26 @@ router.post('/fetchData', async (req, res) => {
   }
 });
 
+router.delete('/deletePC/:userName/:pcId', async (req, res) => {
+  try {
+    const { userName, pcId } = req.params;
+    // Find the user by username
+    const user = await User.findOne({ userName: userName });
+
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+
+    // Logic to delete the PC configuration from the user's pcConfig array
+    await User.updateOne(
+      { _id: user._id },
+      { $pull: { pcConfig: { _id: pcId } } } // Ensure pcId is cast to the correct type if necessary
+    );
+
+    res.json({ success: true });
+  } catch (error) {
+    console.error('Error deleting PC:', error);
+    res.status(500).json({ success: false });
+  }
+});
 module.exports = router;

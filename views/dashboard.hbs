@@ -123,30 +123,40 @@
 
 
 <script>
-        const pcs = {{{ json pcs }}};
-
+    const pcs = {{{ json pcs }}};
+    const userName = "{{ userName }}"; 
     const container = document.getElementById('pcs-container');
 
     pcs.forEach((pc, index) => {
         const pcDiv = document.createElement('div');
         pcDiv.classList.add('pc-row');
 
-        const button = document.createElement('button');
-        button.textContent = 'Expand ↓';
-        button.onclick = () => {
+        // Details button
+        const detailsButton = document.createElement('button');
+        detailsButton.textContent = 'Expand ↓';
+        detailsButton.onclick = () => {
             const detailsDiv = pcDiv.querySelector('.pc-details');
             const isHidden = detailsDiv.style.display === 'none';
             detailsDiv.style.display = isHidden ? 'block' : 'none';
-            button.textContent = isHidden ? 'Collapse ↑' : 'Expand ↓'; // Toggle text
+            detailsButton.textContent = isHidden ? 'Collapse ↑' : 'Expand ↓';
         };
-        pcDiv.appendChild(button);
+        pcDiv.appendChild(detailsButton);
+        const pcIdAsString = pc._id.toString();
+        console.log(pcIdAsString)
+        // Delete button
+        const deleteButton = document.createElement('button');
+        deleteButton.innerHTML = '<i class="fa fa-trash"></i>'; // Using Font Awesome for trash icon
+        deleteButton.classList.add('delete-button');
+        deleteButton.onclick = () => deletePC(userName, pcIdAsString);
+        pcDiv.appendChild(deleteButton);
 
+        // Append price info
         pcDiv.appendChild(document.createTextNode(` PC ${index + 1}: ${pc.totalPrice}`));
 
+        // PC details section
         const detailsDiv = document.createElement('div');
         detailsDiv.classList.add('pc-details');
         detailsDiv.style.display = 'none';
-
         Object.keys(pc).forEach((part) => {
             if (part !== 'totalPrice' && pc[part] && typeof pc[part] === 'object') {
                 const partInfo = pc[part];
@@ -155,10 +165,35 @@
                 detailsDiv.appendChild(partDiv);
             }
         });
-
         pcDiv.appendChild(detailsDiv);
+
+        // Add the pcDiv to the container
         container.appendChild(pcDiv);
     });
+
+    function deletePC(userName, pcId) {
+        if (!confirm('Are you sure you want to delete this PC configuration?')) {
+            return;
+        }
+
+        fetch(`/auth/deletePC/${encodeURIComponent(userName)}/${encodeURIComponent(pcId)}`, { method: 'DELETE' })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok: ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    window.location.reload();
+                } else {
+                    console.error('Failed to delete the PC configuration');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
 </script>
 
     </div>
