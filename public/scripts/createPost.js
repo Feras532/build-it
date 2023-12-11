@@ -4,8 +4,6 @@ const prodInput = document.querySelector('#pTag');
 const questInput = document.querySelector("#qTag");
 const collSelect = document.querySelector('#postCol');
 
-// const Post = require("../models/Post"); //Ask matrouk
-
 var tags = [];
 setupInput.addEventListener('change',() => {
     if(setupInput.checked || prodInput.checked){
@@ -116,7 +114,7 @@ bodyInput.addEventListener('keydown', (e)=>{
 })
 
 //
-let img = "";
+
 function showImage(e){
     
     const postPicDiv = document.querySelector("#picView");
@@ -134,7 +132,7 @@ function showImage(e){
 
         var pic = document.createElement('img');
         pic.src = e.target.result;
-        img = e.target.result;
+        // img = e.target.result;
         pic.className = "UpPic";
         uploadedDiv.appendChild(pic);
 
@@ -149,7 +147,6 @@ function showImage(e){
         removeI.addEventListener("click", ()=>{
             postPicDiv.removeChild(uploadedDiv);
             postPicUpload.value = "";
-            img = "";
         })
         uploadedDiv.appendChild(removeI);
         postPicDiv.append(uploadedDiv);
@@ -158,94 +155,94 @@ function showImage(e){
       reader.readAsDataURL(image);
     }
 }
-const productsDiv = document.querySelector('#prodDiv');
-function showProd(e){
+// const productsDiv = document.querySelector('#prodDiv');
+// function showProd(e){
     
     
     
-    var images = e.files;
-    if(images){
+//     var images = e.files;
+//     if(images){
         
-        Array.from(images).forEach((image)=>{
+//         Array.from(images).forEach((image)=>{
             
-            var reader = new FileReader();
-            reader.onload = (e) =>{
+//             var reader = new FileReader();
+//             reader.onload = (e) =>{
                 
-                let container = document.createElement('div');
-                container.className = 'uploaded';
+//                 let container = document.createElement('div');
+//                 container.className = 'uploaded';
                 
-                let prodImg = document.createElement('img');
-                prodImg.className = "UpPic";
-                prodImg.src = e.target.result;
-                img = e.target.result; //img for submitting;
-                container.appendChild(prodImg);
+//                 let prodImg = document.createElement('img');
+//                 prodImg.className = "UpPic";
+//                 prodImg.src = e.target.result;
+//                 img = e.target.result; //img for submitting;
+//                 container.appendChild(prodImg);
 
-                let nameDiv = document.createElement('div');
-                nameDiv.style.display ='flex';
-                nameDiv.style.flexDirection='column';
-                let prodName = document.createElement('input');
-                prodName.type = 'text';
-                prodName.className = "prodName";
-                prodName.placeholder = 'Product Name';
-                nameDiv.appendChild(prodName);
-                //errorDiv
-                let errorDiv = document.createElement('div');
-                errorDiv.className = 'errorMes';
-                nameDiv.appendChild(errorDiv);
-                container.appendChild(nameDiv);
+//                 let nameDiv = document.createElement('div');
+//                 nameDiv.style.display ='flex';
+//                 nameDiv.style.flexDirection='column';
+//                 let prodName = document.createElement('input');
+//                 prodName.type = 'text';
+//                 prodName.className = "prodName";
+//                 prodName.placeholder = 'Product Name';
+//                 nameDiv.appendChild(prodName);
+//                 //errorDiv
+//                 let errorDiv = document.createElement('div');
+//                 errorDiv.className = 'errorMes';
+//                 nameDiv.appendChild(errorDiv);
+//                 container.appendChild(nameDiv);
                 
-                //add errorMes for cost also 
-                let costCont = document.createElement('div');
-                costCont.className = 'prodCost';
-                let addRemImg = document.createElement('img');
-                addRemImg.src = "assets/addIcon2.png";
-                let span = document.createElement('span');
-                span.innerHTML = "$";
-                span.style.display = "none";
-                let costDiv = document.createElement('div');
-                costDiv.style.display ='flex';
-                costDiv.style.flexDirection='column';
-                let costInput = document.createElement('input');
-                costInput.type = "number";
-                costInput.step = '10';
-                costInput.placeholder = 'Cost';
-                costInput.style.display = "none";
-                costDiv.appendChild(costInput);
-                costDiv.appendChild(errorDiv);
-                
-                
-                addRemImg.addEventListener('click', ()=>{
-                    if((span.style.display === "none")){
-                        span.style.display = "block";
-                        costInput.style.display = "block";
-                        addRemImg.src = 'assets/minusIcon.png'
-                    }
-                    else{
-                        span.style.display = "none";
-                        costInput.style.display = "none"; 
-                        costInput.value='';
-                        addRemImg.src = "assets/addIcon2.png";
-                    }
-                })
-                costCont.appendChild(addRemImg);
-                costCont.appendChild(span);
-                costCont.appendChild(costdiv);
-                container.appendChild(costCont);
+//                 //add errorMes for cost also 
+//                 let costCont = document.createElement('div');
+//                 costCont.className = 'prodCost';
+//                 let addRemImg = document.createElement('img');
+//                 addRemImg.src = "assets/addIcon2.png";
+//                 let span = document.createElement('span');
+//                 span.innerHTML = "$";
+//                 span.style.display = "none";
+//                 let costDiv = document.createElement('div');
+//                 costDiv.style.display ='flex';
+//                 costDiv.style.flexDirection='column';
+//                 let costInput = document.createElement('input');
+//                 costInput.type = "number";
+//                 costInput.step = '10';
+//                 costInput.placeholder = 'Cost';
+//                 costInput.style.display = "none";
+//                 costDiv.appendChild(costInput);
+//                 costDiv.appendChild(errorDiv);
                 
                 
-                let removeImg = document.createElement('img');
-                removeImg.className = 'remImage';
-                removeImg.src = "assets/removeIcon.png";
-                removeImg.addEventListener("click", ()=>{
-                    productsDiv.removeChild(container);
-                });
-                container.appendChild(removeImg);
-                productsDiv.appendChild(container);
-            }
-            reader.readAsDataURL(image);
-        })
-    }
-}
+//                 addRemImg.addEventListener('click', ()=>{
+//                     if((span.style.display === "none")){
+//                         span.style.display = "block";
+//                         costInput.style.display = "block";
+//                         addRemImg.src = 'assets/minusIcon.png'
+//                     }
+//                     else{
+//                         span.style.display = "none";
+//                         costInput.style.display = "none"; 
+//                         costInput.value='';
+//                         addRemImg.src = "assets/addIcon2.png";
+//                     }
+//                 })
+//                 costCont.appendChild(addRemImg);
+//                 costCont.appendChild(span);
+//                 costCont.appendChild(costdiv);
+//                 container.appendChild(costCont);
+                
+                
+//                 let removeImg = document.createElement('img');
+//                 removeImg.className = 'remImage';
+//                 removeImg.src = "assets/removeIcon.png";
+//                 removeImg.addEventListener("click", ()=>{
+//                     productsDiv.removeChild(container);
+//                 });
+//                 container.appendChild(removeImg);
+//                 productsDiv.appendChild(container);
+//             }
+//             reader.readAsDataURL(image);
+//         })
+//     }
+// }
 
 
 // class Product{
@@ -275,17 +272,16 @@ const showSuccess = (element) => {
 }
 
 
-const username = "Me";
-const createProduct = (div)=>{    
-    imgP = div.querySelector('.UpPic').value;
-    nameP = div.querySelector('.prodName').value.trim();
-    costP = div.querySelector('.prodCost').querySelector('input').value.trim();
-    return  {
-        name:nameP,
-        src:imgP,
-        cost:costP
-    }
-} 
+// const createProduct = (div)=>{    
+//     imgP = div.querySelector('.UpPic').value;
+//     nameP = div.querySelector('.prodName').value.trim();
+//     costP = div.querySelector('.prodCost').querySelector('input').value.trim();
+//     return  {
+//         name:nameP,
+//         path:imgP,
+//         cost:costP
+//     }
+// } 
 
 function check_AND_create(){
     var SuccessFlag = true;
@@ -305,25 +301,12 @@ function check_AND_create(){
     NOT EMPTY
     UNIQUE TO USER'S POSTS
     */
-   titleFlag = true
    if(title === ''){
        showError(titleInput, "This field is required!");
        SuccessFlag = false;
        titleFlag = false;
     }
-    if(titleFlag){
-
-        
-        // Post.findOne({Title:title, userID: userId})
-        // .then((post) => {
-        //     if(post){
-        //         showError(titleInput,"You already used this title for another post, use a new one");
-        //         SuccessFlag = false;
-        //         titleFlag= false;
-        //     }})
-        // .catch((err)=>{console.log(err);});
-    }
-    if(!titleFlag){
+    else{
         showSuccess(titleInput);
     }
 
@@ -351,60 +334,60 @@ function check_AND_create(){
         //     return false;
         // }
         else{
-            showSucces(costInput);
+            showSuccess(costInput);
         } 
     }
     
     //Collection (Optional)
     var selectedCollection = collectInput.value;
 
-
     //Image (Optional)
-    if(img === ''){
-        img = 'assets/default.png'; //will database default handle this?
-    }
+    const path = document.querySelector('#uploadFile').path;
+    // if(path === ''){
+    //     path = 'assets/default.png'; //will database default handle this?
+    // }
     
 
 
     //Products (Optional) unless we change it to depend on Tag(Products)
-    var products = [];
-    prodDivs = productsDiv.querySelectorAll('.uploaded');
-    //check products names;
-    if(prodDivs){
-        prodDivs.forEach((pDiv) => {
-            var pFlag = true;
-            const prodNameInput = pDiv.querySelector('.prodName');
-            const prodCostInput = pDiv.querySelector('.prodCost');
-            const pName = prodNameInput.value.trim();
-            const pCost = prodCostInput.value.trim();
-            if(pName === ''){
-                showError(prodNameInput,"Kindly provide the name of the product");
-                SuccessFlag = false;
-                pFlag = false;
-            }
-            else{
-                showSuccess(prodNameInput);
-            }
-            if(pCost){
-                if(pCost.length>8){
-                    showError(prodCostInput,"Be realistic"); //Change this later
-                    pFlag = false;
-                    SuccessFlag = false;
-                }
-                // else if(pCost in scienific notation){
-                //     showError(prodCostInput,"Okay Einstein"); //Change this later
-                //     pFlag = false;
-                //     SuccessFlag
-                // }
-                else{
-                    showSuccess(prodCostInput);
-                }
-            }
-            if(pFlag){
-                products.push(createProduct(pDiv));
-            }
-        });
-    }
+    // var products = [];
+    // prodDivs = productsDiv.querySelectorAll('.uploaded');
+    // //check products names;
+    // if(prodDivs){
+    //     prodDivs.forEach((pDiv) => {
+    //         var pFlag = true;
+    //         const prodNameInput = pDiv.querySelector('.prodName');
+    //         const prodCostInput = pDiv.querySelector('.prodCost');
+    //         const pName = prodNameInput.value.trim();
+    //         const pCost = prodCostInput.value.trim();
+    //         if(pName === ''){
+    //             showError(prodNameInput,"Kindly provide the name of the product");
+    //             SuccessFlag = false;
+    //             pFlag = false;
+    //         }
+    //         else{
+    //             showSuccess(prodNameInput);
+    //         }
+    //         if(pCost){
+    //             if(pCost.length>8){
+    //                 showError(prodCostInput,"Be realistic"); //Change this later
+    //                 pFlag = false;
+    //                 SuccessFlag = false;
+    //             }
+    //             // else if(pCost in scienific notation){
+    //             //     showError(prodCostInput,"Okay Einstein"); //Change this later
+    //             //     pFlag = false;
+    //             //     SuccessFlag
+    //             // }
+    //             else{
+    //                 showSuccess(prodCostInput);
+    //             }
+    //         }
+    //         if(pFlag){
+    //             products.push(createProduct(pDiv));
+    //         }
+    //     });
+    // }
 
     //Body (Optional) IDK about this one honestly
     var bodyContent = bodyInput.value.trim();
@@ -412,17 +395,16 @@ function check_AND_create(){
     //Final creating post,also IDK to have it here or at Index.js 
     if(SuccessFlag){
         //find a way to get the userID or username (since its unique)
-
+        const userid = document.querySelector('#userID').innerHTML;
         const formData = {
-            userName: userId,
             Tags:tags,
             Title: title,
             Note: note,
             Cost: cost,
             Collection: selectedCollection,
-            Image:img,
-            Products:products,
-            Body:bodyContent
+            Path:path,
+            Body:bodyContent,
+            userID: userid
         }
         fetch('/createPost', { //until I figure out how to make post view
             method: 'POST',

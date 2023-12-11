@@ -16,7 +16,7 @@
 
         <form id="form">
 
-
+            <span style="display:none" id="userID">{{userID}}</span>
             <h1>Create a post</h1>
 
             <div id="outerFrame">
@@ -89,7 +89,7 @@
                 </div>
 
 
-                <div class="formElement" id="prodPrompt">
+                {{!-- <div class="formElement" id="prodPrompt">
                     <h2>Add product:</h2>
                     <label for="uploadProd" class="uploadButton">
                         <input type="file" onchange="showProd(this)" name="Products" accept="image/*" multiple="true" id="uploadProd">
@@ -101,14 +101,14 @@
                     <div id="prodDiv">
                         {{!-- Products --}}
                     </div>
-                </div>
+                </div> --}}
 
                 <div class="formElement">
                     <h2>Body:</h2>
                     <textarea name="Body" id="notes" cols="30" rows="10"></textarea>
                 </div>
 
-                <button onclick="check_AND_create" id="createPost">
+                <button type="submit" id="createPost">
                     Create Post
                 </button>
 

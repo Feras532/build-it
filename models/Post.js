@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const PostSchema = new mongoose.Schema({
     Tags: {
-        type:Array,
+        type:[String],
         required:true, //?
     },
     Title: {
@@ -23,8 +23,8 @@ const PostSchema = new mongoose.Schema({
       type: String,
       default:  "assets/default.png",
     },
-    Products: {
-      type:Array,
+    CID: {
+      type: String, //Cloudinary ID
     },
     Body:{
       type:String,
@@ -41,20 +41,30 @@ const PostSchema = new mongoose.Schema({
       },
     },
     Comments: {
-      type: Array,
+      type: [Object],
     },
     Rating: {
-      type:Number,
-      default: 0,
+
+      users: {
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: "User",
+      },
+      value:{
+        type:Number,
+        default: 0,
+      }
+
     },
     Views: {
       type:Number,
       default: 0,
     },
-    userName: {
-      type:String,
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
       required:true,
     }
+
     //a way to trace back the user who own the post
   })
 

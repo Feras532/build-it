@@ -4,6 +4,7 @@ const User = require("../models/User");
 const bcrypt = require("bcrypt");
 
 const Post = require("../models/Post");
+const cloudinary = require("../config/cloudinary");
 
 const passport = require("passport");
 const authMiddleware = require("../routes/auth");
@@ -53,45 +54,66 @@ router.get("/CreatePC", authMiddleware.ensureAuth, (req, res) => {
 });
 
 router.get("/community", async (req, res) => {
-      res.render("community", { layout: "main" });
-
-  // const SU = await Post.countDocuments({ Tags: { $in: ['Setups']}});
-  // const Q = await Post.countDocuments({ Tags: { $in: ['Questions']}});
-  // const PR = await Post.countDocuments({ Tags: { $in: ['Products']}});
+  
+  res.render("community", { layout: "main" });
+  // const SU = await Post.find({ Tags: { $in: ['Setups']}}).count();
+  // const Q = await Post.find({ Tags: { $in: ['Questions']}}).count();
+  // const PR = await Post.find({ Tags: { $in: ['Products']}}).count();
   // const filters = {
   //   SU:SU,
   //   Q:Q,
   //   PR:PR,
   // };
-  // Post.find()
-  //   .then((result) =>{
-  //     res.render("community", { layout: "main", posts:result, Filters:filters });
-  //   })
-  //   .catch((err)=>{
-  //     console.log(err);
-  //   })
+    // Post.find().sort({ CreationDate: -1}).lean()
+    // .then((result) =>{
+    //   res.render("community", { layout: "main", posts:result, Filters:filters });
+    // })
+    // .catch((err)=>{
+    //   console.log(err);
+    // })
 });
 
 router.get("/upgrade", (req, res) => {
   res.render("upgrade", { layout: "main" });
 });
+// router.get("/createPost", authMiddleware.ensureAuth, (req, res) => {
+//   res.render("createPost", { layout: "main" , userID: req.user._id});
+// });
 
-router.get("/createPost", (req, res) => {
-  res.render("createPost", { layout: "main" });
-});
+// router.post("/createPost", async (req, res) => {
 
-router.post("/createPost", (req, res) => {
+//   // res.render("createPost", { layout: "main" });
+//   const {Tags, Title, Note, Cost, Collection, Path, Body, userID} = req.body;
+//   const result = await cloudinary.uploader.upload(Path);
+  
+//   const post = new Post({Tags:Tags, Title:Title, 
+//     Note:Note, Cost:Cost,Collection:Collection ,Image:result.secure_url, 
+//     CID:result.public_id, Body:Body, user:userID });
 
-  // res.render("createPost", { layout: "main" });
-  // const post = new Post(req.body);
-  // post.save()
-  //   .then((result) =>{
-  //     res.redirect('/community')
-  //   })
-  //   .catch((err) =>{
-  //     console.log(err);
-  //   })
-});
+//   post.save()
+//   .then((result) =>{
+//     res.redirect(`/community/${post._id}`)
+//   })
+//   .catch((err) =>{
+//     console.log(err);
+//   })
+// });
+
+// router.get("community/:id", (req, res) =>{
+//   const postID = req.params.id;
+//   Post.find({_id: postID})
+//   .then((result) =>{
+//     if(res){
+//       const user = User.find({ _id : result.user})
+//       res.render("post", {layout: 'main', post : result, user : user});
+//     }
+//       else
+//       res.status(404).send('No Post Exists With The Given ID');
+//   })
+//   .catch((err) =>{
+//     console.log(err);
+//   })
+// })
 
 router.post("/generated", (req, res) => {
   res.render("generated", { layout: "main" });
