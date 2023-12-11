@@ -40,7 +40,7 @@ const systemMessageContent = `
     responseFormat
   )}. If you didn't follow my format, you will ruin my system.`;
 
-const API_KEY = "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"
+
 let PC = {  };
 async function fetchData() {
 
