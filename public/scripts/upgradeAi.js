@@ -1,41 +1,49 @@
 const storedInput = localStorage.getItem("userInput");
-const input = storedBasket ? JSON.parse(storedInput) : {};
+const input = storedInput ? JSON.parse(storedInput) : {};
 const inputString = JSON.stringify(input);
-
+console.log(storedInput)
+console.log(input)
+console.log(inputString)
 const responseFormat = {
   totalPrice: "1000$",
-  CPU: { brand: "AMD", model: "Ryzen 5 5600G", price: "XXX$" },
-  GPU: { brand: "Geforce", model: "1660gtx super", price: "XXX$" },
-  MotherBoard: { brand: "Gigabyte", model: "B450M DS3H", price: "XXX$" },
-  Case: { brand: "NZXT", model: "H510", price: "XXX$" },
+  CPU: { brand: "AMD", model: "Ryzen 5 5600G", price: "XXX$", flag: ''},
+  GPU: { brand: "Geforce", model: "1660gtx super", price: "XXX$", flag: '' },
+  MotherBoard: { brand: "Gigabyte", model: "B450M DS3H", price: "XXX$", flag: '' },
+  Case: { brand: "NZXT", model: "H510", price: "XXX$", flag: '' },
   Rams: {
     brand: "Corsair",
     model: "Vengeance LPX 16GB (2x8GB) DDR4 3200",
-    price: "XXX$",
+    price: "XXX$", flag: ''
   },
-  SSD: { brand: "Crucial", model: "P2 500GB NVMe SSD", price: "XXX$" },
-  HDD: { brand: "Seagate", model: "Barracuda 2TB HDD", price: "XXX$" },
-  M2: { brand: "none", model: "none", price: "none" },
-  PSU: { brand: "EVGA", model: "600 BR 80+ Bronze", price: "XXX$" },
+  SSD: { brand: "Crucial", model: "P2 500GB NVMe WASSD", price: "XXX$" , flag: ''},
+  HDD: { brand: "Seagate", model: "Barracuda 2TB HDD", price: "XXX$", flag: '' },
+  M2: { brand: "none", model: "none", price: "none", flag: '' },
+  PSU: { brand: "EVGA", model: "600 BR 80+ Bronze", price: "XXX$" , flag: ''},
+  Monitor: { brand: "LG", model: "32GN600-B", price: "XXX$", flag: '' },
   performance: {
     FPS: "120",
     Bottleneck: "10%",
     System_Booting_Time: "5",
     score: { Gaming: "92", VR_Gaming: "90", Montage: "80", MultiTasking: "99" },
   },
+  
 };
 
 const systemMessageContent = `
-  if a part is not needed, then type none inside its component.
-  and for the price try to give an estimated price from your last update.
+  given the specified budget and PC specifications, find the most optimal way to upgrade this PC to solve these issues: ${storedInput.issues}. if a part doesn't have to be upgraded, then type its specifications into its component.
+  otherwise, if it should be upgraded, then type its suggested upgraded specifications inside its component. 
+  Set the 'flag' field of a component to the value 'y' IF and ONLY IF any of its specifications were changed from the inputted ones, otherwise leave it empty.
+  and for the price try to give an estimated price for each component
   for the total price, just sum the price of each component and add it there (ACURATE summation).
-  for spending prefrences when its useMax, try to spend all money by providing the best products in the market(expensive).
-  performance response with numbers only, example FPS:"470".
+  for performance response with numbers only, example FPS:"470".
   answer style ONLY in this format: ${JSON.stringify(
     responseFormat
   )}. If you didn't follow my format, you will ruin my system.`;
-let PC = {};
+
+const API_KEY = "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"
+let PC = {  };
 async function fetchData() {
+
   const response = await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
     headers: {
@@ -107,6 +115,9 @@ function createTable() {
 
         [key, brand, model, price].forEach((tdText) => {
           let td = document.createElement("td");
+          if(PC[key].flag === 'y'){
+            td.className = 'upgraded'
+          }
           td.appendChild(document.createTextNode(tdText));
           tr.appendChild(td);
         });

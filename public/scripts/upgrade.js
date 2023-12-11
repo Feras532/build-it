@@ -13,7 +13,7 @@ let userInput = {
   RAM: "not specified",
   SSD: "not specified",
   monitor: "not specified",
-  soundCard: "not specified",
+  case: "not specified",
   upgradeAll: true, //Default option is to upgrade all parts
   upgradeSpecific: [],
   issues: ''
@@ -68,8 +68,8 @@ function nextQuestion() {
       if(document.getElementById("monitor").value.length !== 0){
         userInput.monitor = document.getElementById("monitor").value
       }
-      if(document.getElementById("sound").value.length !== 0){
-        userInput.soundCard = document.getElementById("sound").value
+      if(document.getElementById("case").value.length !== 0){
+        userInput.case = document.getElementById("case").value
       }
 
       break;
@@ -85,10 +85,6 @@ function nextQuestion() {
         }
       }
 
-      break;
-    case 4:
-      let issues = document.querySelector('.answer-container input')
-      userInput.issues = issues.value;
       break;
     default:
       break;  
@@ -127,6 +123,7 @@ function updateValue(value) {
 window.updateValue = updateValue;
 
 // ========================Question 3=====================
+if(!(document.querySelector('.left') === null)){
   let leftPart = document.querySelector('.left')
   let rightPart = document.querySelector('.right')
   let prompt = document.querySelector('.firstprompt')
@@ -150,12 +147,13 @@ window.updateValue = updateValue;
     nextBttn.style.display= 'none'
     userInput.upgradeAll = true
   })
+}
 // ========================================================
 
  async function populateDatalists(){
     
     //Motherboard list
-    let data = await fetchJson('public/assets/part_dataset/motherboard.json')
+    let data = await fetchJson('../public/assets/part_dataset/motherboard.json')
       let motherboards = data.map((o) => o.name)
       let list = document.getElementById('mbdata')
       for(let i = 0; i<motherboards.length; i++){
@@ -165,7 +163,7 @@ window.updateValue = updateValue;
       }
 
     //CPU list
-    data = await fetchJson('public/assets/part_dataset/cpu.json')
+    data = await fetchJson('../public/assets/part_dataset/cpu.json')
     motherboards = data.map((o) => o.name)
     list = document.getElementById('cpudata')
     for(let i = 0; i<motherboards.length; i++){
@@ -175,7 +173,7 @@ window.updateValue = updateValue;
     }
 
     //GPU list
-    data = await fetchJson('public/assets/part_dataset/video-card.json')
+    data = await fetchJson('../public/assets/part_dataset/video-card.json')
     motherboards = data.map((o) => o.name)
     list = document.getElementById('gpudata')
     for(let i = 0; i<motherboards.length; i++){
@@ -185,7 +183,7 @@ window.updateValue = updateValue;
     }
 
     //PowerSupply list
-    data = await fetchJson('public/assets/part_dataset/power-supply.json')
+    data = await fetchJson('../public/assets/part_dataset/power-supply.json')
     motherboards = data.map((o) => o.name)
     list = document.getElementById('powerdata')
     for(let i = 0; i<motherboards.length; i++){
@@ -195,7 +193,7 @@ window.updateValue = updateValue;
     }
 
     //Case Fan list
-    data = await fetchJson('public/assets/part_dataset/case-fan.json')
+    data = await fetchJson('../public/assets/part_dataset/case-fan.json')
     motherboards = data.map((o) => o.name)
     list = document.getElementById('casefandata')
     for(let i = 0; i<motherboards.length; i++){
@@ -205,7 +203,7 @@ window.updateValue = updateValue;
     }
 
     //HDD list
-    data = await fetchJson('public/assets/part_dataset/external-hard-drive.json')
+    data = await fetchJson('../public/assets/part_dataset/external-hard-drive.json')
     motherboards = data.map((o) => o.name)
     list = document.getElementById('hdddata')
     for(let i = 0; i<motherboards.length; i++){
@@ -215,7 +213,7 @@ window.updateValue = updateValue;
     }
 
     //SSD list
-    data = await fetchJson('public/assets/part_dataset/internal-hard-drive.json')
+    data = await fetchJson('../public/assets/part_dataset/internal-hard-drive.json')
     motherboards = data.map((o) => o.name)
     list = document.getElementById('ssddata')
     for(let i = 0; i<motherboards.length; i++){
@@ -225,7 +223,7 @@ window.updateValue = updateValue;
     }
 
     //RAM list
-    data = await fetchJson('public/assets/part_dataset/memory.json')
+    data = await fetchJson('../public/assets/part_dataset/memory.json')
     motherboards = data.map((o) => o.name)
     list = document.getElementById('ramdata')
     for(let i = 0; i<motherboards.length; i++){
@@ -235,7 +233,7 @@ window.updateValue = updateValue;
     }
 
     //Monitor list
-    data = await fetchJson('public/assets/part_dataset/monitor.json')
+    data = await fetchJson('../public/assets/part_dataset/monitor.json')
     motherboards = data.map((o) => o.name)
     list = document.getElementById('monitordata')
     for(let i = 0; i<motherboards.length; i++){
@@ -244,10 +242,10 @@ window.updateValue = updateValue;
       list.appendChild(option)
     }
 
-    //Sound Card
-    data = await fetchJson('public/assets/part_dataset/sound-card.json')
+    //Case list
+    data = await fetchJson('../public/assets/part_dataset/case.json')
     motherboards = data.map((o) => o.name)
-    list = document.getElementById('sounddata')
+    list = document.getElementById('casedata')
     for(let i = 0; i<motherboards.length; i++){
       let option = document.createElement("option")
       option.value = motherboards[i]
@@ -257,18 +255,22 @@ window.updateValue = updateValue;
 
 function submitForm() {
   // Save userInput to localStorage
+  let issues = document.querySelector('#answer-container')
+  userInput.issues = issues.value;
+  
   localStorage.setItem("userInput", JSON.stringify(userInput));
   console.log("submitted.");
+
 }
+window.submitForm = submitForm
 
 const fetchJson = async url => {
     const response = await fetch(url)
     return response.json()
 }
 
-export function getInput() {
-  return userInput;
+export default function getInput(){
+  return JSON.stringify(userInput);
 }
-
 
 
