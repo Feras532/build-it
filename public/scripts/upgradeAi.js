@@ -56,32 +56,30 @@ if(input.upgradeAll){
 
 let PC = {  };
 async function fetchData() {
+  try {
+    const response = await fetch("/auth/upgrade-data", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        systemMessageContent: systemMessageContent,
+        inputString: inputString,
+      }),
+    });
+    const data = await response.json();
+    console.log("Raw response data:", data); // Log the raw response data
 
-  const response = await fetch("https://api.openai.com/v1/chat/completions", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${API_KEY}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      model: "gpt-4-1106-preview",
-      messages: [
-        {
-          role: "system",
-          content: systemMessageContent,
-        },
-        {
-          role: "user",
-          content: inputString,
-        },
-      ],
-    }),
-  });
-  const data = await response.json();
-  console.log("request created.");
-  // Parse the API response into a JSON object
-  PC = JSON.parse(data.choices[0].message.content);
-  console.log(PC);
+    if (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) {
+      console.log("Upgrade request created.");
+      PC = JSON.parse(data.choices[0].message.content);
+      console.log("PC:", PC);
+    } else {
+      console.error("Unexpected response structure:", data);
+    }
+  } catch (error) {
+    console.error("Error in upgrade fetchData:", error);
+  }
 }
 
 window.onload = async function () {

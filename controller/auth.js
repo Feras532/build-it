@@ -118,6 +118,37 @@ router.post("/fetchData", async (req, res) => {
   }
 });
 
+router.post("/upgrade-data", async (req, res) => {
+  try {
+    const { systemMessageContent, inputString } = req.body;
+    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${process.env.OPENAI_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        model: "gpt-4-1106-preview",
+        messages: [
+          {
+            role: "system",
+            content: systemMessageContent,
+          },
+          {
+            role: "user",
+            content: inputString,
+          },
+        ],
+      }),
+    });
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    console.error("Error fetching upgrade data:", error);
+    res.status(500).send("Error fetching upgrade data");
+  }
+});
+
 router.delete('/deletePC/:userName/:pcId', async (req, res) => {
   try {
     const { userName, pcId } = req.params;
