@@ -80,7 +80,60 @@ app.get('/public/assets/part_dataset/:part', (req, res) =>{
   res.sendFile(path.join(__dirname, jsonpath))
 })
 
-// addPCConfigurationToUser('656720910d50adaea327fd11',PC2)
+const examplePC = {
+  totalPrice: "1500",
+  CPU: {
+    brand: "Intel",
+    model: "Core i7-10700K",
+    price: "340"
+  },
+  GPU: {
+    brand: "NVIDIA",
+    model: "GeForce RTX 3070",
+    price: "500"
+  },
+  MotherBoard: {
+    brand: "ASUS",
+    model: "ROG Strix Z490-E Gaming",
+    price: "250"
+  },
+  Case: {
+    brand: "NZXT",
+    model: "H510",
+    price: "70"
+  },
+  Rams: {
+    brand: "Corsair",
+    model: "Vengeance LPX 16GB",
+    price: "80"
+  },
+  SSD: {
+    brand: "Samsung",
+    model: "970 EVO Plus 1TB",
+    price: "150"
+  },
+  HDD: {
+    brand: "Seagate",
+    model: "Barracuda 2TB",
+    price: "50"
+  },
+  M2: {
+    brand: "Western Digital",
+    model: "Blue SN550 1TB",
+    price: "100"
+  },
+  PSU: {
+    brand: "Corsair",
+    model: "RM750x",
+    price: "110"
+  }
+};
+
+// addPCConfigurationToUser('656720910d50adaea327fd11',examplePC)
+
+// addPCConfigurationToUser('656720910d50adaea327fd11',examplePC)
+
+// addPCConfigurationToUser('656720910d50adaea327fd11',examplePC)
 
 // // Function to add PC configuration to a user's profile
 // async function addPCConfigurationToUser(userId, pcConfig) {

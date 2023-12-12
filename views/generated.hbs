@@ -211,6 +211,33 @@
             border-radius: 5px;
             text-decoration: none;
         }
+        #notification {
+    display: none;
+    position: fixed;
+    top: 20px; /* Adjusted to not be too close to the top edge */
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(76, 175, 80, 0.9);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    z-index: 10000;
+    min-width: 250px;
+    text-align: center;
+}
+
+#notification button {
+    float: right;
+    font-size: 20px;
+    line-height: 20px;
+    font-weight: bold;
+}
+
+#notification span {
+    display: inline-block;
+    vertical-align: middle;
+}
     </style>
 
     <script type="module" src="scripts/openAi.js"></script>
@@ -219,6 +246,11 @@
 </head>
 
 <body>
+    <div id="notification" style="display: none; position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: rgba(76, 175, 80, 0.9); color: white; padding: 10px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.2); z-index: 1000; min-width: 250px; text-align: center;">
+    <span id="notification-message">Notification Message</span>
+    <button onclick="closeNotification()" style="margin-left: 20px; background-color: transparent; color: white; border: none; cursor: pointer;">×</button>
+</div>
+
     <div id="loading-screen">
         <div class="loading-container">
             <div class="loaders">
@@ -249,6 +281,19 @@
         changeText();
 
         setInterval(changeText, 4000); 
+
+        function showNotification(message) {
+    const notificationDiv = document.getElementById('notification');
+    const notificationMessage = document.getElementById('notification-message');
+    notificationMessage.textContent = message;
+    notificationDiv.style.display = 'block';
+
+    // Hide the notification after 4 seconds
+    setTimeout(() => {
+        notificationDiv.style.display = 'none';
+    }, 4000);
+}
+
     </script>
 
     <div id="content-container">

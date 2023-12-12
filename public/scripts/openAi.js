@@ -248,12 +248,13 @@ async function savePC() {
       });
       const result = await response.json();
       if (result.success) {
-          console.log('PC configuration saved successfully.');
+          showNotification('PC configuration saved successfully.'); // Display success notification
       } else {
-          console.error('Failed to save PC configuration:', result.message);
+          showNotification('Failed to save PC configuration.'); // Display failure notification
       }
   } catch (error) {
       console.error('Error in savePC:', error);
+      showNotification('Error in saving PC.'); // Display error notification
   }
 }
 
