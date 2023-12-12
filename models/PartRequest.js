@@ -1,15 +1,14 @@
 const mongoose = require('mongoose');
 
-// Define the schema for the part request
+
 const partRequestSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
     },
-    email: {
+    phone: { 
         type: String,
         required: true,
-        lowercase: true,
         trim: true
     },
     partDetails: {

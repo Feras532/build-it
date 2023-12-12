@@ -63,7 +63,15 @@
             color: white;
             font-size: 20px;
             cursor: pointer;
-        }</style>
+        }
+                .description-text {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 15px;
+            line-height: 1.5;
+            text-align: justify;
+        }
+        </style>
 </head>
 <body>
         <div id="notification">
@@ -71,11 +79,13 @@
         <button onclick="closeNotification()">×</button>
     </div>
     <div class="request-form-container">
-        <h1>Need a specific part?</h1>
-        <p>Make a request, and we'll find it for you.</p>
+        <h1>Need Someone to Asemble your PC for You !</h1>
+        <p class="description-text">
+            Complete the form below to make your request. Our team will contact you on WhatsApp to discuss your budget and provide further details on the specifications you require. Please note, assembling your custom PC may take anywhere from 7 to 14 days. We appreciate your patience and are excited to assist you in building your ideal PC setup!
+        </p>
         <form id="partRequestForm">
             <input type="text" id="name" name="name" placeholder="Your Name" required>
-            <input type="email" id="email" name="email" placeholder="Your Email" required>
+            <input type="tel" id="phone" name="phone" placeholder="Your Phone Number (for WhatsApp)" required>
             <textarea id="partDetails" name="partDetails" placeholder="Describe the part you need" required></textarea>
             <button type="submit">Send Request</button>
         </form>
@@ -90,14 +100,14 @@ document.getElementById('partRequestForm').addEventListener('submit', function(e
     submitButton.textContent = 'Sending...';
 
     document.getElementById('name').disabled = true;
-    document.getElementById('email').disabled = true;
+    document.getElementById('phone').disabled = true;
     document.getElementById('partDetails').disabled = true;
 
-    const requestData = {
-        name: document.getElementById('name').value,
-        email: document.getElementById('email').value,
-        partDetails: document.getElementById('partDetails').value
-    };
+ const requestData = {
+    name: document.getElementById('name').value,
+    phone: document.getElementById('phone').value,
+    partDetails: document.getElementById('partDetails').value
+};
 
     fetch('/auth/request-part', {
         method: 'POST',

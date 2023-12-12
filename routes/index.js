@@ -77,7 +77,7 @@ router.get("/upgrade", (req, res) => {
   res.render("upgrade", { layout: "main" });
 });
 
-router.get("/request", (req, res) => {
+router.get("/request",authMiddleware.ensureAuth, (req, res) => {
   res.render("request", { layout: "main" });
 });
 

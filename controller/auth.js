@@ -193,10 +193,10 @@ router.post('/savePC', async (req, res) => {
 router.post('/request-part', async (req, res) => {
   try {
       // Destructure the request body to get the submitted values
-      const { name, email, partDetails } = req.body;
+      const { name, phone, partDetails } = req.body;
 
       // Create a new document from the PartRequest model
-      const newRequest = new PartRequest({ name, email, partDetails });
+      const newRequest = new PartRequest({ name, phone, partDetails });
 
       // Save the new part request to the database
       await newRequest.save();
