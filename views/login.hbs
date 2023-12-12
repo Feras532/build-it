@@ -54,7 +54,7 @@
             const form = document.getElementById('authForm');
             const submitBtn = document.getElementById('submitBtn');
             const toggleText = document.getElementById('formToggleText');
-
+         const errorMessageDiv = document.getElementById('errorMessage'); 
             if (!newUser) {
                 form.action = '/auth/register';
                 usernameDiv.style.display = 'block';
