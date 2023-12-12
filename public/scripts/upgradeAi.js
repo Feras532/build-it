@@ -17,7 +17,6 @@ const responseFormat = {
   },
   SSD: { brand: "Crucial", model: "P2 500GB NVMe WASSD", price: "XXX$" , flag: ''},
   HDD: { brand: "Seagate", model: "Barracuda 2TB HDD", price: "XXX$", flag: '' },
-  M2: { brand: "none", model: "none", price: "none", flag: '' },
   PSU: { brand: "EVGA", model: "600 BR 80+ Bronze", price: "XXX$" , flag: ''},
   Monitor: { brand: "LG", model: "32GN600-B", price: "XXX$", flag: '' },
   performance: {
@@ -29,16 +28,30 @@ const responseFormat = {
   
 };
 
-const systemMessageContent = `
-  given the specified budget and PC specifications, find the most optimal way to upgrade this PC to solve these issues: ${storedInput.issues}. if a part doesn't have to be upgraded, then type its specifications into its component.
+let systemMessageContent = ''
+if(input.upgradeAll){
+ systemMessageContent = `
+  given the specified budget and PC specifications, find the most optimal way to upgrade this PC to solve these issues: ${input.issues}. if a part doesn't have to be upgraded, then type its specifications into its component.
   otherwise, if it should be upgraded, then type its suggested upgraded specifications inside its component. 
   Set the 'flag' field of a component to the value 'y' IF and ONLY IF any of its specifications were changed from the inputted ones, otherwise leave it empty.
-  and for the price try to give an estimated price for each component
-  for the total price, just sum the price of each component and add it there (ACURATE summation).
+  and for the price try to give an estimated price for each upgraded component, for components that were not upgraded set the price to 0.
+  set the 'totalPrice' field to the sum the price of each upgraded component ONLY (Accurate summation)
   for performance response with numbers only, example FPS:"470".
   answer style ONLY in this format: ${JSON.stringify(
     responseFormat
   )}. If you didn't follow my format, you will ruin my system.`;
+  }else{
+   systemMessageContent = `
+  given the specified budget and PC specifications, find the most optimal way to upgrade the following parts: (${input.upgradeSpecific.toString()}) and type their new specifications into their components.
+  For the rest of the components that are not listed, type their existing inputted specifications into their components.
+  Set the 'flag' field of a component to the value 'y' IF and ONLY IF any of its specifications were changed from the inputted ones, otherwise leave it empty.
+  and for the price try to give an estimated price for each upgraded component, for components that were not upgraded set the price to 0.
+  set the 'totalPrice' field to the sum the price of each upgraded component ONLY (Accurate summation)
+  for performance response with numbers only, example FPS:"470".
+  answer style ONLY in this format: ${JSON.stringify(
+    responseFormat
+  )}. If you didn't follow my format, you will ruin my system.`;
+  }
 
 
 let PC = {  };
@@ -47,7 +60,7 @@ async function fetchData() {
   const response = await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
     headers: {
-      Authorization: `Bearer ${API_KEY}`,
+      Authorization: `Bearer ${OPENAI_KEY}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
