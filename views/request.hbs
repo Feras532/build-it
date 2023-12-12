@@ -81,56 +81,58 @@
         </form>
     </div>
     <script>
-        // Add this to your script.js file
-        document.getElementById('partRequestForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+document.getElementById('partRequestForm').addEventListener('submit', function(e) {
+    e.preventDefault();
 
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const partDetails = document.getElementById('partDetails').value;
+    // Disable the submit button and other form fields
+    const submitButton = document.querySelector('#partRequestForm button');
+    submitButton.disabled = true;
+    submitButton.textContent = 'Sending...';
 
-            // Construct the request payload
-            const requestData = {
-                name,
-                email,
-                partDetails
-            };
+    document.getElementById('name').disabled = true;
+    document.getElementById('email').disabled = true;
+    document.getElementById('partDetails').disabled = true;
 
-            // Send the request to your server
-            fetch('/auth/request-part', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(requestData)
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Request sent:', data);
-                // Show notification
-                showNotification('Your request has been sent successfully!');
-            })
-            .catch(error => {
-                console.error('Error sending request:', error);
-                // Show error in notification
-                showNotification('Error sending request. Please try again.');
-            });
-        });
+    const requestData = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        partDetails: document.getElementById('partDetails').value
+    };
 
-        function showNotification(message) {
-            const notification = document.getElementById('notification');
-            const messageParagraph = document.getElementById('notification-message');
-            messageParagraph.textContent = message;
-            notification.style.display = 'block';
-            setTimeout(() => {
-                notification.style.display = 'none';
-            }, 3000);
-        }
+    fetch('/auth/request-part', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Request sent:', data);
+        showNotification('Your request has been sent successfully!');
+        submitButton.textContent = 'Request Sent'; // Update button text on success
+    })
+    .catch(error => {
+        console.error('Error sending request:', error);
+        showNotification('Error sending request. Please try again.');
+        submitButton.textContent = 'Error Occurred'; // Update button text on failure
+    });
+});
 
-        function closeNotification() {
-            const notification = document.getElementById('notification');
-            notification.style.display = 'none';
-        }
+function showNotification(message) {
+    const notification = document.getElementById('notification');
+    const messageParagraph = document.getElementById('notification-message');
+    messageParagraph.textContent = message;
+    notification.style.display = 'block';
+    setTimeout(() => {
+        notification.style.display = 'none';
+    }, 3000);
+}
+
+function closeNotification() {
+    const notification = document.getElementById('notification');
+    notification.style.display = 'none';
+}
 </script>
 </body>
 </html>

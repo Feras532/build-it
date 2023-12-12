@@ -239,24 +239,30 @@ function animateProgressBar(progressBar, finalValue, duration, textNode) {
 }
 
 async function savePC() {
+  const saveButton = document.getElementById('saveButton');
+  saveButton.disabled = true; // Disable the button
+  saveButton.textContent = 'Saving...'; // Change button text
+
   try {
-    const response = await fetch("/auth/savePC", {
-      // Endpoint should match the server route
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(PC), // Send the PC object as a JSON string
-    });
-    const result = await response.json();
-    if (result.success) {
-      showNotification("PC configuration saved successfully."); // Display success notification
-    } else {
-      showNotification("Failed to save PC configuration."); // Display failure notification
-    }
+      const response = await fetch("/auth/savePC", {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json",
+          },
+          body: JSON.stringify(PC),
+      });
+      const result = await response.json();
+      if (result.success) {
+          showNotification("PC configuration saved successfully.");
+          saveButton.textContent = 'Saved'; // Update button text on success
+      } else {
+          showNotification("Failed to save PC configuration.");
+          saveButton.textContent = 'Failed to Save'; // Update button text on failure
+      }
   } catch (error) {
-    console.error("Error in savePC:", error);
-    showNotification("Error in saving PC."); // Display error notification
+      console.error("Error in savePC:", error);
+      showNotification("Error in saving PC.");
+      saveButton.textContent = 'Error'; // Update button text on error
   }
 }
 
