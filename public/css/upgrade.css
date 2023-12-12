@@ -359,3 +359,36 @@ form h1 {
       outline: 0px;
       box-shadow: 0 0 0 2px coral;
   }
+
+
+  @media screen and (max-width:600px) {
+
+    body{
+        padding-top:0px;
+    }
+    .question-container.active{
+        width:100%;
+        padding:0px;
+        scale:85%;
+    }
+    .question{
+        font-size: 24px;
+        scale:85%;
+    }
+
+    .question-container.active h1{
+        font-size: 20px;
+        
+    }
+
+    .right, .left, .left.selected, .right.selected, h1, {
+        scale:85%;
+    }
+    .left.selected{
+        padding-top:0px;
+    }
+
+    #answer-container{
+        scale:70%;
+    }
+  }
