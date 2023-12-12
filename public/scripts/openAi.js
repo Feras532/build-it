@@ -64,6 +64,7 @@ window.onload = async function () {
 
   // Hide loading screen
   document.getElementById("loading-screen").style.display = "none";
+
   createTable();
   createTotalDiv();
   createPerformanceCards();
@@ -239,24 +240,51 @@ function animateProgressBar(progressBar, finalValue, duration, textNode) {
 
 async function savePC() {
   try {
-      const response = await fetch('/auth/savePC', { // Endpoint should match the server route
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(PC), // Send the PC object as a JSON string
-      });
-      const result = await response.json();
-      if (result.success) {
-          showNotification('PC configuration saved successfully.'); // Display success notification
-      } else {
-          showNotification('Failed to save PC configuration.'); // Display failure notification
-      }
+    const response = await fetch("/auth/savePC", {
+      // Endpoint should match the server route
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(PC), // Send the PC object as a JSON string
+    });
+    const result = await response.json();
+    if (result.success) {
+      showNotification("PC configuration saved successfully."); // Display success notification
+    } else {
+      showNotification("Failed to save PC configuration."); // Display failure notification
+    }
   } catch (error) {
-      console.error('Error in savePC:', error);
-      showNotification('Error in saving PC.'); // Display error notification
+    console.error("Error in savePC:", error);
+    showNotification("Error in saving PC."); // Display error notification
   }
 }
 
 // Expose savePC to be callable from your HTML
 window.savePC = savePC;
+
+function openPopup() {
+  let popup = document.getElementById("successPopup");
+  let span = document.getElementsByClassName("close")[0];
+
+  popup.style.display = "block";
+
+  span.onclick = function () {
+    popup.style.display = "none";
+  };
+
+  // When the user clicks anywhere outside of the popup, close it
+  window.onclick = function (event) {
+    if (event.target === popup) {
+      popup.style.display = "none";
+    }
+  };
+  // document.getElementById("btn-save").style.display = "none";
+}
+
+function closePopupAfterDelay(delayMs = 4000) {
+  setTimeout(() => {
+    let popup = document.getElementById("successPopup");
+    popup.style.display = "none";
+  }, delayMs);
+}

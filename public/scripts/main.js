@@ -4,7 +4,7 @@ let currentQuestion = 1;
 let BASKET = {
   spendingPreference: "useMax", // Default value
   applications: "not specified",
-  capacity: "not specified",
+  capacity: "1TB",
   resolution: "1080p",
   spendingPreference: "useMax",
   tower: "Mid Tower",

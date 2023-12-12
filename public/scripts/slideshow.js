@@ -23,3 +23,12 @@ function showSlides() {
 
   setTimeout(showSlides, 5000);
 }
+
+document
+  .querySelector(".fancy-button")
+  .addEventListener("click", function (event) {
+    event.preventDefault();
+    document
+      .getElementById("features-intro")
+      .scrollIntoView({ behavior: "smooth" });
+  });
