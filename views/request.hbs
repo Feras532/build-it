@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Part Request</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        .request-form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin-top: 50px;
+        }
+
+        #partRequestForm input,
+        #partRequestForm textarea,
+        #partRequestForm button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+        }
+
+        #partRequestForm button {
+            background-color: #ff7f50; /* Orange color */
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        #partRequestForm button:hover {
+            background-color: #e56740; /* Darker orange */
+        }
+
+        #notification {
+            display: none; /* Initially hidden */
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ffa500; /* Orange background */
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            z-index: 1000;
+            min-width: 250px;
+            text-align: center;
+        }
+
+        #notification button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }</style>
+</head>
+<body>
+        <div id="notification">
+        <span id="notification-message">Your request has been sent successfully!</span>
+        <button onclick="closeNotification()">×</button>
+    </div>
+    <div class="request-form-container">
+        <h1>Need a specific part?</h1>
+        <p>Make a request, and we'll find it for you.</p>
+        <form id="partRequestForm">
+            <input type="text" id="name" name="name" placeholder="Your Name" required>
+            <input type="email" id="email" name="email" placeholder="Your Email" required>
+            <textarea id="partDetails" name="partDetails" placeholder="Describe the part you need" required></textarea>
+            <button type="submit">Send Request</button>
+        </form>
+    </div>
+    <script>
+        // Add this to your script.js file
+        document.getElementById('partRequestForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const partDetails = document.getElementById('partDetails').value;
+
+            // Construct the request payload
+            const requestData = {
+                name,
+                email,
+                partDetails
+            };
+
+            // Send the request to your server
+            fetch('/auth/request-part', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(requestData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Request sent:', data);
+                // Show notification
+                showNotification('Your request has been sent successfully!');
+            })
+            .catch(error => {
+                console.error('Error sending request:', error);
+                // Show error in notification
+                showNotification('Error sending request. Please try again.');
+            });
+        });
+
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            const messageParagraph = document.getElementById('notification-message');
+            messageParagraph.textContent = message;
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+        }
+
+        function closeNotification() {
+            const notification = document.getElementById('notification');
+            notification.style.display = 'none';
+        }
+</script>
+</body>
+</html>

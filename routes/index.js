@@ -76,6 +76,11 @@ router.get("/community", async (req, res) => {
 router.get("/upgrade", (req, res) => {
   res.render("upgrade", { layout: "main" });
 });
+
+router.get("/request", (req, res) => {
+  res.render("request", { layout: "main" });
+});
+
 // router.get("/createPost", authMiddleware.ensureAuth, (req, res) => {
 //   res.render("createPost", { layout: "main" , userID: req.user._id});
 // });

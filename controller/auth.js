@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const passport = require("passport");
+const PartRequest = require('../models/PartRequest');
 
 router.post("/register", async (req, res) => {
   const { userName, email, password, password2 } = req.body;
@@ -157,4 +158,25 @@ router.post('/savePC', async (req, res) => {
       res.status(500).json({ success: false, message: "Internal Server Error" });
   }
 });
+
+router.post('/request-part', async (req, res) => {
+  try {
+      // Destructure the request body to get the submitted values
+      const { name, email, partDetails } = req.body;
+
+      // Create a new document from the PartRequest model
+      const newRequest = new PartRequest({ name, email, partDetails });
+
+      // Save the new part request to the database
+      await newRequest.save();
+
+      // Respond with a success message
+      res.json({ success: true, message: 'Your request has been submitted successfully.' });
+      // res.redirect("/");
+  } catch (error) {
+      console.error('Failed to submit request:', error);
+      res.status(500).json({ success: false, message: 'There was an error processing your request.' });
+  }
+});
+
 module.exports = router;
