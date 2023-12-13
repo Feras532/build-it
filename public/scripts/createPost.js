@@ -27,9 +27,10 @@ setupInput.addEventListener('change',() => {
         tags = tags.filter(function(string) {
             return string !== "Setups"});
     }
-    costDiv.querySelector('.error').value = '';
+    costDiv.querySelector('.errorMes').innerHTML = '';
     costDiv.querySelector('input').classList.remove('CorrInput');
     costDiv.querySelector('input').classList.remove('WrongInput');
+    // console.log(tags);
 
 });
 prodInput.addEventListener('change',() => {
@@ -109,12 +110,11 @@ costInput.addEventListener('keydown', (e)=>{
 } )
 bodyInput.addEventListener('keydown', (e)=>{
     if(e.key === 'Enter' | e.key === 13){
-        checkInputs();
+        check_AND_create();
     }
 })
 
 //
-
 function showImage(e){
     
     const postPicDiv = document.querySelector("#picView");
@@ -296,7 +296,9 @@ function check_AND_create(){
     }
 
     //Title (Required)
-    var title = titleInput.value.trim();
+    const title = titleInput.value.trim();
+    // console.log(title);
+
     /*check if title:
     NOT EMPTY
     UNIQUE TO USER'S POSTS
@@ -311,16 +313,17 @@ function check_AND_create(){
     }
 
     //Note (Optional)
-    var note = noteInput.value.trim();
+    const note = noteInput.value.trim();
 
     //Cost (Depends on Tags)
     /*check if the cost:
     NOT EMPTY IF TAG == SETUPS or TAG == PRODUCTS, 
     Should Tag(PRODUCTS) have It's own cost? (like in the product adding section [make it required if tag == product])
     */
+   const cost = costInput.value.trim();
+//    console.log(cost);
     if(tags.indexOf("Setups")!=-1 | tags.indexOf('Products')!=-1){
-        var cost = costInput.value.trim();
-        if(cost.length === ""){
+        if(cost === ""){
             showError(costInput, "This field is require!");
             SuccessFlag = false;
         }
@@ -339,10 +342,13 @@ function check_AND_create(){
     }
     
     //Collection (Optional)
-    var selectedCollection = collectInput.value;
+    const selectedCollection = collectInput.value;
+
+    // console.log(selectedCollection);
 
     //Image (Optional)
-    const path = document.querySelector('#uploadFile').path;
+
+    var file = document.querySelector('#uploadFile').files[0];
     // if(path === ''){
     //     path = 'assets/default.png'; //will database default handle this?
     // }
@@ -390,23 +396,26 @@ function check_AND_create(){
     // }
 
     //Body (Optional) IDK about this one honestly
-    var bodyContent = bodyInput.value.trim();
-
-    //Final creating post,also IDK to have it here or at Index.js 
+    const bodyContent = bodyInput.value.trim();
+    // console.log(bodyContent);
+    
     if(SuccessFlag){
         //find a way to get the userID or username (since its unique)
-        const userid = document.querySelector('#userID').innerHTML;
-        const formData = {
-            Tags:tags,
-            Title: title,
-            Note: note,
-            Cost: cost,
-            Collection: selectedCollection,
-            Path:path,
-            Body:bodyContent,
-            userID: userid
-        }
-        fetch('/createPost', { //until I figure out how to make post view
+
+        // const userid = document.querySelector('#userID').innerHTML;
+        const userid = '6562fef5b865d9690deefa57';
+
+        const formData = new FormData();
+        formData.append('Tags', tags);
+        formData.append('Title', title);
+        formData.append('Note', note);
+        formData.append('Cost', cost);
+        formData.append('Collection', selectedCollection);
+        formData.append('file', file);
+        formData.append('Body', bodyContent);
+        formData.append('user', userid);
+        
+        fetch('/createPost', {
             method: 'POST',
             body: formData,
           })

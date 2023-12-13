@@ -17,7 +17,7 @@ const PostSchema = new mongoose.Schema({
       type: String,
     },
     Collection:{
-      type:Object,
+      type:String,
     },
     Image: {
       type: String,
@@ -68,4 +68,4 @@ const PostSchema = new mongoose.Schema({
     //a way to trace back the user who own the post
   })
 
-  const Post = mongoose.model("Post", PostSchema);
+  module.exports = mongoose.model("Post", PostSchema);

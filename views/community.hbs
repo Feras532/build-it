@@ -50,27 +50,27 @@
                     
                     <div class="card">
                         <figure>
-                            <img src={{Image}} alt="">
+                            <img src={{this.Image}} alt="Post Image">
                         </figure>
 
                         <figcaption>
                             <div id="userPost">
-                                <img src="assets/loginIcon.png" alt="">
-                                <p>{{userName}}</p>
+                                <img src={{this.user.image}} alt="User Image">
+                                <p>{{this.user.userName}}</p>
                             </div>
 
                         <h1>{{Title}}</h1>
 
-                        {{#if Cost}}
-                        <h2>{{Cost}}</h2>
+                        {{#if this.Cost}}
+                        <h2>Cost: ${{this.Cost}}</h2>
                         {{/if}}
 
-                        {{#if Note}}
-                        <h3>{{Note}}</h3>
+                        {{#if this.Note}}
+                        <h3>{{this.Note}}</h3>
                         {{/if}}
 
                         <div id="postTags">
-                        {{#each Tags}}
+                        {{#each this.Tags}}
                         <div class="pTag" id={{this}}>{{this}}</div>
                         {{/each}}
                         </div>
@@ -80,24 +80,24 @@
                             <div id="postStats">
 
                                 <div id="postData">
-                                    <p>Created in {{formattedDate}}</p>
+                                    <p>Created in {{this.formattedDate}}</p>
                                 </div>
                             
                                 <div id="stats">
 
                                     <div id="postRating">
                                         <img src="assets/ratingStar.png" alt="">
-                                        <p>{{Rating}}</p>
+                                        <p>{{this.Rating.value}}</p>
                                     </div>
 
                                     <div id="postComments">
                                         <img src="assets/comment.png" alt="">
-                                        <p>{{Comments.length}}</p>
+                                        <p>{{this.Comments.length}}</p>
                                     </div>
 
                                     <div id="postViews">
                                         <img src="assets/views.png" alt="">
-                                        <p>{{Views}}</p>
+                                        <p>{{this.Views}}</p>
                                     </div>
 
                                 </div>

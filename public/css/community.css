@@ -216,7 +216,14 @@ main h1 {
     text-shadow: 2px 2px 2px #CCCCCC;
     margin: 0px 0px 0px 0px;
 }
+.card h2 {
+    font-size: large;
+    margin: 0px 0px 0px 0px;
 
+}
+.card h3 {
+    font-size: large;
+}
 .card figcaption {
 
     display: flex;
