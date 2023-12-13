@@ -83,3 +83,10 @@ router.post("/createPost", upload.single('file'), async (req, res) => {
         console.log(err);
       })
     })
+    //comment
+    router.post("/:id", (req , res) =>{
+
+    })
+    //rate or edit?
+    router.put('/:id', (req, res) =>{
+    });
