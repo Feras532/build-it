@@ -41,7 +41,7 @@ const PostSchema = new mongoose.Schema({
       },
     },
     Comments: {
-      type: [Object],
+      type: [String],
     },
     Rating: {
 

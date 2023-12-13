@@ -47,7 +47,7 @@
                 <div id="posts">
 
                     {{#each posts}}
-                    
+                    {{!-- div to a   --}}
                     <div class="card">
                         <figure>
                             <img src={{this.Image}} alt="Post Image">
@@ -58,8 +58,12 @@
                                 <img src={{this.user.image}} alt="User Image">
                                 <p>{{this.user.userName}}</p>
                             </div>
-
+                        
+                        
+                        <a href="/community/{{this._id}}">
                         <h1>{{Title}}</h1>
+                        </a>
+                        {{!-- <h1>{{Title}}</h1> --}}
 
                         {{#if this.Cost}}
                         <h2>Cost: ${{this.Cost}}</h2>
@@ -105,6 +109,7 @@
                             </div>
 
                     </div>
+                    {{!-- div to a --}}
 
                     {{/each}}
                     {{!-- Template --}}

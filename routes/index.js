@@ -8,6 +8,7 @@ const upload = require('../controller/multer')
 
 const passport = require("passport");
 const authMiddleware = require("../routes/auth");
+// router.use(express.static('public'))
 
 router.get("/", (req, res) => {
   res.render("main", {
@@ -87,7 +88,7 @@ router.get("/request",authMiddleware.ensureAuth, (req, res) => {
 
 router.get("/createPost", (req, res) => {
 
-  res.render("createPost", { layout: "main" , userID: 2333});
+  res.render("createPost", { layout: "main" , userID: "22"});
 });
 
 // res.render("createPost", { layout: "main" });
@@ -126,21 +127,24 @@ router.post("/createPost", upload.single('file'), async (req, res) => {
   }
 });
 
-// router.get("community/:id", (req, res) =>{
-//   const postID = req.params.id;
-//   Post.find({_id: postID})
-//   .then((result) =>{
-//     if(res){
-//       const user = User.find({ _id : result.user})
-//       res.render("post", {layout: 'main', post : result, user : user});
-//     }
-//       else
-//       res.status(404).send('No Post Exists With The Given ID');
-//   })
-//   .catch((err) =>{
-//     console.log(err);
-//   })
-// })
+router.get("/community/:id", (req, res) => {
+  const postID = req.params.id;
+  Post.findOne({ _id: postID })
+    .populate('user')
+    .lean()
+    .then((result) => {
+      if (result) {
+        result.Views += 1;
+        Post.findByIdAndUpdate(postID, {Views: result.Views});
+        res.render("post", { layout: 'main', post: result});
+      } else {
+        res.status(404).send('No Post Exists With The Given ID');
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
 
 router.post("/generated", (req, res) => {
   res.render("generated", { layout: "main" });

@@ -388,7 +388,7 @@ function check_AND_create() {
     formData.append("Body", bodyContent);
     formData.append("user", userid);
 
-    // Example using fetch
+    //if we use the controller I thing we should fetch this /community/createPost
     fetch("/createPost", {
       method: "POST",
       body: formData,

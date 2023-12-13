@@ -1,74 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/post.css">
     <title>post</title>
 </head>
+
 <body>
     {{!-- post to display --}}
     {{!-- Title, Note, Pic --}}
-    <div class="header" style="display: flex; justify-content:space-between">
+    {{!-- <div class="header" style="display: flex; justify-content:space-between; height:2em;">
         <button class="backButton">Go Back {{!Change to an arrow}}</button>
-        <form action="community/{{post._id}}/rate" id=""><button>Leave a rating</button></form>{{!Change to stars (hard)}}
-    </div>
+        <form action="community/{{post._id}}/rate" id=""><button>Leave a rating</button></form>{{!Change to stars
+        (hard)}}
+    </div> --}}
+    <div class="main" style="display: flex; height:90%; padding:1em;">
+        <div class="left-main"
+            style="display: flex; align-items:center; justify-content: center; height:100%; width:5%;">
+            {{!-- Arrow to go back --}}
+            <button>
+                Back
+            </button>
+        </div>
+        {{!-- Post --}}
+        <div class="post" style="display: flex; width: 95%; padding:2em; border: 2px solid black; border-radius:3em; ">
+            <div class="img_stats"
+                style="display: flex; flex-direction: column; width:25%; padding:1em; justify-content:space-between">
+                <div class="img-border"
+                    style="width:100%; border: 2px solid black; display:flex; justify-content:center; align-items:center; padding:0.5em; border-radius: 1em;">
+                    <img src={{post.Image}} style="width: 90%;" alt="">
+                </div>
+                <div id="userAndStats" style="display: flex; flex-direction:column; gap:2em;">
+                    <div class="col-flex">
+                        <span class="small-grey-text">User</span>
+                        <div class="user"><img src="../assets/loginIcon.png" alt=""><span>/{{post.user.userName}}</span>
+                        </div>
+                        {{!-- {{post.user.image}} --}}
+                    </div>
+                    <div class="col-flex">
+                        <span class="small-grey-text">Note</span>
+                        <div class="note">{{post.Note}}</div>
+                    </div>
+                    <div class="col-flex">
+                        <span class="small-grey-text">Creation Date</span>
+                        <div class="date">{{post.formattedDate}}</div>
+                    </div>
+                    <div class="stats"
+                        style="display:flex; flex-direction:column; justify-content:space-between; gap:1.5em; border: 2px solid black; padding:1em; border-radius:1em;">
 
-    <div class="post" style="display: flex;">
-        <div class="img_stats" style="display: flex; flex-direction: column;">
-            <img src={{post.Image}} alt="">
-            <div id="userAndStats" style="display: flex; flex-direction:column;">
-                <div id="user"><img src={{user.image}} alt=""><span>/{{user.username}}</span></div>
-                <div class="note">{{post.Note}}</div>
-                <div class="date">Created At: <span>{{post.formattedDate}}</span></div>
-                <div class="stats">
-                    <div id="rating" style="display:flex; flex-direction:column;"><img src="assets/ratingStar.png" alt=""><span>{{post.Rating.value}}</span></div>
-                    <div id="views" style="display:flex; flex-direction:column;"><img src="assets/views.png" alt=""><span>{{post.Views}}</span></div>
+                        <span class="small-grey-text" style="align-self:center">Stats</span>
+                        <div style="display: flex; justify-content:space-around">
+                            <div class="rating" style="display:flex; flex-direction:column; align-items:center;"><img
+                                    src="../assets/ratingStar.png" alt=""
+                                    style="width:2em"><span>{{post.Rating.value}}</span></div>
+                            <div class="views" style="display:flex; flex-direction:column; align-items:center;"><img
+                                    src="../assets/views.png" alt="" style="width:2em"><span>{{post.Views}}</span></div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div>
-            <div class="title">{{post.Title}}</div>
-            <div class="body">{{post.Body}}</div>
-            <div class="comment-section" style="display: flex; flex-direction:column;">
-                <div class="comment-header">
-                    <span >Comments: </span> 
-                    {{#if post.Comments}}
-                    <p>{{post.Comments.length}}</p>
-                    {{#else}}
-                    <p>0</p>
+            <div class="main-post-content"
+                style="width:75%; padding:1em; display:flex; flex-direction:column; gap: 2em;">
+                <div class="title-section col-flex">
+                    <span class="small-grey-text">Title</span>
+                    <div class="title">{{post.Title}}</div>
+                </div>
+                <div class="cost-section col-flex">
+                    {{#if post.Cost}}
+                    <span class="small-grey-text">Cost</span>
+                    <div class="cost">${{post.Cost}}</div>
                     {{/if}}
                 </div>
-                <div class="comments">
-                    <form action="community/{{post._id}}/createComment">
-                        <input type="text" name="comment" placeholder="Leave a comment on this post">{{! ensureAuth before creating}}
+                <div class="body-section col-flex">
+                    <span class="small-grey-text">Body</span>
+                    {{#if post.Body}}
+                    <div class="body">{{post.Body}}</div>
+                    {{/if}}
+                </div>
+                <div class="comment-section col-flex">
+                    <div class="comment-header" style="display:flex; justify-content:space-between;">
+                        <span>Comments: </span>
+                        {{#if post.Comments}}
+                        <p>{{post.Comments.length}}</p>
+                        {{else}}
+                        <p>0</p>
+                        {{/if}}
+                    </div>
+
+                    <form action="community/{{post._id}}/createComment" class="comment-send">
+                        <input type="text" name="comment" placeholder="Leave a comment on this post">{{! ensureAuth
+                        before creating}}
+                        <button type="submit" class="send-button"><img src="../assets/send.png" alt=""></button>
                     </form>
-                    {{#if post.Comments}}
-                        <div class="scrollable" style="overflow:auto height:30em" >
+
+                    <div class="comments">
+                        {{#if post.Comments}}
+                        <div class="scrollable" style="overflow:auto height:30em">
                             {{#each post.Comments}}
-                                <div class="comment" style="display: flex; flex-direction:column; gap:0.2em;">
-                                    <div class="comment-noDate" style="display: flex;">
-                                    <img class="comment-img" src={{u.image}}>
-                                    <div class="comment-name-title">
-                                        <span class="comment-name">{{u.username}}</span> {{!Did not make the comment entity yet.}}
-                                        <span class="comment-content">{{Content}}</span>
+                            <div class="comment col-flex"
+                                style="gap:0.2em; width:100%; border:1px solid black; border-radius:7em;">
+                                <div class="comment-noDate" style="display: flex; align-items:center;">
+                                    <div class="col-flex"
+                                        style="width: 10%; justify-content:center; align-items:center; border-right:1px solid black; padding:0.2em">
+                                        <img class="comment-img" src={{u.image}} style="width: 2.5em; ">
+                                        <span class="comment-name">{{u.userName}}</span>
                                     </div>
-                                    <div class="comment-date">{{DateMade}}</div>
+                                    <div class="comment-name-title col-flex"
+                                        style="width:90%; display:flex; justify-content:center; align-items:center">
+                                        <span class="comment-content">{{Content}}</span>
+                                        <span class="comment-date">{{DateMade}}</span>
                                     </div>
                                 </div>
+                            </div>
+
+                        </div>
 
                             {{/each}}
                         </div>
-                    {{#else}}
+                        {{else}}
 
-                            <p class="noComments">No comments</p>                        
-
-                    {{/if}}
+                        <div class="no-comments">No comments</div>
                         
+                        {{/if}}
+
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    
+
 </body>
+
 </html>

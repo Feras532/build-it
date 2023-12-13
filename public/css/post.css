@@ -1,0 +1,129 @@
+.small-grey-text{
+    font-size: medium;
+    color:gray;
+}
+.col-flex{
+    display: flex; 
+    flex-direction:column
+}
+.xx-large{
+    font-size: xx-large;
+}
+/* User image in name */
+.user img{
+    width:2em;
+}
+.user span{
+    font-size:xx-large;
+}
+.user{
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+}
+
+/* Note */
+.note{
+    font-size: xx-large;
+}
+
+/* Date */
+.date{
+    font-size: x-large;
+}
+.views span{
+    font-size:large;
+}
+.rating span{
+    font-size: large;
+}
+.title {
+    font-size: xx-large;
+}
+.cost{
+    font-size: x-large;
+}
+.body {
+    font-size: larger;
+}
+.title-section{
+    height: 10%;
+    max-height: 6em;
+    overflow: hidden;
+}
+.cost-section{
+    height: 5%;
+}
+.body-section{
+    height: 25%;
+    font-size: large;
+}
+.comment-section{
+    height:60%;
+    border: 1px solid black;
+    padding: 1em;
+    border-radius: 2em;
+}
+.comment-header{
+    font-size: x-large;
+    border:0px;
+    border-bottom: 1px solid black;
+    height: 10%;
+}
+.comment-send{ /*form*/
+    display: flex;
+    height: 15%;
+    overflow: hidden;
+    border: 1px solid black;
+    border-right: 0px solid black;
+    border-radius: 7em;
+
+}
+.comment-send input{
+    width: 95%;
+    border:0px;
+    padding-left: 1em;
+    font-size: larger;
+}
+.comment-send input:focus{
+    outline: none;
+}
+.comment-send button{
+    border-radius: 100%;
+    width: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.comments{
+    height:75%;
+    display: flex;
+    flex-direction: column;
+
+}
+.scrollable{
+    display: flex;
+    flex-direction: column;
+    margin: 0.4em 0em 0.4em 0em;
+    gap: 0.3em;
+}
+.no-comments{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: x-large;
+    color: grey;
+}
+
+.comment-name{
+    font-size: small;
+}
+.comment-content{
+    font-size: x-large;
+}
+.comment-date{
+    font-size: small;
+    color: gray;
+}
