@@ -65,6 +65,7 @@ form.addEventListener("submit", (e) => {
   e.preventDefault();
   check_AND_create();
 });
+
 //Moving from field to field
 const titleInput = document.querySelector("#pTitle");
 const noteInput = document.querySelector("#pNote");
@@ -376,6 +377,7 @@ function check_AND_create() {
     //find a way to get the userID or username (since its unique)
 
     // const userid = document.querySelector('#userID').innerHTML;
+    
     const userid = "6562fef5b865d9690deefa57";
 
     const formData = new FormData();
@@ -389,7 +391,7 @@ function check_AND_create() {
     formData.append("user", userid);
 
     //if we use the controller I thing we should fetch this /community/createPost
-    fetch("/createPost", {
+    fetch("/community/createPost", {
       method: "POST",
       body: formData,
     }).then((response) => {
@@ -398,4 +400,5 @@ function check_AND_create() {
       }
     });
   }
+
 }

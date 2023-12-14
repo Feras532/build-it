@@ -12,6 +12,7 @@
 /* User image in name */
 .user img{
     width:2em;
+    border-radius: 2em;
 }
 .user span{
     font-size:xx-large;
@@ -24,7 +25,7 @@
 
 /* Note */
 .note{
-    font-size: xx-large;
+    font-size: larger;
 }
 
 /* Date */
@@ -34,7 +35,7 @@
 .views span{
     font-size:large;
 }
-.rating span{
+.ratings span{
     font-size: large;
 }
 .title {
@@ -49,7 +50,7 @@
 .title-section{
     height: 10%;
     max-height: 6em;
-    overflow: hidden;
+    
 }
 .cost-section{
     height: 5%;
@@ -80,7 +81,7 @@
 
 }
 .comment-send input{
-    width: 95%;
+    width: 93%;
     border:0px;
     padding-left: 1em;
     font-size: larger;
@@ -90,14 +91,15 @@
 }
 .comment-send button{
     border-radius: 100%;
-    width: 5%;
+    width: 7%;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    background-color:#f5793b ;
 }
 .comments{
-    height:75%;
+    height:70%;
     display: flex;
     flex-direction: column;
 
@@ -120,10 +122,153 @@
 .comment-name{
     font-size: small;
 }
+.comment-img{
+    width:1.6em;
+    border-radius: 2em;
+}
 .comment-content{
     font-size: x-large;
 }
 .comment-date{
     font-size: small;
     color: gray;
+}
+.back-button{
+    text-shadow:3px 1px 1px grey;
+    transition: scale 1s ease; 
+    transition: text-shadow 0.2s;
+}
+.back-button:hover{
+    scale:110%;
+    text-shadow: 5px 2px 1px grey;
+    
+}
+.hidden{
+    display: none;
+}
+.ErrorMes{
+    font-size: x-small;
+    color:red;
+}
+#Setups{
+    background-color:rgb(83, 83, 177);
+    color:white;
+}
+
+#Questions{
+    background-color:rgb(160, 83, 177);
+    color:white;
+}
+
+#Products{
+    background-color:rgb(83, 177, 103);
+    color:white;
+}
+.post-tag{
+    display: flex;
+    border-radius:1em;
+    font-size: x-large;
+    height: 2em;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid black
+}
+
+
+/* Stars */
+.Rate-post{
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.Rate-post-header{
+    color:grey
+}
+.rating {
+    display: inline-block;
+    position: relative;
+    height: 2em;
+    line-height: 50px;
+    font-size: 50px;
+  }
+  
+  .rating label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    cursor: pointer;
+  }
+  
+  .rating label:last-child {
+    position: static;
+  }
+  
+  .rating label:nth-child(1) {
+    z-index: 5;
+  }
+  
+  .rating label:nth-child(2) {
+    z-index: 4;
+  }
+  
+  .rating label:nth-child(3) {
+    z-index: 3;
+  }
+  
+  .rating label:nth-child(4) {
+    z-index: 2;
+  }
+  
+  .rating label:nth-child(5) {
+    z-index: 1;
+  }
+  
+  .rating label input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+  }
+  
+  .rating label .icon {
+    float: left;
+    color: transparent;
+  }
+  
+  .rating label:last-child .icon {
+    color: #000;
+  }
+  
+  .rating:not(:hover) label input:checked ~ .icon,
+  .rating:hover label:hover input ~ .icon {
+    color: rgb(255, 251, 0);
+  }
+  
+  .rating label input:focus:not(:checked) ~ .icon:last-child {
+    color: #000;
+    text-shadow: 0 0 5px rgb(255, 251, 0);
+  }
+  /*  */
+  .buttons{
+    width: 100%;
+    gap: 0.8em;
+}
+.Edit{
+    font-size: x-large;
+    color:white;
+    background-color: rgb(73, 73, 224);
+    border-radius: 2em;
+    padding: 0.2em;
+    cursor: pointer;
+
+}
+.Delete{
+    font-size: x-large;
+    color:white;
+    background-color: rgb(171, 49, 49);
+    border-radius: 2em;
+    padding: 0.2em;
+    cursor: pointer;
+
 }

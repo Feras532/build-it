@@ -3,18 +3,25 @@ const router = express.Router();
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const Post = require("../models/Post");
+const Comment = require("../models/Comment");
 const cloudinary = require("../config/cloudinary");
-const upload = require('../controller/multer')
 
+const upload = require('../controller/multer');
+
+const communityController = require('../controller/community');
+
+
+router.use('/community', communityController);
+ 
 const passport = require("passport");
 const authMiddleware = require("../routes/auth");
-// router.use(express.static('public'))
 
 router.get("/", (req, res) => {
   res.render("main", {
     layout: "main",
   });
 });
+
 
 router.get("/login", authMiddleware.ensureGuest, (req, res) => {
   const errorMessage = req.flash("error")[0];
@@ -44,117 +51,35 @@ router.post(
     failureRedirect: "/login",
     failureFlash: true,
   })
-);
-
-router.get("/logintest", (req, res) => {
-  res.render("logintest", { layout: "main" });
-});
-
-router.get("/CreatePC", authMiddleware.ensureAuth, (req, res) => {
-  res.render("createPc", { layout: "main" });
-});
-
-router.get("/community", async (req, res) => {
+  );
   
-  // res.render("community", { layout: "main" });
-  const SU = await Post.find({ Tags: { $in: ['Setups']}}).count();
-  const Q = await Post.find({ Tags: { $in: ['Questions']}}).count();
-  const PR = await Post.find({ Tags: { $in: ['Products']}}).count();
-  const filters = {
-    SU:SU,
-    Q:Q,
-    PR:PR,
-  };
-    Post.find().sort({ CreationDate: -1}).populate('user').lean()
-    .then((result) =>{
-      res.render("community", { layout: "main", posts:result, Filters:filters });
-    })
-    .catch((err)=>{
-      console.log(err);
-    })
-});
-
-router.get("/upgrade", (req, res) => {
-  res.render("upgrade", { layout: "main" });
-});
-
-router.get("/request",authMiddleware.ensureAuth, (req, res) => {
-  res.render("request", { layout: "main" });
-});
-
-// router.get("/createPost", authMiddleware.ensureAuth, (req, res) => {
-//   res.render("createPost", { layout: "main" , userID: req.user._id});
-// });
-
-router.get("/createPost", (req, res) => {
-
-  res.render("createPost", { layout: "main" , userID: "22"});
-});
-
-// res.render("createPost", { layout: "main" });
-router.post("/createPost", upload.single('file'), async (req, res) => {
-//0 public id means that the image is default
-  try{
-    const {Tags, Title, Note, Cost, Collection, Body, user} = req.body;
-    const tagsArray = Tags.split(',');
-    var result;
-    if(req.file){
-        result = await cloudinary.uploader.upload(req.file.path);
-    }
-    else{
-      result = {
-        secure_url: 'assets/default.png',
-        public_id: '0',
-      }
-    }
-    const post = new Post({Tags:tagsArray, Title:Title, 
-      Note:Note, Cost:Cost ,Image:result.secure_url, 
-      CID:result.public_id, Body:Body, user:user });
-
-    post.save()
-    .then((result) =>{
-      res.redirect("/community");
-      // res.redirect("localhost:3000/community");
-      // res.redirect(`/community/${post._id}`)
-    })
-    .catch((err) =>{
-      console.log(err);
-    })
-
-  }
-  catch(err){
-    console.log(err);
-  }
-});
-
-router.get("/community/:id", (req, res) => {
-  const postID = req.params.id;
-  Post.findOne({ _id: postID })
-    .populate('user')
-    .lean()
-    .then((result) => {
-      if (result) {
-        result.Views += 1;
-        Post.findByIdAndUpdate(postID, {Views: result.Views});
-        res.render("post", { layout: 'main', post: result});
-      } else {
-        res.status(404).send('No Post Exists With The Given ID');
-      }
-    })
-    .catch((err) => {
-      console.log(err);
+  router.get("/logintest", (req, res) => {
+    res.render("logintest", { layout: "main" });
+  });
+  
+  router.get("/CreatePC", authMiddleware.ensureAuth, (req, res) => {
+    res.render("createPc", { layout: "main" });
+  });
+      
+    router.get("/upgrade", (req, res) => {
+      res.render("upgrade", { layout: "main" });
     });
-});
-
-router.post("/generated", (req, res) => {
-  res.render("generated", { layout: "main" });
-});
-
-router.post("/generated/upgrade", (req, res) => {
-  res.render("generatedUpgrade", { layout: "main" });
-});
-
-router.get("/generated/upgrade", (req, res) => {
-  res.render("upgrade", { layout: "main" });
-});
-module.exports = router;
+    
+    router.get("/request",authMiddleware.ensureAuth, (req, res) => {
+      res.render("request", { layout: "main" });
+    });
+    
+        
+        router.post("/generated", (req, res) => {
+          res.render("generated", { layout: "main" });
+        });
+        
+        router.post("/generated/upgrade", (req, res) => {
+          res.render("generatedUpgrade", { layout: "main" });
+        });
+        
+        router.get("/generated/upgrade", (req, res) => {
+          res.render("upgrade", { layout: "main" });
+        });
+        module.exports = router;
+        
