@@ -1,11 +1,11 @@
 const storedInput = localStorage.getItem("userInput");
 const input = storedInput ? JSON.parse(storedInput) : {};
-const inputString = JSON.stringify(input);
+let inputString = JSON.stringify(input);
 console.log(storedInput)
 console.log(input)
 console.log(inputString)
 const responseFormat = {
-  totalPrice: "1000$",
+  totalPrice: "XXX$",
   CPU: { brand: "AMD", model: "Ryzen 5 5600G", price: "XXX$", flag: ''},
   GPU: { brand: "Geforce", model: "1660gtx super", price: "XXX$", flag: '' },
   MotherBoard: { brand: "Gigabyte", model: "B450M DS3H", price: "XXX$", flag: '' },
@@ -20,10 +20,14 @@ const responseFormat = {
   PSU: { brand: "EVGA", model: "600 BR 80+ Bronze", price: "XXX$" , flag: ''},
   Monitor: { brand: "LG", model: "32GN600-B", price: "XXX$", flag: '' },
   performance: {
-    FPS: "120",
-    Bottleneck: "10%",
-    System_Booting_Time: "5",
-    score: { Gaming: "92", VR_Gaming: "90", Montage: "80", MultiTasking: "99" },
+    FPS: "XXX"
+      // Heavy:"XXX",
+      // Middle:"XXX",
+      // Light:"XXX"
+    ,
+    Bottleneck: "XX%",
+    System_Booting_Time: "X",
+    score: { Gaming: "XX", VR_Gaming: "XX", Montage: "XX", MultiTasking: "XX" },
   },
   
 };
@@ -35,19 +39,22 @@ if(input.upgradeAll){
   otherwise, if it should be upgraded, then type its suggested upgraded specifications inside its component. 
   Set the 'flag' field of a component to the value 'y' IF and ONLY IF any of its specifications were changed from the inputted ones, otherwise leave it empty.
   and for the price try to give an estimated price for each upgraded component, for components that were not upgraded set the price to 0.
-  set the 'totalPrice' field to the sum the price of each upgraded component ONLY (Accurate summation)
-  for performance response with numbers only, example FPS:"470".
+
+  for the 'performance' field respond with numbers only, example Bottleneck:"470".
+  for the 'FPS' field in 'performance', measure the FPS if the PC ran the game 'Red Dead Redemption 2' and set the result of it in the 'FPS' field.
+  To measure and calculate FPS performence of the resulting PC, measure its performance while running the game 'Red Dead Redemption 2' as an example.
   answer style ONLY in this format: ${JSON.stringify(
     responseFormat
-  )}. If you didn't follow my format, you will ruin my system.`;
+  )} .If you didn't follow my format, you will ruin my system.`;
   }else{
    systemMessageContent = `
   given the specified budget and PC specifications, find the most optimal way to upgrade the following parts: (${input.upgradeSpecific.toString()}) and type their new specifications into their components.
   For the rest of the components that are not listed, type their existing inputted specifications into their components.
   Set the 'flag' field of a component to the value 'y' IF and ONLY IF any of its specifications were changed from the inputted ones, otherwise leave it empty.
   and for the price try to give an estimated price for each upgraded component, for components that were not upgraded set the price to 0.
-  set the 'totalPrice' field to the sum the price of each upgraded component ONLY (Accurate summation)
   for performance response with numbers only, example FPS:"470".
+  For the 'FPS' field in 'performance', measure the FPS if the PC ran the game 'Red Dead Redemption 2' and set the result of it in the 'FPS' field
+  To measure and calculate FPS performence of the resulting PC, measure its performance while running the game 'Red Dead Redemption 2' as an example.
   answer style ONLY in this format: ${JSON.stringify(
     responseFormat
   )}. If you didn't follow my format, you will ruin my system.`;
@@ -95,8 +102,10 @@ window.onload = async function () {
   createPerformanceCards();
 };
 
+let totalPrice = 0
 function createTable() {
   // Create table
+
   let table = document.createElement("table");
 
   // Create table header
@@ -132,6 +141,8 @@ function createTable() {
           td.appendChild(document.createTextNode(tdText));
           tr.appendChild(td);
         });
+        totalPrice += parseInt(PC[key].price.replace("$",""))
+        console.log(totalPrice)
         tbody.appendChild(tr);
       }
     });
@@ -147,7 +158,7 @@ function createTotalDiv() {
   // Add total price to container
   let totalDiv = document.createElement("div");
   totalDiv.id = "total-price";
-  totalDiv.innerHTML = `Total Price: ${PC.totalPrice}`;
+  totalDiv.innerHTML = `Total Price: ${totalPrice}$`;
   document.getElementById("results-container").appendChild(totalDiv);
 }
 
