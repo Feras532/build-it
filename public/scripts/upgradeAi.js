@@ -20,10 +20,11 @@ const responseFormat = {
   PSU: { brand: "EVGA", model: "600 BR 80+ Bronze", price: "XXX$" , flag: ''},
   Monitor: { brand: "LG", model: "32GN600-B", price: "XXX$", flag: '' },
   performance: {
-    FPS: "XXX"
-      // Heavy:"XXX",
-      // Middle:"XXX",
-      // Light:"XXX"
+    FPS: {
+       Heavy:"XXX",
+       Average:"XXX",
+       Light:"XXX"
+    }
     ,
     Bottleneck: "XX%",
     System_Booting_Time: "X",
@@ -41,8 +42,7 @@ if(input.upgradeAll){
   and for the price try to give an estimated price for each upgraded component, for components that were not upgraded set the price to 0.
 
   for the 'performance' field respond with numbers only, example Bottleneck:"470".
-  for the 'FPS' field in 'performance', measure the FPS if the PC ran the game 'Red Dead Redemption 2' and set the result of it in the 'FPS' field.
-  To measure and calculate FPS performence of the resulting PC, measure its performance while running the game 'Red Dead Redemption 2' as an example.
+  for the 'FPS' field in 'performance', measure the value of each category (heavy, average, light) by using the following games respectively as an example to test the PC's FPS performace (Red Read Redemption 2, Rainbow Six Siege, Minecraft)
   answer style ONLY in this format: ${JSON.stringify(
     responseFormat
   )} .If you didn't follow my format, you will ruin my system.`;
@@ -179,10 +179,21 @@ function createPerformanceCards() {
       let title = document.createElement("h2");
       title.textContent = key;
       card.appendChild(title);
+      if(key === 'FPS'){
+        Object.keys(PC.performance.FPS).forEach((skey) => {
+          let subT = document.createElement("h3");
+
+          subT.innerHTML = `${skey}: <span>${PC.performance.FPS[skey]}</span>`;
+          card.appendChild(subT)
+          
+        })
+
+      }
 
       if (
         typeof PC.performance[key] === "object" &&
-        PC.performance[key] !== null
+        PC.performance[key] !== null &&
+        key !== "FPS"
       ) {
         Object.keys(PC.performance[key]).forEach((subKey) => {
           let subCard = document.createElement("div");
@@ -232,7 +243,9 @@ function createPerformanceCards() {
             }
           }
         });
-      } else {
+      }
+      else if(key !== 'FPS')
+      {
         let value = document.createElement("p");
         let valueText = document.createTextNode("0"); // create a text node with a starting text of "0"
         value.appendChild(valueText); // append the text node to the p element
