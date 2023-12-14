@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/community.css">
+    <link rel="stylesheet" href="../css/community.css">
     <title> Build it | Community</title>
 </head>
 
@@ -12,13 +12,19 @@
     
 
     {{!-- Search Bar --}}
+    <form action="search" method="GET">
         <div id="searchDiv">
             <div id="searchBar">
-                <input type="text" id="searchText" placeholder="We are going to build it">
-                <button id="searchButton"> <img src="assets/magGlass.png" style="width:25px;" alt=""> </button>
-                <button id="filterButton"><img src="assets/filter.png" style="width: 25px;" alt=""></button>
+                {{#if query}}
+                <input type="text" name="query" id="searchText" placeholder="Search posts" value={{query}}>
+                {{else}}
+                <input type="text" name="query" id="searchText" placeholder="Search posts">
+                {{/if}}
+                <button id="searchButton" action="submit"> <img src="../assets/magGlass.png" style="width:25px;" alt=""> </button>
+                <button id="filterButton" formnovalidate><img src="../assets/filter.png" style="width: 25px;" alt=""></button>
             </div>
         </div>
+    </form>
         {{!-- Search Bar --}}
         {{!-- Filter below search bar as tags or Filters here? because It does not feel right-
         -to have "post" cards take the whole width of the page --}}
@@ -34,17 +40,18 @@
 
                     <button id="productsFilter">Products <p>{{Filters.PR}}</p></button>
 
-                    <button id="trendingFilter">Trending <p>3</p></button>
+                    {{!-- <button id="trendingFilter">Trending <p>3</p></button> --}}
 
-                    <button id="HighviewsFitler">Highly viewed <p>45</p></button>
+                    {{!-- <button id="HighviewsFitler">Highly viewed</button> --}}
                 </div>
             </div>
             {{!-- Posts Div --}}
             <div id="midD">
 
                 <h1>Community Posts</h1>
-
+                {{#if posts}}
                 <div id="posts">
+                
 
                     {{#each posts}}
                     {{!-- div to a   --}}
@@ -90,17 +97,17 @@
                                 <div id="stats">
 
                                     <div id="postRating">
-                                        <img src="assets/ratingStar.png" alt="">
+                                        <img src="../assets/ratingStar.png" alt="">
                                         <p>{{this.Rating.value}}</p>
                                     </div>
 
                                     <div id="postComments">
-                                        <img src="assets/comment.png" alt="">
-                                        <p>{{this.Comments.length}}</p>
+                                        <img src="../assets/comment.png" alt="">
+                                        <p>{{this.Comments}}</p>
                                     </div>
 
                                     <div id="postViews">
-                                        <img src="assets/views.png" alt="">
+                                        <img src="../assets/views.png" alt="">
                                         <p>{{this.Views}}</p>
                                     </div>
 
@@ -114,14 +121,27 @@
                     {{/each}}
                     {{!-- Template --}}
                 </div>
+                {{else}}
+                    {{#if query}}
+                        <div class="no-posts">
+                            There are no posts that contain "{{query}}"
+                        </div>
+                    {{else}}
+
+                    <div class="no-posts">
+                        There are no posts to view
+                    </div>
+                    {{/if}}
+
+                {{/if}}
 
             </div>
 
             <div id="rightD">
                 
-                <a href="/createPost" id="addPost">
+                <a href="/community/createPost" id="addPost">
                     {{!-- redirect to login <- (N){Check login}(Y) -> Show form -> confirm --}}
-                        <img src="assets/addIcon.png" alt="">
+                        <img src="../assets/addIcon.png" alt="">
                 </a>
 
             </div>
@@ -130,18 +150,18 @@
 
 
 
-    <script src="scripts/community.js"></script>
+    <script src="../scripts/community.js"></script>
     
 
 
 </body>
 {{!-- <div class="card">
     <figure>
-        <img src="assets/setUp.jpeg" alt="">
+        <img src="../assets/setUp.jpeg" alt="">
     </figure>
     <figcaption>
         <div id="userPost">
-            <img src="assets/loginIcon.png" alt="">
+            <img src="../assets/loginIcon.png" alt="">
             <p>Username</p>
         </div>
         <h1>TITLE</h1>
@@ -160,15 +180,15 @@
         </div>
         <div id="stats">
             <div id="postRating">
-                <img src="assets/ratingStar.png" alt="">
+                <img src="../assets/ratingStar.png" alt="">
                 <p>4.3</p>
             </div>
             <div id="postComments">
-                <img src="assets/comment.png" alt="">
+                <img src="../assets/comment.png" alt="">
                 <p>120</p>
             </div>
             <div id="postViews">
-                <img src="assets/views.png" alt="">
+                <img src="../assets/views.png" alt="">
                 <p>4k</p>
             </div>
         </div>

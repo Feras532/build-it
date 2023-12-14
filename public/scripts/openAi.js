@@ -1,6 +1,7 @@
 const storedBasket = localStorage.getItem("basket");
 const basket = storedBasket ? JSON.parse(storedBasket) : {};
 const basketString = JSON.stringify(basket);
+import { showNotification } from "/scripts/generated.js";
 
 const responseFormat = {
   totalPrice: "1000$",
@@ -30,7 +31,9 @@ const systemMessageContent = `
   and for the price try to give an estimated price from your last update.
   for the total price, just sum the price of each component and add it there (ACURATE summation).
   for spending prefrences when its useMax, try to spend all money by providing the best products in the market(expensive).
-  performance response with numbers only, example FPS:"470".
+  performance response with numbers only, example FPS:"470" no string in FPS pls if its dead give it a 30.
+  if their is no GPU in the collection bottleneck ==0.
+  score system should be as much as possible accurate, even if the pc collection is bad give it a low score dont give (string nan or non) in this part, if it very dead give it a 0.
   answer style ONLY in this format: ${JSON.stringify(
     responseFormat
   )}. If you didn't follow my format, you will ruin my system.`;
@@ -77,7 +80,7 @@ function createTable() {
   // Create table header
   let thead = document.createElement("thead");
   let headerRow = document.createElement("tr");
-  ["Component", "Brand", "Model", "Price"].forEach((headerText) => {
+  ["Component", "Brand", "Model", "Price", "Links"].forEach((headerText) => {
     let th = document.createElement("th");
     th.appendChild(document.createTextNode(headerText));
     headerRow.appendChild(th);
@@ -88,6 +91,22 @@ function createTable() {
   // Create table body
   let tbody = document.createElement("tbody");
 
+  // Import your links.js here or define your link generation logic
+  const generateLink = (brand, model) => {
+    if (brand.toLowerCase() === "none" || model.toLowerCase() === "none") {
+      return {
+        newegg: "none",
+        amazon: "none",
+      };
+    }
+    // Replace this with your actual link generation logic
+    const encodedBrandModel = encodeURIComponent(brand + " " + model);
+    return {
+      newegg: `https://www.newegg.com/Product/ProductList.aspx?Submit=ENE&DEPA=0&Order=BESTMATCH&Description=${encodedBrandModel}&N=-1&isNodeId=1`,
+      amazon: `https://www.amazon.com/s?k=${encodedBrandModel}`,
+    };
+  };
+
   // Check if PC is an object before iterating over its keys
   if (typeof PC === "object" && PC !== null) {
     Object.keys(PC).forEach((key) => {
@@ -95,15 +114,44 @@ function createTable() {
         let tr = document.createElement("tr");
 
         // Check if PC[key] is an object before accessing its properties
-        let brand = PC[key] && PC[key].brand ? PC[key].brand : "";
-        let model = PC[key] && PC[key].model ? PC[key].model : "";
-        let price = PC[key] && PC[key].price ? PC[key].price : "";
+        let brand = PC[key] && PC[key].brand ? PC[key].brand : "none";
+        let model = PC[key] && PC[key].model ? PC[key].model : "none";
+        let price = PC[key] && PC[key].price ? PC[key].price : "none";
 
         [key, brand, model, price].forEach((tdText) => {
           let td = document.createElement("td");
           td.appendChild(document.createTextNode(tdText));
           tr.appendChild(td);
         });
+
+        // Generate links and create icons for Newegg and Amazon or display "none"
+        let links = generateLink(brand, model);
+        let linksTd = document.createElement("td");
+
+        if (links.newegg === "none" && links.amazon === "none") {
+          linksTd.appendChild(document.createTextNode("none"));
+        } else {
+          if (links.newegg !== "none") {
+            let neweggIcon = document.createElement("img");
+            neweggIcon.src = "assets/newegg-icon.png";
+            neweggIcon.style.height = "24px";
+            neweggIcon.onclick = () => window.open(links.newegg, "_blank");
+            neweggIcon.style.cursor = "pointer";
+            linksTd.appendChild(neweggIcon);
+          }
+
+          if (links.amazon !== "none") {
+            let amazonIcon = document.createElement("img");
+            amazonIcon.src = "assets/amazon-icon.png";
+            amazonIcon.style.width = "24px";
+            amazonIcon.style.height = "24px";
+            amazonIcon.onclick = () => window.open(links.amazon, "_blank");
+            amazonIcon.style.cursor = "pointer";
+            linksTd.appendChild(amazonIcon);
+          }
+        }
+
+        tr.appendChild(linksTd);
         tbody.appendChild(tr);
       }
     });
@@ -128,6 +176,9 @@ function createPerformanceCards() {
 
   if (typeof PC.performance === "object" && PC.performance !== null) {
     Object.keys(PC.performance).forEach((key) => {
+      if (PC.performance[key] === "none" || PC.performance[key] === "NaN") {
+        return; // Skip to the next iteration
+      }
       let card = document.createElement("div");
       card.classList.add("performance-card");
       if (
@@ -140,6 +191,20 @@ function createPerformanceCards() {
       let title = document.createElement("h2");
       title.textContent = key;
       card.appendChild(title);
+      // Add the descriptive paragraph
+      let description = document.createElement("p");
+      description.style.fontSize = "0.8em"; // Set font size smaller for the description
+      description.style.color = "#666"; // Optional: set a different color for description text
+      description.style.marginTop = "0.25em"; // Add a small top margin
+      description.style.marginBottom = "1em"; // Add bottom margin before content starts
+      if (key === "FPS") {
+        description.textContent = "More is better";
+      } else if (key === "Bottleneck") {
+        description.textContent = "Less is better";
+      } else if (key === "System_Booting_Time") {
+        description.textContent = "Less is better in (seconds)";
+      }
+      card.appendChild(description);
 
       if (
         typeof PC.performance[key] === "object" &&
@@ -239,30 +304,30 @@ function animateProgressBar(progressBar, finalValue, duration, textNode) {
 }
 
 async function savePC() {
-  const saveButton = document.getElementById('saveButton');
+  const saveButton = document.getElementById("saveButton");
   saveButton.disabled = true; // Disable the button
-  saveButton.textContent = 'Saving...'; // Change button text
+  saveButton.textContent = "Saving..."; // Change button text
 
   try {
-      const response = await fetch("/auth/savePC", {
-          method: "POST",
-          headers: {
-              "Content-Type": "application/json",
-          },
-          body: JSON.stringify(PC),
-      });
-      const result = await response.json();
-      if (result.success) {
-          showNotification("PC configuration saved successfully.");
-          saveButton.textContent = 'Saved'; // Update button text on success
-      } else {
-          showNotification("Failed to save PC configuration.");
-          saveButton.textContent = 'Failed to Save'; // Update button text on failure
-      }
+    const response = await fetch("/auth/savePC", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(PC),
+    });
+    const result = await response.json();
+    if (result.success) {
+      showNotification("PC configuration saved successfully.");
+      saveButton.textContent = "Saved"; // Update button text on success
+    } else {
+      showNotification("Failed to save PC configuration.");
+      saveButton.textContent = "Failed to Save"; // Update button text on failure
+    }
   } catch (error) {
-      console.error("Error in savePC:", error);
-      showNotification("Error in saving PC.");
-      saveButton.textContent = 'Error'; // Update button text on error
+    console.error("Error in savePC:", error);
+    showNotification("Error in saving PC.");
+    saveButton.textContent = "Error"; // Update button text on error
   }
 }
 

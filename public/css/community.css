@@ -76,6 +76,7 @@ hr {
 main {
     display:flex;
     background: linear-gradient(to top, rgb(245, 219, 208) 1%, rgb(255, 255, 255) 40%);
+    height: 100%;
 }
 
 main h1 {
@@ -314,6 +315,15 @@ main h1 {
     color:white;
 }
 
+.no-posts{
+    position: relative;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    top: 40%;
+    font-size: x-large;
+    color: grey;
+}
 
 
 

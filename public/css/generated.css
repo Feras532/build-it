@@ -1,9 +1,12 @@
+        #pc-components {
+            margin: 10px 30px;
+        }
+
         /* Table styles */
         table {
             width: 100%;
             border-collapse: collapse;
             text-align: left;
-            margin-top: 10px;
         }
 
         th,
@@ -29,8 +32,9 @@
             background-color: #ddd;
         }
 
-        #content-container {   
-            margin: 8px 0px; /* Changed horizontal margin so it fits mobile because media query wasnt overriding for some reason*/
+        #content-container {
+            margin: 8px 0px;
+            /* Changed horizontal margin so it fits mobile because media query wasnt overriding for some reason*/
             background-color: rgb(255, 255, 255);
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
         }
@@ -83,7 +87,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            scale:90%;
+            scale: 90%;
         }
 
         /* Loading squares row */
@@ -298,5 +302,3 @@
             text-decoration: none;
             cursor: pointer;
         }
-
-

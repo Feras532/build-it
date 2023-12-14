@@ -40,9 +40,6 @@ const PostSchema = new mongoose.Schema({
         return this.CreationDate.toLocaleString('en-US');
       },
     },
-    Comments: {
-      type: [String],
-    },
     Rating: {
 
       users: {
@@ -55,6 +52,10 @@ const PostSchema = new mongoose.Schema({
       }
 
     },
+    Comments:{
+      type:Number,
+      default:0,
+    },
     Views: {
       type:Number,
       default: 0,
@@ -64,6 +65,7 @@ const PostSchema = new mongoose.Schema({
       ref: "User",
       required:true,
     }
+
 
     //a way to trace back the user who own the post
   })

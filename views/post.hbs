@@ -9,25 +9,20 @@
 </head>
 
 <body>
-    {{!-- post to display --}}
-    {{!-- Title, Note, Pic --}}
-    {{!-- <div class="header" style="display: flex; justify-content:space-between; height:2em;">
-        <button class="backButton">Go Back {{!Change to an arrow}}</button>
-        <form action="community/{{post._id}}/rate" id=""><button>Leave a rating</button></form>{{!Change to stars
-        (hard)}}
-    </div> --}}
-    
-    {{!-- Posts with the default image does not show (I tried using the router.use(express.use('public')) )  --}}
+    <div class="hidden">{{post._id}}</div>
     <div class="main" style="display: flex; height:90%; padding:1em;">
         <div class="left-main"
             style="display: flex; align-items:center; justify-content: center; height:100%; width:5%;">
             {{!-- Arrow to go back --}}
-            <button>
-                Back
+            <button class="back-button"
+                style="font-size: 3em; background-color:white; border: 0px solid; cursor:pointer;">
+                <a href={{referer}}>
+                    < </a>
+
             </button>
         </div>
         {{!-- Post --}}
-        <div class="post" style="display: flex; width: 95%; padding:2em; border: 2px solid black; border-radius:3em; ">
+        <div class="post" style="display: flex; width: 82%; padding:2em; border: 2px solid black; border-radius:3em; ">
             <div class="img_stats"
                 style="display: flex; flex-direction: column; width:25%; padding:1em; justify-content:space-between">
                 <div class="img-border"
@@ -35,26 +30,28 @@
                     <img src={{post.Image}} style="width: 90%;" alt="">
                 </div>
                 <div id="userAndStats" style="display: flex; flex-direction:column; gap:2em;">
-                    <div class="col-flex">
+                    <div class="col-flex" style="height:25%">
                         <span class="small-grey-text">User</span>
-                        <div class="user"><img src="../assets/loginIcon.png" alt=""><span>/{{post.user.userName}}</span>
+                        <div class="user"><img src={{post.user.image}} alt=""><span>/{{post.user.userName}}</span>
                         </div>
-                        {{!-- {{post.user.image}} --}}
+                        {{!-- {{"../assets/logoSeperated.png"}} --}}
                     </div>
-                    <div class="col-flex">
+                    <div class="col-flex" style="height: 20%;">
                         <span class="small-grey-text">Note</span>
+                        {{#if post.Note}}
                         <div class="note">{{post.Note}}</div>
+                        {{/if}}
                     </div>
-                    <div class="col-flex">
+                    <div class="col-flex" style="height: 15%;">
                         <span class="small-grey-text">Creation Date</span>
                         <div class="date">{{post.formattedDate}}</div>
                     </div>
                     <div class="stats"
-                        style="display:flex; flex-direction:column; justify-content:space-between; gap:1.5em; border: 2px solid black; padding:1em; border-radius:1em;">
+                        style="display:flex; flex-direction:column; justify-content:space-between; gap:1.5em; border: 2px solid black; padding:1em; border-radius:1em; height:40%;">
 
                         <span class="small-grey-text" style="align-self:center">Stats</span>
                         <div style="display: flex; justify-content:space-around">
-                            <div class="rating" style="display:flex; flex-direction:column; align-items:center;"><img
+                            <div class="ratings" style="display:flex; flex-direction:column; align-items:center;"><img
                                     src="../assets/ratingStar.png" alt=""
                                     style="width:2em"><span>{{post.Rating.value}}</span></div>
                             <div class="views" style="display:flex; flex-direction:column; align-items:center;"><img
@@ -65,8 +62,7 @@
                 </div>
             </div>
 
-            <div class="main-post-content"
-                style="width:75%; padding:1em; display:flex; flex-direction:column; gap: 2em;">
+            <div class="main-post-content col-flex" style="width:75%; padding:1em; gap: 2em;">
                 <div class="title-section col-flex">
                     <span class="small-grey-text">Title</span>
                     <div class="title">{{post.Title}}</div>
@@ -86,55 +82,108 @@
                 <div class="comment-section col-flex">
                     <div class="comment-header" style="display:flex; justify-content:space-between;">
                         <span>Comments: </span>
-                        {{#if post.Comments}}
-                        <p>{{post.Comments.length}}</p>
+                        {{#if comments}}
+                        <p>{{comments.length}}</p>
                         {{else}}
                         <p>0</p>
                         {{/if}}
                     </div>
-
-                    <form action="community/{{post._id}}/createComment" class="comment-send">
+                    {{!-- action="community/{{post._id}}/createComment" --}}
+                    <form class="comment-send" id="com">
                         <input type="text" name="comment" placeholder="Leave a comment on this post">{{! ensureAuth
                         before creating}}
                         <button type="submit" class="send-button"><img src="../assets/send.png" alt=""></button>
+                        <span class="ErrorMes"></span>
                     </form>
 
                     <div class="comments">
-                        {{#if post.Comments}}
-                        <div class="scrollable" style="overflow:auto height:30em">
-                            {{#each post.Comments}}
+                        {{#if comments}}
+                        <div class="scrollable" style="overflow:scroll;">
+                            {{#each comments}}
                             <div class="comment col-flex"
                                 style="gap:0.2em; width:100%; border:1px solid black; border-radius:7em;">
                                 <div class="comment-noDate" style="display: flex; align-items:center;">
                                     <div class="col-flex"
                                         style="width: 10%; justify-content:center; align-items:center; border-right:1px solid black; padding:0.2em">
-                                        <img class="comment-img" src={{u.image}} style="width: 2.5em; ">
-                                        <span class="comment-name">{{u.userName}}</span>
+                                        <img class="comment-img" src={{this.User.image}}>
+                                        <span class="comment-name">{{this.User.userName}}</span>
                                     </div>
                                     <div class="comment-name-title col-flex"
                                         style="width:90%; display:flex; justify-content:center; align-items:center">
-                                        <span class="comment-content">{{Content}}</span>
-                                        <span class="comment-date">{{DateMade}}</span>
+                                        <span class="comment-content">{{this.Content}}</span>
+                                        <span class="comment-date">{{this.DateMade}}</span>
                                     </div>
                                 </div>
                             </div>
 
-                        </div>
-
                             {{/each}}
                         </div>
-                        {{else}}
-
-                        <div class="no-comments">No comments</div>
-                        
-                        {{/if}}
 
                     </div>
+                    {{else}}
+
+                    <div class="no-comments">No comments</div>
+
+                    {{/if}}
+
                 </div>
             </div>
         </div>
     </div>
+    <div class="right-main col-flex" style="width: 16%; padding:0.5em; justify-content:space-between">
+        <div class="col-flex" style="justify-content: center; width:100%; align-items:center">
+            <span class="Tags-header" style="font-size:x-large">Tags</span>
+            <div class="Tags col-flex" style="border-top:1px solid black; width:100%; padding:0.2em; gap:0.3em">
+                {{#each post.Tags}}
+                <p class="post-tag" id={{this}}>{{this}}</p>
+                {{/each}}
+            </div>
+        </div>
+        <div class="Rate-post col-flex">
+            <div class="Rate-post-header">Rate this post</div>
+            <form class="rating" method="POST" action="{{post._id}}/ratePost">
+                <label>
+                    <input type="radio" name="stars" value="1" />
+                    <span class="icon">★</span>
+                </label>
+                <label>
+                    <input type="radio" name="stars" value="2" />
+                    <span class="icon">★</span>
+                    <span class="icon">★</span>
+                </label>
+                <label>
+                    <input type="radio" name="stars" value="3" />
+                    <span class="icon">★</span>
+                    <span class="icon">★</span>
+                    <span class="icon">★</span>
+                </label>
+                <label>
+                    <input type="radio" name="stars" value="4" />
+                    <span class="icon">★</span>
+                    <span class="icon">★</span>
+                    <span class="icon">★</span>
+                    <span class="icon">★</span>
+                </label>
+                <label>
+                    <input type="radio" name="stars" value="5" />
+                    <span class="icon">★</span>
+                    <span class="icon">★</span>
+                    <span class="icon">★</span>
+                    <span class="icon">★</span>
+                    <span class="icon">★</span>
+                </label>
+            </form>
+        </div>
+        <div class="buttons col-flex">
+            {{!-- {{#if true}} --}}
+            <Button class="Edit">Edit</Button>
+            <Button class="Delete">Delete</Button>
+            {{!-- {{/if}} --}}
+        </div>
+    </div>
 
+    </div>
+    <script src="scripts/post.js"></script>
 </body>
 
 </html>
