@@ -31,7 +31,9 @@ const systemMessageContent = `
   and for the price try to give an estimated price from your last update.
   for the total price, just sum the price of each component and add it there (ACURATE summation).
   for spending prefrences when its useMax, try to spend all money by providing the best products in the market(expensive).
-  performance response with numbers only, example FPS:"470".
+  performance response with numbers only, example FPS:"470" no string in FPS pls if its dead give it a 30.
+  if their is no GPU in the collection bottleneck ==0.
+  score system should be as much as possible accurate, even if the pc collection is bad give it a low score dont give (string nan or non) in this part, if it very dead give it a 0.
   answer style ONLY in this format: ${JSON.stringify(
     responseFormat
   )}. If you didn't follow my format, you will ruin my system.`;
@@ -174,6 +176,9 @@ function createPerformanceCards() {
 
   if (typeof PC.performance === "object" && PC.performance !== null) {
     Object.keys(PC.performance).forEach((key) => {
+      if (PC.performance[key] === "none" || PC.performance[key] === "NaN") {
+        return; // Skip to the next iteration
+      }
       let card = document.createElement("div");
       card.classList.add("performance-card");
       if (
@@ -186,6 +191,20 @@ function createPerformanceCards() {
       let title = document.createElement("h2");
       title.textContent = key;
       card.appendChild(title);
+      // Add the descriptive paragraph
+      let description = document.createElement("p");
+      description.style.fontSize = "0.8em"; // Set font size smaller for the description
+      description.style.color = "#666"; // Optional: set a different color for description text
+      description.style.marginTop = "0.25em"; // Add a small top margin
+      description.style.marginBottom = "1em"; // Add bottom margin before content starts
+      if (key === "FPS") {
+        description.textContent = "More is better";
+      } else if (key === "Bottleneck") {
+        description.textContent = "Less is better";
+      } else if (key === "System_Booting_Time") {
+        description.textContent = "Less is better in (seconds)";
+      }
+      card.appendChild(description);
 
       if (
         typeof PC.performance[key] === "object" &&
