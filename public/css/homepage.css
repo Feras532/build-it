@@ -205,6 +205,10 @@ body {
     transition: background-color 0.3s ease;
 }
 
+.start-button a{
+color:white;
+}
+
 .start-button:hover {
     background-color: #e66848;
     /* Slightly darker coral color on hover */
@@ -342,6 +346,18 @@ h2 {
         width: 100%;
         padding: 0;
         padding: 70px 0px;
+    }
+
+    .testimonials-section {
+        width: 100%;
+        margin:auto;
+    }
+
+    .testimonials-container {
+        width: 100%;
+        justify-content: center;
+        margin:0px;
+        scale:95%;
     }
 }
 

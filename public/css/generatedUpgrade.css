@@ -1,0 +1,307 @@
+        /* Table styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            margin-top: 10px;
+        }
+
+        th,
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4c4c4c;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+
+        #content-container {   
+            margin: 8px 0px; /* Changed horizontal margin so it fits mobile because media query wasnt overriding for some reason*/
+            background-color: rgb(255, 255, 255);
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .upgraded{
+            padding: 15px;
+            background-color:rgba(255, 127, 80, 0.596);
+        }
+
+        #total-price {
+            font-size: 20px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Animation for table rows */
+        @keyframes rowAnimation {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        table tbody tr {
+            opacity: 0;
+            /* Hidden by default */
+            animation: rowAnimation 0.5s forwards;
+            /* 0.5s animation to show the row */
+        }
+
+        /* Loading screen */
+        #loading-screen {
+            background: rgba(0, 0, 0, 0.5);
+            /* Semi-transparent background */
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* White container with fixed size */
+        .loading-container {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            width: 300px;
+            /* Fixed width */
+            height: 200px;
+            /* Fixed height */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            scale:90%;
+        }
+
+        /* Loading squares row */
+        .loaders {
+            display: flex;
+            /* Align squares in a row */
+        }
+
+        /* Loading squares */
+        .loading-square {
+            width: 20px;
+            height: 20px;
+            margin: 3px;
+            border: 2px solid coral;
+            border-top-color: darkgrey;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+        }
+
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Loading text with fade effect */
+        .loading-text {
+            margin-top: 20px;
+            color: black;
+            opacity: 0;
+            /* Start with text invisible */
+            transition: opacity 1s ease-in-out;
+            /* Smooth transition for the opacity */
+        }
+
+        .text-visible {
+            opacity: 1;
+        }
+
+
+        /* Animation for table rows */
+        @keyframes rowAnimation {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        table tbody tr {
+            opacity: 0;
+            /* Hidden by default */
+            animation: rowAnimation 0.5s forwards;
+            /* 0.5s animation to show the row */
+        }
+
+
+        .performance-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+            margin-top: 20px;
+        }
+
+        .performance-card {
+
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            padding: 16px;
+            text-align: center;
+            background-color: white;
+            margin: 10px;
+            display: inline-block;
+        }
+
+        .fixed-size-card {
+            width: 250px;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .performance-card h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .performance-card p {
+            font-size: 16px;
+        }
+
+        .gauge-chart {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .performance-card progress {
+            flex: 1;
+            width: 100%;
+            align-self: center;
+            /* center the progress bar horizontally */
+        }
+
+        .btn-save {
+            display: block;
+            width: 100px;
+            height: 30px;
+            margin: 20px auto;
+            background-color: #f44336;
+            color: #fff;
+            text-align: center;
+            line-height: 30px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        #notification {
+            display: none;
+            position: fixed;
+            top: 20px;
+            /* Adjusted to not be too close to the top edge */
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(76, 175, 80, 0.9);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            z-index: 10000;
+            min-width: 250px;
+            text-align: center;
+        }
+
+        #notification button {
+            float: right;
+            font-size: 20px;
+            line-height: 20px;
+            font-weight: bold;
+        }
+
+        #notification span {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+
+        /* The Popup (background) */
+        .popup {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1;
+            /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%;
+            /* Full width */
+            height: 100%;
+            /* Full height */
+            overflow: auto;
+            /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0);
+            /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4);
+            /* Black with opacity */
+        }
+
+        /* Popup Content Box */
+        .popup-content {
+            position: relative;
+            background-color: #fefefe;
+            margin: 10% auto;
+            /* 10% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 40%;
+            /* Could be more or less, depending on screen size */
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            animation-name: animatepopup;
+            animation-duration: 0.4s
+        }
+
+        /* Add Animation */
+        @keyframes animatepopup {
+            from {
+                top: -300px;
+                opacity: 0
+            }
+
+            to {
+                top: 0;
+                opacity: 1
+            }
+        }
+
+        /* The Close Button */
+        .close {
+            color: #aaaaaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+
