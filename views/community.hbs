@@ -1,201 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/community.css">
-    <title> Build it | Community</title>
+    <title>Build it | Under Maintenance</title>
+    <link rel="stylesheet" href="css/maintenance.css">
 </head>
-
 <body>
-    
 
-    {{!-- Search Bar --}}
-    <form action="search" method="GET">
-        <div id="searchDiv">
-            <div id="searchBar">
-                {{#if query}}
-                <input type="text" name="query" id="searchText" placeholder="Search posts" value={{query}}>
-                {{else}}
-                <input type="text" name="query" id="searchText" placeholder="Search posts">
-                {{/if}}
-                <button id="searchButton" action="submit"> <img src="../assets/magGlass.png" style="width:25px;" alt=""> </button>
-                <button id="filterButton" formnovalidate><img src="../assets/filter.png" style="width: 25px;" alt=""></button>
-            </div>
+    <div class="main">
+        <div class="left">
+            <h1>Sorry, under maintenance...</h1>
+            <img src="../assets/requestpage/workers.png" alt="Under Maintenance">
         </div>
-    </form>
-        {{!-- Search Bar --}}
-        {{!-- Filter below search bar as tags or Filters here? because It does not feel right-
-        -to have "post" cards take the whole width of the page --}}
-        <main>
-            {{!-- Filter side --}}
-            <div id="leftD">
-                <h1>Filters</h1>
-
-                <div id="filterContainer">
-                    <button id="setUpFilter">Set Ups <p>{{Filters.SU}}</p></button>
-
-                    <button id="questionFilter">Questions <p>{{Filters.Q}}</p></button>
-
-                    <button id="productsFilter">Products <p>{{Filters.PR}}</p></button>
-
-                    {{!-- <button id="trendingFilter">Trending <p>3</p></button> --}}
-
-                    {{!-- <button id="HighviewsFitler">Highly viewed</button> --}}
-                </div>
-            </div>
-            {{!-- Posts Div --}}
-            <div id="midD">
-
-                <h1>Community Posts</h1>
-                {{#if posts}}
-                <div id="posts">
-                
-
-                    {{#each posts}}
-                    {{!-- div to a   --}}
-                    <div class="card">
-                        <figure>
-                            <img src={{this.Image}} alt="Post Image">
-                        </figure>
-
-                        <figcaption>
-                            <div id="userPost">
-                                <img src={{this.user.image}} alt="User Image">
-                                <p>{{this.user.userName}}</p>
-                            </div>
-                        
-                        
-                        <a href="/community/{{this._id}}">
-                        <h1>{{Title}}</h1>
-                        </a>
-                        {{!-- <h1>{{Title}}</h1> --}}
-
-                        {{#if this.Cost}}
-                        <h2>Cost: ${{this.Cost}}</h2>
-                        {{/if}}
-
-                        {{#if this.Note}}
-                        <h3>{{this.Note}}</h3>
-                        {{/if}}
-
-                        <div id="postTags">
-                        {{#each this.Tags}}
-                        <div class="pTag" id={{this}}>{{this}}</div>
-                        {{/each}}
-                        </div>
-
-                        </figcaption>
-
-                            <div id="postStats">
-
-                                <div id="postData">
-                                    <p>Created in {{this.formattedDate}}</p>
-                                </div>
-                            
-                                <div id="stats">
-
-                                    <div id="postRating">
-                                        <img src="../assets/ratingStar.png" alt="">
-                                        <p>{{this.Rating.value}}</p>
-                                    </div>
-
-                                    <div id="postComments">
-                                        <img src="../assets/comment.png" alt="">
-                                        <p>{{this.Comments}}</p>
-                                    </div>
-
-                                    <div id="postViews">
-                                        <img src="../assets/views.png" alt="">
-                                        <p>{{this.Views}}</p>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                    </div>
-                    {{!-- div to a --}}
-
-                    {{/each}}
-                    {{!-- Template --}}
-                </div>
-                {{else}}
-                    {{#if query}}
-                        <div class="no-posts">
-                            There are no posts that contain "{{query}}"
-                        </div>
-                    {{else}}
-
-                    <div class="no-posts">
-                        There are no posts to view
-                    </div>
-                    {{/if}}
-
-                {{/if}}
-
-            </div>
-
-            <div id="rightD">
-                
-                <a href="/community/createPost" id="addPost">
-                    {{!-- redirect to login <- (N){Check login}(Y) -> Show form -> confirm --}}
-                        <img src="../assets/addIcon.png" alt="">
-                </a>
-
-            </div>
-
-        </main>
-
-
-
-    <script src="../scripts/community.js"></script>
-    
-
-
-</body>
-{{!-- <div class="card">
-    <figure>
-        <img src="../assets/setUp.jpeg" alt="">
-    </figure>
-    <figcaption>
-        <div id="userPost">
-            <img src="../assets/loginIcon.png" alt="">
-            <p>Username</p>
+        
+        <div class="request-form-container">
+            <p class="description-text">
+                Our team is currently working to improve our services. We apologize for the inconvenience.
+            </p>
+            <p class="note">
+                Please check back later. We appreciate your patience.
+            </p>
         </div>
-        <h1>TITLE</h1>
-        <h2>Cost</h2>
-        <h3>Note</h3>
-        <div id="postTags">
-            <div class="pTag">Questions</div>
-            <div class="pTag">Questions</div>
-            <div class="pTag">Questions</div>
-            <div class="pTag">Questions</div>
-        </div>
-    </figcaption>
-    <div id="postStats">
-        <div id="postData">
-            <p>Created in 29 Nov</p>
-        </div>
-        <div id="stats">
-            <div id="postRating">
-                <img src="../assets/ratingStar.png" alt="">
-                <p>4.3</p>
-            </div>
-            <div id="postComments">
-                <img src="../assets/comment.png" alt="">
-                <p>120</p>
-            </div>
-            <div id="postViews">
-                <img src="../assets/views.png" alt="">
-                <p>4k</p>
-            </div>
-        </div>
-
     </div>
 
-</div> --}}
+    <script>
+        // You can add any necessary scripts here
+    </script>
 
-
+</body>
 </html>
